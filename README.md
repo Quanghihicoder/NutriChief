@@ -1,5 +1,3 @@
 # NutriChief
 
-Nhớ xóa file text trong folder android trước khi init project nhé. 
-
-Tạo project android ngay trong folder android đấy nhé.
+Cái android version nó mới hơn cái trường mình dùng nên Parcelable hơi khác đấy. Có example trong code đó
