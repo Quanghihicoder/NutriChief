@@ -4,15 +4,15 @@ USE db_nutrichief;
 
 CREATE TABLE IF NOT EXISTS `user` (
     user_id INT(11) NOT NULL AUTO_INCREMENT,
-    user_name VARCHAR(255) NOT NULL, 
+    user_name VARCHAR(255), 
     user_email VARCHAR(255) NOT NULL, 
-    user_year_of_birth INT(4) NOT NULL,
-    user_gender INT(1) NOT NULL,
-    user_weight FLOAT(4,1) NOT NULL,
-    user_height FLOAT(4,1) NOT NULL,
-    user_activity_level INT(2) NOT NULL,
-    user_bmi FLOAT(4,1) NOT NULL,
-    user_tdee INT(5) NOT NULL,
+    user_year_of_birth INT(4),
+    user_gender INT(1),
+    user_weight FLOAT(4,1),
+    user_height FLOAT(4,1),
+    user_activity_level INT(2),
+    user_bmi FLOAT(4,1),
+    user_tdee INT(5),
     
     PRIMARY KEY (user_id),
     UNIQUE (user_email)
@@ -92,6 +92,5 @@ CREATE TABLE IF NOT EXISTS `otp` (
     otp_key INT(6) NOT NULL,
 
     PRIMARY KEY (user_email),
-    UNIQUE (user_email),
-    FOREIGN KEY (user_email) REFERENCES user(user_email)
+    UNIQUE (user_email)
 ) ENGINE=INNODB;
