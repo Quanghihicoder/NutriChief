@@ -1,18 +1,18 @@
--- Version
+# Version
 
 npm version: 8.1.2
 
 node version 16.13.1
 
--- Run
+# Run
 
 npm install
 
 npm start
 
--- Sử dụng APIs 
+# Sử dụng APIs 
 
---- Register/Login using email and otp 
+## Register/Login using email and otp 
 
 Ở frontend cho user nhập email xong call POST tới /apis/users/otp với body là user_email thì nó tự gửi otp tới email. 
 
