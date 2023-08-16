@@ -1,27 +1,14 @@
 // import functions from User model
 
 import {
-    getUserInfoByID,
-    getUserInfoByEmail,
+    getUserInfo,
     updateUserInfo
 } from "../models/UserModel.js";
 
-// update user
-export const getUserByID = (req, res) => {
+// get user
+export const getUser = (req, res) => {
     const data = req.body;
-    getUserInfoByID(data, (err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    });
-};
-
-// update user
-export const getUserByEmail = (req, res) => {
-    const data = req.body;
-    getUserInfoByEmail(data, (err, results) => {
+    getUserInfo(data, (err, results) => {
         if (err) {
             res.send(err);
         } else {
