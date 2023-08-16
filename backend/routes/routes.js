@@ -6,8 +6,7 @@ import {
 } from "../controllers/otp.js";
 
 import {
-    getUserByID,
-    getUserByEmail,
+    getUser,
     updateUser
 } from "../controllers/user.js";
 
@@ -24,10 +23,7 @@ router.get("/apis/otp/", verifyOtp);
 
 ////////////////////////// USER ////////////////////////////////
 // get user by id
-router.get("/apis/user/id", getUserByID);
-
-// get user by email
-router.get("/apis/user/email", getUserByEmail);
+router.get("/apis/user/", getUser);
 
 // update user
 router.put("/apis/user/", updateUser);

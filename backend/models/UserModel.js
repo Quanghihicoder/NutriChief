@@ -1,26 +1,26 @@
 // import connection
 import db from "../config/database.js";
 
-export const getUserInfoByID = (data, result) => {
-    db.query("SELECT * FROM user WHERE user_id = ?", [data.user_id], (err, results) => {
-        if (err) {
-            console.log(err);
-            result({ "status": 0, "message": "Can not get user", "data": [] });
-        } else {
-            result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
-        }
-    });
-}
-
-export const getUserInfoByEmail = (data, result) => {
-    db.query("SELECT * FROM user WHERE user_email = ?", [data.user_email], (err, results) => {
-        if (err) {
-            console.log(err);
-            result({ "status": 0, "message": "Can not get user", "data": [] });
-        } else {
-            result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
-        }
-    });
+export const getUserInfo = (data, result) => {
+    if (data.user_id) {
+        db.query("SELECT * FROM user WHERE user_id = ?", [data.user_id], (err, results) => {
+            if (err) {
+                console.log(err);
+                result({ "status": 0, "message": "Can not get user", "data": [] });
+            } else {
+                result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+            }
+        });
+    } else if (data.user_email) {
+        db.query("SELECT * FROM user WHERE user_email = ?", [data.user_email], (err, results) => {
+            if (err) {
+                console.log(err);
+                result({ "status": 0, "message": "Can not get user", "data": [] });
+            } else {
+                result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+            }
+        });
+    }
 }
 
 export const updateUserInfo = (data, result) => {
