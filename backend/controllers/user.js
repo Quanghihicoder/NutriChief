@@ -1,13 +1,15 @@
 // import functions from User model
 
 import {
-    createOtpUser, verifyOtpUser
+    getUserInfoByID,
+    getUserInfoByEmail,
+    updateUserInfo
 } from "../models/UserModel.js";
 
-// create otp user
-export const createOtp = (req, res) => {
+// update user
+export const getUserByID = (req, res) => {
     const data = req.body;
-    createOtpUser(data, (err, results) => {
+    getUserInfoByID(data, (err, results) => {
         if (err) {
             res.send(err);
         } else {
@@ -16,11 +18,22 @@ export const createOtp = (req, res) => {
     });
 };
 
-
-// create otp user
-export const verifyOtp = (req, res) => {
+// update user
+export const getUserByEmail = (req, res) => {
     const data = req.body;
-    verifyOtpUser(data, (err, results) => {
+    getUserInfoByEmail(data, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+};
+
+// update user
+export const updateUser = (req, res) => {
+    const data = req.body;
+    updateUserInfo(data, (err, results) => {
         if (err) {
             res.send(err);
         } else {
