@@ -33,8 +33,6 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_id INT(11) NOT NULL AUTO_INCREMENT,
     food_name VARCHAR(255) NOT NULL, 
     food_desc VARCHAR(255) NOT NULL,
-    food_price FLOAT(11,1) NOT NULL,
-    food_time FLOAT(7,2) NOT NULL,
     
     PRIMARY KEY (food_id)
 ) ENGINE=INNODB; 
