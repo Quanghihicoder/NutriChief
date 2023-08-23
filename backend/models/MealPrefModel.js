@@ -22,16 +22,6 @@ export const getMealPrefInfo = (data, result) => {
 }
 
 export const createMealPrefInfo = (data, result) => {
-    // pref_goal data:
-    // loss - 0
-    // maintain - 1
-    // gain - 2
-
-    // pref_date_range: 
-    // daily - 1
-    // weekly - 7
-    // monthly - 30
-
     if (data.user_id) {
         db.query("INSERT INTO user SET user_id = ?, pref_calo = ?, pref_time = ?, pref_goal = ?, pref_date_range = ?", [data.user_id, data.pref_calo, data.pref_time, pref_goal, pref_date_range], (err, results) => {
             if (err) {
