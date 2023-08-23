@@ -15,18 +15,18 @@ const router = express.Router();
 
 ////////////////////////// OTP ////////////////////////////////
 // update otp user
-router.post("/apis/otp/", createOtp);
+router.post("/apis/otp/create", createOtp);
 
 // verify otp user
-router.get("/apis/otp/", verifyOtp);
+router.post("/apis/otp/verify", verifyOtp);
 
 
 ////////////////////////// USER ////////////////////////////////
 // get user by id
-router.get("/apis/user/", getUser);
+router.post("/apis/user/get", getUser);
 
 // update user
-router.put("/apis/user/", updateUser);
+router.post("/apis/user/update", updateUser);
 
 // export default router
 export default router;

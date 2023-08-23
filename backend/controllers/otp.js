@@ -1,11 +1,11 @@
 import {
-    createOtpUser, verifyOtpUser
+    createUserOtp, verifyUserOtp
 } from "../models/OTPModel.js";
 
-// create otp user
+// create user otp
 export const createOtp = (req, res) => {
     const data = req.body;
-    createOtpUser(data, (err, results) => {
+    createUserOtp(data, (err, results) => {
         if (err) {
             res.send(err);
         } else {
@@ -15,10 +15,10 @@ export const createOtp = (req, res) => {
 };
 
 
-// create otp user
+// create user otp
 export const verifyOtp = (req, res) => {
     const data = req.body;
-    verifyOtpUser(data, (err, results) => {
+    verifyUserOtp(data, (err, results) => {
         if (err) {
             res.send(err);
         } else {

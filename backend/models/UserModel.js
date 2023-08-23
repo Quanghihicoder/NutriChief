@@ -28,11 +28,13 @@ export const getUserInfo = (data, result) => {
                 }
             }
         });
+    } else {
+        console.log(err);
+        result({ "status": 0, "message": "Can not get user", "data": [] });
     }
 }
 
 export const updateUserInfo = (data, result) => {
-
     const bmi = data.user_weight / (data.user_height / 100 * data.user_height / 100)
 
     const currentYear = new Date().getFullYear()
