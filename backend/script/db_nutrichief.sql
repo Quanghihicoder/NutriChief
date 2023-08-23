@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `mealpref` (
     user_id INT(11) NOT NULL,
     pref_calo INT(5) NOT NULL, 
-    pref_time FLOAT(7,2) NOT NULL, 
+    pref_time INT(5) NOT NULL, 
     pref_goal INT(1) NOT NULL,
     pref_date_range INT(2) NOT NULL,
 
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_id INT(11) NOT NULL AUTO_INCREMENT,
     food_name VARCHAR(255) NOT NULL, 
     food_desc VARCHAR(255) NOT NULL,
-    food_ctime FLOAT(7,2) NOT NULL,
-    food_ptime FLOAT(7,2) NOT NULL,
+    food_ctime INT(5) NOT NULL,
+    food_ptime INT(5) NOT NULL,
     
     PRIMARY KEY (food_id)
 ) ENGINE=INNODB; 
