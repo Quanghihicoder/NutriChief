@@ -3,14 +3,14 @@ CREATE DATABASE IF NOT EXISTS db_nutrichief;
 USE db_nutrichief;
 
 CREATE TABLE IF NOT EXISTS `user` (
-    user_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL AUTO_INCREMENT, 
     user_name VARCHAR(255), 
     user_email VARCHAR(255) NOT NULL, 
-    user_year_of_birth INT(4),
-    user_gender INT(1),
-    user_weight FLOAT(4,1),
-    user_height FLOAT(4,1),
-    user_activity_level INT(2),
+    user_year_of_birth INT(4), 
+    user_gender INT(1), -- 0 female, 1 - male 
+    user_weight FLOAT(4,1), -- kg
+    user_height FLOAT(4,1), -- cm 
+    user_activity_level INT(2), -- 1,2,3,4,5
     user_bmi FLOAT(4,1),
     user_tdee INT(5),
     
@@ -20,10 +20,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 CREATE TABLE IF NOT EXISTS `mealpref` (
     user_id INT(11) NOT NULL,
-    pref_calo INT(5) NOT NULL, 
-    pref_time INT(5) NOT NULL, 
-    pref_goal INT(1) NOT NULL,
-    pref_date_range INT(2) NOT NULL,
+    pref_calo INT(5) NOT NULL,  
+    pref_time INT(5) NOT NULL, -- mins
+    pref_goal INT(1) NOT NULL, -- loss - 0, maintain - 1, gain - 2
+    pref_date_range INT(2) NOT NULL, -- daily - 1, weekly - 7, monthly - 30
 
     PRIMARY KEY (user_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_id INT(11) NOT NULL AUTO_INCREMENT,
     food_name VARCHAR(255) NOT NULL, 
     food_desc VARCHAR(255) NOT NULL,
-    food_ctime INT(5) NOT NULL,
-    food_ptime INT(5) NOT NULL,
+    food_ctime INT(5) NOT NULL, -- mins
+    food_ptime INT(5) NOT NULL, -- mins
     
     PRIMARY KEY (food_id)
 ) ENGINE=INNODB; 
@@ -42,11 +42,11 @@ CREATE TABLE IF NOT EXISTS `food` (
 CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_id INT(11) NOT NULL AUTO_INCREMENT,
     ingre_name VARCHAR(255) NOT NULL, 
-    ingre_price FLOAT(11,1) NOT NULL,
-    ingre_calo INT(5) NOT NULL,
-    ingre_fat FLOAT(8,1) NOT NULL,
-    ingre_protein FLOAT(8,1) NOT NULL,
-    ingre_carb FLOAT(8,1) NOT NULL,
+    ingre_price FLOAT(11,1) NOT NULL, 
+    ingre_calo INT(5) NOT NULL, 
+    ingre_fat FLOAT(8,1) NOT NULL, -- grams
+    ingre_protein FLOAT(8,1) NOT NULL, -- grams
+    ingre_carb FLOAT(8,1) NOT NULL, -- grams
     
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB; 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `recipe` (
     food_id INT(11) NOT NULL,
     ingre_id INT(11) NOT NULL,
     media_id INT(11),
-    recipe_qty FLOAT(11,1) NOT NULL,
+    recipe_qty FLOAT(11,1) NOT NULL, -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
     
