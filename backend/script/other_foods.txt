@@ -1,0 +1,217 @@
+-- Breakfast
+-- ("Scrambled Eggs with Smoked Salmon", "") Eggs, Smoked Salmon, Dill, Lemon Juice
+-- ("Breakfast Hash", "") Potato, Onion, Bell Pepper, Sausage, Egg
+-- ("Shakshuka", "") Tomato, Bell Pepper, Onion, Garlic, Eggs, Cumin Powder
+-- ("Bread with Cream Cheese and Smoked Salmon", "") Bread, Cream Cheese, Smoked Salmon, Red Onion, Capers
+-- ("Peanut Butter Banana Toast", "") Bread, Peanut Butter, Banana, Honey
+-- ("Breakfast BLT", "") Bacon, Lettuce, Tomato, Egg, Mayonnaise, Bread
+
+-- Salads
+-- ("Mexican Corn Salad", "") Corn, Black Beans, Bell Pepper, Chili, Cilantro, Lime 
+-- ("Grapefruit Salad (Goi Buoi)", "") Grapefruit, Shrimp, Chicken, Peanuts, Mint Leaves, Basil, Lime, Fish Sauce, Sugar
+-- ("Mango Salad (Nom Xoai)", "") Mango, Shrimp, Red Onion, Peanuts, Mint Leaves, Fish Sauce, Lime
+-- ("Caprese Salad", "") Tomato, Mozzarella Cheese, Basil Leaves, Balsamic Glaze
+
+-- Side dishes
+-- ("Roasted Garlic Parmesan Potatoes", "") Potato, Garlic Powder, Parmesan Cheese, Olive Oil
+-- ("Grilled Asparagus with Lemon Butter", "") Asparagus, Lemon Juice, Butter, Black Pepper
+-- ("Sesame Ginger Green Beans", "") Green Beans, Sesame Seeds, Ginger Powder, Soy Sauce
+-- ("Garlic Butter Green Beans", "")  Green Beans, Garlic, Butter, Lemon Zest
+-- ("Roasted Brussels Sprouts with Balsamic Glaze", "") Brussels Sprouts, Balsamic Glaze, Olive Oil, Salt
+-- ("Caprese Skewers", "") Cherry Tomatoes, Mozzarella Cheese, Basil Leaves, Balsamic Glaze
+-- ("Sweet and Spicy Roasted Cauliflower", "") Cauliflower, Chili Powder, Sugar, Olive Oil
+-- ("Spinach and Feta Stuffed Mushrooms", "") Mushroom, Spinach, Feta Cheese, Garlic, Olive Oil
+-- ("Cheesy Broccoli Casserole", "") Broccoli, Cheddar Cheese, Garlic Powder, Bread Crumbs
+-- ("Baked Parmesan Zucchini Fries", "") Zucchini, Parmesan Cheese, Bread Crumbs, Garlic Powder
+-- ("Creamed Spinach", "") Spinach, Cream Cheese, Garlic, Onion, Nutmeg
+-- ("Fruit Salsa with Cinnamon Chips", "") Apple, Apricot, Kiwi, Lemon, Cinnamon Powder, Tortilla Chips
+-- ("Avocado Bruschetta", "") Avocado, Tomato, Garlic, Basil, Baguette Slices
+-- ("Crab Cakes", "") Crab Meat, Bread Crumbs, Mayonnaise, Dijon Mustard, Lemon, Old Bay Seasoning
+-- ("Thai Beef Lettuce Wraps", "") Beef, Lettuce Leaves, Onion, Garlic, Ginger, Soy Sauce
+-- ("Smoked Salmon Cucumber Bites", "") Cucumber Slices, Smoked Salmon, Cream Cheese, Dill
+-- ("Tomato Basil Bruschetta", "") Tomatoes, Basil, Garlic, Baguette, Olive Oil
+
+-- Soup
+-- ("Creamy Tomato Basil Soup", ""): Tomato, Onion, Garlic, Basil, Cream, Olive Oil
+-- ("Chicken Noodle Soup", ""): Chicken, Carrot, Celery, Onion, Egg Noodles, Chicken Broth
+-- ("Spicy Black Bean Soup", ""): Black Beans, Onion, Garlic, Chili Powder, Cumin, Vegetable Broth
+-- ("Butternut Squash Soup", ""): Butternut Squash, Onion, Garlic, Nutmeg, Vegetable Broth, Cream
+-- ("Minestrone Soup", ""): Tomato, Carrot, Celery, Onion, Cannellini Beans, Pasta, Vegetable Broth
+-- ("Coconut Curry Chicken Soup", ""): Chicken, Coconut Milk, Curry Powder, Ginger, Garlic, Vegetables of choice
+-- ("Potato Leek Soup", ""): Potato, Leek, Onion, Garlic, Vegetable Broth, Cream
+-- ("Pumpkin Soup", ""): Pumpkin, Onion, Garlic, Nutmeg, Cinnamon, Vegetable Broth, Cream
+-- ("Creamy Spinach and Parmesan Soup", ""): Spinach, Onion, Garlic, Parmesan Cheese, Vegetable Broth, Cream
+-- ("Creamy Broccoli Cheddar Soup", ""): Broccoli, Cheddar Cheese, Onion, Garlic, Vegetable Broth, Cream
+-- ("Crab Soup (Gejang)", ""): Crab, Soy Sauce, Chili Paste, Garlic, Ginger, Rice Wine, Sesame Seeds
+-- ("Canh Bap Cai", ""): Cabbage Soup, Cabbage, Ground Meat, Mushroom
+-- ("Canh Chua", ""): Sour Soup, Fish or Shrimp, Pineapple, Tomato, Okra, Tamarind
+-- ("Sup Mang Cua", ""): Crab and Asparagus Soup, Crab Meat, Asparagus, Quail Eggs
+
+-- Main courses
+-- ("Ginseng Chicken Soup", ""): Chicken, Sticky Rice, Ginseng, Garlic, Jujubes, Ginger, Ginseng Tea
+-- ("Seafood Udon Soup", ""): Udon Noodles, Assorted Seafood (Shrimp, Crab, Squid), Fish Cake, Green Onions, Dashi Broth
+-- ("BBQ Pulled Pork Sandwich", "") Pork, BBQ Sauce, Hamburger Buns, Coleslaw
+-- ("Honey Mustard Glazed Salmon", "") Salmon, Honey Mustard Sauce, Lemon, Rice, Asparagus
+-- ("Baked Chicken Parmesan", "") Chicken, Tomato Sauce, Mozzarella Cheese, Parmesan Cheese, Pasta
+-- ("Sweet and Sour Meatballs", "") Ground Meat (Beef/Pork/Chicken), Pineapple, Bell Pepper, Onion, Sweet and Sour Sauce, Rice
+-- ("Stuffed Bell Peppers", "") Bell Pepper, Ground Meat (Chicken/Beef/Pork), Rice, Tomato Sauce, Cheese
+-- ("Lemon Garlic Butter Shrimp", "") Shrimp, Lemon, Garlic, Butter, Parsley, Pasta
+-- ("Spicy Korean Beef Bulgogi", "") Beef, Gochujang Sauce, Soy Sauce, Sesame Oil, Rice, Kimchi
+-- ("Baked Teriyaki Salmon", "") Salmon, Teriyaki Sauce, Sesame Seeds, Rice, Steamed Vegetables
+-- ("Chicken Alfredo Pasta", "") Chicken, Cream, Parmesan Cheese, Garlic, Pasta
+-- ("Honey Glazed Ham", "") Ham, Honey, Sugar, Dijon Mustard, Roasted Potatoes, Green Beans
+-- ("Beef Stir-Fry with Vegetables", "") Beef, Mixed Vegetables (Broccoli, Carrot, Bell Pepper), Soy Sauce, Rice
+-- ("Shrimp Scampi Pasta", "") Shrimp, Garlic, Butter, Lemon Juice, White Wine, Parsley, Pasta
+-- ("Sticky Teriyaki Tofu", "") Tofu, Teriyaki Sauce, Sesame Seeds, Rice, Steamed Broccoli
+-- ("Spaghetti Aglio e Olio", "") Pasta, Garlic, Chili Flakes, Olive Oil, Parsley
+-- ("Pan-Seared Steak with Chimichurri Sauce", "") Steak, Chimichurri Sauce, Roasted Potatoes, Asparagus
+-- ("Baked BBQ Chicken", "") Chicken, BBQ Sauce, Roasted Potatoes, Corn on the Cob
+-- ("Pork Tenderloin with Apple Compote", "") Pork Tenderloin, Apple, Cinnamon, Sugar, Mashed Potatoes, Steamed Green Beans
+-- ("Chicken and Vegetable Curry", "") Chicken, Mixed Vegetables (Carrot, Bell Pepper, Onion), Coconut Milk, Curry Powder, Rice
+-- ("Baked Stuffed Pork Chops", "") Pork Chops, Bread Stuffing, Apple, Onion, Mashed Potatoes, Roasted Brussels Sprouts
+-- ("Honey Balsamic Glazed Pork Tenderloin", "") Pork Tenderloin, Honey, Balsamic Vinegar, Roasted Potatoes, Steamed Asparagus
+-- ("Thai Pineapple Fried Rice", "") Pineapple, Shrimp/Chicken/Tofu, Jasmine Rice, Bell Pepper, Onion, Soy Sauce
+-- ("Lemon Garlic Roasted Chicken", "") Chicken, Lemon Juice, Garlic, Rosemary, Olive Oil
+-- ("Bacon Wrapped Asparagus", "") Asparagus, Bacon, Olive Oil, Salt, Black Pepper
+-- ("Creamy Mushroom Risotto", "") Arborio Rice, Mushrooms, White Wine, Parmesan Cheese, Vegetable Broth
+-- ("Black Pepper Beef Stir-Fry", "") Beef, Black Pepper, Onion, Garlic, Soy Sauce, Fish Sauce, Rice
+-- ("Grilled Pork Rice Vermicelli - Bun Cha", ""): Pork, Rice Vermicelli Noodles, Lettuce, Herbs, Dipping Sauce (Fish Sauce, Lime Juice, Sugar, Garlic, Chili)
+-- ("Fresh Spring Rolls - Goi Cuon", ""): Shrimp, Rice Paper Wrappers, Rice Vermicelli Noodles, Lettuce, Herbs, Peanut Dipping Sauce
+-- ("Caramelized Ginger Chicken - Ga Kho Gung", ""): Chicken, Ginger, Garlic, Fish Sauce, Soy Sauce, Sugar, Rice
+-- ("Beef Pho", ""): Beef, Rice Noodles, Beef Broth, Bean Sprouts, Basil Leaves, Lime Wedges, Hoisin Sauce, Sriracha
+-- ("Braised Pork Belly - Thit Kho Trung", ""): Pork Belly, Hard-Boiled Eggs, Coconut Water, Fish Sauce, Soy Sauce, Sugar, White Rice
+-- ("Crab Noodle Soup - Bun Rieu", ""): Crab Meat, Tomato, Tofu, Noodles, Shrimp Paste, Herbs, Lime Wedges
+-- ("Shaking Beef - Bo Luc Lac", ""): Beef, Garlic, Onion, Soy Sauce, Fish Sauce, Worcestershire Sauce, Lettuce Leaves, Tomato Slices, Rice
+-- ("Grilled Lemongrass Pork Chops - Suon Nuong Xa", ""): Pork Chops, Lemongrass, Garlic, Fish Sauce, Sugar, Rice, Pickled Vegetables
+-- ("Fried Spring Rolls - Nem", ""): Ground Pork/Shrimp, Vegetables, Vermicelli Noodles, Rice Paper Wrappers, Dipping Sauce
+-- ("Stir-Fried Squid with Veggies - Muc Xao Rau Cai", ""): Squid, Mixed Vegetables (Broccoli, Carrot, Bell Pepper), Garlic, Soy Sauce, Oyster Sauce, Rice
+-- ("Vietnamese Shrimp Pancakes - Banh Xeo", ""): Shrimp, Rice Flour Batter, Bean Sprouts, Mung Beans, Lettuce Leaves, Dipping Sauce
+-- ("Lemongrass Beef Skewers - Bo Nuong Xa", ""): Beef, Lemongrass, Garlic, Onion, Fish Sauce, Sugar, Rice
+-- ("Grilled Fish in Banana Leaf - Ca Nuong La Chuoi", ""): Fish, Lemongrass, Garlic, Chili, Fish Sauce, Rice
+-- ("Banh Mi", ""): Baguette, Pork, Pickled Vegetables, Cilantro, Mayonnaise
+-- ("Broken Rice - Com Tam", ""): Broken Rice, Grilled Pork Chop, Egg, Tomato, Cucumber, Fish Sauce
+-- ("Caramelized Fish - Ca Kho To", "") Fish Fillet, Soy Sauce, Ginger, Shallots
+-- ("Turmeric Noodles - Mi Quang", "") Turmeric Noodles, Shrimp or Pork, Peanuts, Herbs, Fish Sauce
+-- ("Steamed Rice Roll - Banh Cuon", "") Rice, Ground Pork, Wood Ear Mushroom, Fish Sauce
+-- ("Vietnamese Rice Congee - Chao Ga", "") Rice, Chicken, Ginger, Scallions
+-- ("Sticky Rice with Chicken - Xoi Ga", ""): Glutinous Rice, Chicken Pieces, Fried Shallots
+-- ("Caramelized Pork Ribs - Suon Ram Man", "") Pork Ribs, Fish Sauce, Black Pepper
+-- ("Tapioca Dumplings - Banh Bot Loc", "") Shrimp, Pork, Dipping Sauce
+-- ("Spicy Beef Noodle Soup - Bun Bo Hue", ""):  Beef Shank, Lemongrass, Shrimp Paste
+-- ("Nem Ran", ""): Fried Spring Rolls, Ground Pork, Vermicelli Noodles, Lettuce
+-- ("Bun Thit Nuong", ""): Grilled Pork Noodle Salad, Grilled Pork, Vermicelli Noodles, Herbs
+-- ("Glass Noodle with Chicken - Mien Ga", ""):  Chicken, Wood Ear Mushroom, Ginger, Glass Noodle
+-- ("Stir-Fried Water Spinach- Rau muong xao toi", ""): Water Spinach, Garlic, Peanut Oil
+-- ("Avocado Kimbap", ""): Avocado, Rice, Seaweed, Carrot, Cucumber, Egg, Sesame Seeds
+-- ("Jajangmyeon", ""): Noodles, Pork, Black Bean Paste, Onion, Zucchini, Potatoes
+-- ("Korean Fried Chicken", ""): Chicken, Flour, Cornstarch, Soy Sauce, Garlic, Ginger, Honey, Korean Chili Paste, Vegetable Oil
+-- ("Tteokbokki", ""): Rice Cakes, Fish Cakes, Gochujang Sauce, Soy Sauce, Sugar, Garlic, Green Onions
+-- ("Orange Chicken", ""): Chicken, Orange Juice, Soy Sauce, Garlic, Ginger, Honey, Cornstarch, Sesame Seeds
+-- ("Seafood Pancake", ""): Shrimp, Squid, Green Onions, Batter (Flour, Eggs, Water), Soy Dipping Sauce
+-- ("Chicken Bulgogi", ""): Chicken, Soy Sauce, Sesame Oil, Garlic, Ginger, Honey, Green Onions
+-- ("Grilled Mackerel", ""): Mackerel, Soy Sauce, Garlic, Ginger, Sesame Oil, Sesame Seeds
+-- ("Korean Potato Pancakes", ""): Potatoes, Flour, Eggs, Green Onions, Soy Dipping Sauce
+-- ("Spicy Octopus Salad", ""): Octopus, Vegetables (Onion, Cabbage, Carrot), Gochujang Sauce, Soy Sauce, Garlic, Sesame Oil
+-- ("Tofu Bibimbap", ""): Tofu, Rice, Assorted Vegetables, Gochujang Sauce, Sesame Oil, Sesame Seeds
+-- ("Korean Pancake", ""): Green Onions, Flour, Water, Eggs, Seafood (Shrimp, Squid), Soy Dipping Sauce
+-- ("Spicy Pork Belly BBQ", ""): Pork Belly, Garlic, Green Onions, Sesame Oil, Soybean Paste, Lettuce Wraps
+-- ("Apple Daifuku", ""): Apple, Sweet Rice Flour, Red Bean Paste
+-- ("Chicken Katsu", ""): Chicken Breast, Panko Bread Crumbs, Tonkatsu Sauce, Cabbage Slaw
+-- ("Pork Gyoza", ""): Ground Pork, Cabbage, Garlic, Ginger, Gyoza Wrappers, Dipping Sauce (Soy Sauce, Vinegar)
+-- ("Sushi Bowl", ""): Assorted Fish or Seafood (Tuna, Salmon, Shrimp, Crab), Sushi Rice, Vegetables, Soy Sauce, Pickled Ginger, Wasabi
+-- ("Yakitori Skewers", ""): Chicken, Green Onion, Yakitori Sauce, Sesame Seeds
+-- ("Nikujaga", ""): Beef, Potatoes, Carrots, Soy Sauce, Mirin, Sugar, Onion, Spring Onion
+-- ("Tuna Poke Bowl", ""): Tuna, Rice, Avocado, Cucumber, Soy Sauce, Sesame Oil, Nori, Sesame Seeds
+-- ("Okonomiyaki", ""): Cabbage, Flour, Eggs, Bacon, Okonomiyaki Sauce, Mayonnaise, Bonito Flakes
+-- ("Miso Eggplant", ""): Eggplant, Miso Paste, Mirin, Sugar
+-- ("Shrimp Tempura", ""): Shrimp, Tempura Batter, Soy Dipping Sauce
+-- ("Sukiyaki", ""): Beef, Tofu, Vegetables (Napa Cabbage, Enoki Mushrooms), Soy Sauce, Mirin, Sugar, Raw Egg
+-- ("Chicken Yakisoba", ""): Chicken, Noodles, Cabbage, Carrots, Yakisoba Sauce
+-- ("Tamagoyaki", ""): Eggs, Soy Sauce, Mirin, Sugar, Nori
+-- ("Tonkatsu", ""): Pork Cutlet, Panko Bread Crumbs, Tonkatsu Sauce, Cabbage Slaw, Steamed Rice
+-- ("Zaru Soba", ""): Buckwheat Noodles, Soy Dipping Sauce, Nori, Green Onions
+-- ("Chawanmushi", ""): Eggs, Soy Sauce, Dashi, Chicken, Shrimp, Mushrooms
+-- ("Japanese Curry Rice", ""): Chicken/Beef/Pork, Potatoes, Carrots, Curry Roux, Steamed Rice
+-- ("Ramen Noodles", ""): Chicken/Pork Broth, Ramen Noodles, Chashu (Braised Pork), Soft-Boiled Egg, Bamboo Shoots, Nori, Green Onions
+-- ("Sweet and Sour Chicken", "") Chicken, Bell Peppers, Pineapple, Onion, Sweet and Sour Sauce
+-- ("Kung Pao Shrimp", "") Shrimp, Peanuts, Bell Peppers, Chili Peppers, Ginger, Garlic, Soy Sauce
+-- ("Mapo Tofu", "") Tofu, Ground Pork, Chili Bean Sauce, Sichuan Peppercorns, Green Onions
+-- ("Gong Bao Chicken", "") Chicken, Peanuts, Bell Peppers, Chili Peppers, Sichuan Peppercorns, Soy Sauce, Vinegar
+-- ("Ma Po Eggplant", "") Eggplant, Ground Pork, Chili Bean Sauce, Soy Sauce, Ginger, Garlic, Green Onions
+-- ("Mongolian Beef", "") Beef, Soy Sauce, Sugar, Ginger, Garlic, Green Onions
+-- ("Moo Shu Vegetables", "") Cabbage, Carrots, Mushrooms, Bamboo Shoots, Green Onions, Hoisin Sauce, Pancakes
+-- ("Cantonese Fried Rice", "") Rice, Shrimp, BBQ Pork, Eggs, Peas, Carrots, Soy Sauce
+-- ("Peking Duck", "") Duck, Hoisin Sauce, Pancakes, Cucumber, Spring Onions
+-- ("Crab Rangoon", "") Crab Meat, Cream Cheese, Green Onions, Wonton Wrappers
+-- ("Dan Dan Noodles", "") Ground Pork, Noodles, Peanut Sauce, Chili Oil, Green Onions
+-- ("Salt and Pepper SqCantaloupeuid", "") Squid, Salt, Black Pepper, Garlic, Chili Peppers, Green Onions
+-- ("Chinese BBQ Pork", "") Pork Tenderloin, Hoisin Sauce, Soy Sauce, Honey
+-- ("Scallion Pancakes", "") Flour, Spring Onions, Sesame Oil, Soy Dipping Sauce
+-- ("Steamed Fish with Ginger and Scallions", "") Fish Fillets, Ginger, Spring Onions, Soy Sauce, Sesame Oil
+-- ("Shanghai Noodles", "") Noodles, Shredded Pork, Bok Choy, Shitake Mushrooms, Soy Sauce
+-- ("Dongpo Pork", "") Pork Belly, Soy Sauce, Rice Wine, Sugar, Ginger, Star Anise
+-- ("Almond Chicken", "") Chicken, Almonds, Garlic, Soy Sauce, Sugar, Cornstarch
+
+-- Dessert
+-- ("Cherry Pie", ""): Cherries, Sugar, Butter, Pie Crust
+-- ("Cantaloupe Sorbet", "") Cantaloupe, Sugar, Lemon Juice
+-- ("Kiwi Tart", "") Kiwi, Pie Crust, Vanilla Custard, Whipped Cream
+-- ("Lemon Bars", "") Lemon, Flour, Sugar, Butter, Eggs
+-- ("Papaya Coconut Ice Cream", "") Papaya, Coconut Milk, Sugar, Lime Zest
+-- ("Pear and Almond Tart", "") Pear, Almond Flour, Pastry Dough, Sugar, Almonds
+-- ("Pineapple Upside-Down Cake", "") Pineapple, Sugar, Maraschino Cherries, Butter, Vanilla Cake
+-- ("Raspberry Cheesecake", "") Raspberry, Cream Cheese, Sugar, Graham Cracker Crust
+-- ("Strawberry Shortcake", "") Strawberries, Whipped Cream, Biscuits
+-- ("Blueberry Muffins", "") Blueberries, Flour, Sugar, Eggs, Butter
+-- ("Blackberry Lemon Bars", "") Blackberries, Lemon Juice, Flour, Sugar, Eggs
+-- ("Cherry Chocolate Brownies", "") Cherries, Dark Chocolate, Flour, Sugar, Eggs
+-- ("Grape Jelly Thumbprint Cookies", "") Grapes, Sugar, Butter, Flour
+-- ("Cinnamon Sugar Fried Bananas", "") Banana, Cinnamon Sugar, Ice Cream
+-- ("Raspberry Swirl Cheesecake", "") Raspberry, Cream Cheese, Sugar, Graham Cracker Crust
+-- ("Apple Cinnamon Pancakes", "") Apple, Cinnamon Powder, Pancake Batter, Maple Syrup
+-- ("Raspberry Yogurt Parfait", ""): Raspberry, Yogurt, Granola, Honey
+-- ("Che Ba Mau", ""): Three Color Dessert, Mung Bean, Red Beans, Coconut Milk
+-- ("Mung Bean Dessert Soup - Che Dau Xanh", ""): , Mung Beans, Coconut Milk, Pandan Leaves
+-- ("Che Chuoi", ""): Banana Coconut Milk Dessert, Banana, Coconut Milk, Tapioca Pearls
+-- ("Vietnamese Caramel Flan (Banh Flan)", ""): Eggs, Sugar, Milk, Vanilla Extract, Caramel Sauce
+-- ("Vietnamese Coffee Ice Cream", ""): Coffee, Condensed Milk, Whipped Cream
+-- ("Pandan Sticky Rice with Mango (Xoi Vo)", ""): Sticky Rice, Pandan Leaves, Coconut Milk, Sugar, Fresh Mango
+-- ("Cantaloupe","")
+-- ("Banana","")
+-- ("Cherries","")
+-- ("Strawberries","")
+-- ("Plum","")
+-- ("Pineapple","")
+-- ("Pear","")
+-- ("Papaya","")
+-- ("Peach","")
+-- ("Kiwi","")
+-- ("Honeydew melon","")
+
+-- Drinks
+-- ("Matcha Green Tea Smoothie", ""): Matcha Powder, Milk, Banana, Honey
+-- ("Strawberry Milk", ""): Strawberries, Milk, Sugar
+-- ("Banana Milk", ""): Banana, Milk, Honey
+-- ("Plum Tea (Maesil Cha)", ""): Plum, Sugar, Water
+-- ("Pomegranate Juice", "") : Pomegranate
+-- ("Kiwi Lime Sorbet", ""): Kiwi, Lime Juice, Sugar, Water
+-- ("Kiwi Lime Margarita", ""): Kiwi, Lime Juice, Tequila, Triple Sec, Simple Syrup
+-- ("Mango Orange Agua Fresca", ""): Mango, Orange, Sugar, Water
+-- ("Pineapple Mint Mojito", ""): Pineapple, Mint Leaves, Lime, Soda Water, Rum (optional)
+-- ("Plum Raspberry Lemonade", ""): Plum, Raspberry, Lemon, Sugar, Water
+-- ("Strawberry Watermelon Slush", ""): Strawberry, Watermelon, Ice
+-- ("Cherry Limeade", ""): Cherries, Lime, Sugar, Water, Ice
+-- ("Grape Sangria", ""): Grapes, Red Wine, Orange Juice, Soda Water, Sugar
+-- ("Blackberry Basil Lemonade", ""): Blackberry, Basil Leaves, Lemon, Sugar, Water
+-- ("Cucumber Mint Cooler", ""): Cucumber, Mint Leaves, Lime, Sugar, Water
+-- ("Watermelon Lime Slushie", ""): Watermelon, Lime, Sugar, Water, Ice
+-- ("Zesty Tomato Juice", ""): Tomato, Lemon, Black Pepper, Salt, Tabasco Sauce
+-- ("Basil Lemon Iced Tea", ""): Basil Leaves, Lemon, Black Tea, Sugar, Ice
+-- ("Coconut Matcha Latte", ""): Coconut Milk, Matcha Powder, Honey
+-- ("Honeydew Melon Mint Cooler", ""): Honeydew Melon, Mint Leaves, Lime, Sugar, Water
+-- ("Strawberry Kiwi Lemonade", ""): Strawberry, Kiwi, Lemon, Sugar, Water
+-- ("Mango Passion Fruit Iced Tea", ""): Mango, Passion Fruit, Black Tea, Sugar, Ice
+-- ("Peach Raspberry Lemonade", ""): Peach, Raspberry, Lemon, Sugar, Water
+-- ("Pineapple Ginger Lemonade", ""): Pineapple, Ginger Powder, Lemon, Sugar, Water
+-- ("Cucumber Watermelon Cooler", ""): Cucumber, Watermelon, Mint Leaves, Lime, Sugar, Water
+-- ("Wine","")

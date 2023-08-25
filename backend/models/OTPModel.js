@@ -30,7 +30,7 @@ const sendOTP = (email, otp) => {
 }
 
 // create user otp
-export const createOtpUser = (data, result) => {
+export const createUserOtp = (data, result) => {
     const otp = Math.floor(100000 + Math.random() * 900000);
 
     // Check if otp exist 
@@ -69,7 +69,7 @@ export const createOtpUser = (data, result) => {
 
 
 // verify user otp
-export const verifyOtpUser = (data, result) => {
+export const verifyUserOtp = (data, result) => {
     // Check if otp correct 
     db.query("SELECT user_email FROM otp WHERE user_email = ? AND otp_key = ?", [data.user_email, data.otp_key], (err, results) => {
         if (err) {

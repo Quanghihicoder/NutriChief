@@ -8,7 +8,11 @@ export const getUserInfo = (data, result) => {
                 console.log(err);
                 result({ "status": 0, "message": "Can not get user", "data": [] });
             } else {
-                result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+                if (results[0]) {
+                    result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+                } else {
+                    result({ "status": 0, "message": "Can not get user", "data": [] });
+                }
             }
         });
     } else if (data.user_email) {
@@ -17,14 +21,20 @@ export const getUserInfo = (data, result) => {
                 console.log(err);
                 result({ "status": 0, "message": "Can not get user", "data": [] });
             } else {
-                result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+                if (results[0]) {
+                    result({ "status": 1, "message": "Successfully get user", "data": [results[0]] });
+                } else {
+                    result({ "status": 0, "message": "Can not get user", "data": [] });
+                }
             }
         });
+    } else {
+        console.log(err);
+        result({ "status": 0, "message": "Can not get user", "data": [] });
     }
 }
 
 export const updateUserInfo = (data, result) => {
-
     const bmi = data.user_weight / (data.user_height / 100 * data.user_height / 100)
 
     const currentYear = new Date().getFullYear()
