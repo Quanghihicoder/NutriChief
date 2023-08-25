@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="OtpDigitStyle">
+        <!-- Customize text appearance -->
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:gravity">center</item>
+        <!-- You can add more style attributes as needed -->
+    </style>
+
+</resources>
