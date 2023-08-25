@@ -16,6 +16,15 @@ import {
     updateMealPref
 } from "../controllers/mealpref.js";
 
+
+import {
+    getAllFoods
+} from "../controllers/food.js"
+
+import {
+    getIngres
+} from "../controllers/ingre.js"
+
 // init express router
 const router = express.Router();
 
@@ -44,6 +53,14 @@ router.post("/apis/mealpref/create", createMealPref);
 
 // update meal pref 
 router.post("/apis/mealpref/update", updateMealPref);
+
+////////////////////////// FOOD ////////////////////////////////
+// get foods
+router.post("/apis/food", getAllFoods);
+
+////////////////////////// INGRE ////////////////////////////////
+// get ingres
+router.post("/apis/ingre", getIngres);
 
 // export default router
 export default router;
