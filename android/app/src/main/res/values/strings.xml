@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NutriChief</string>
+    <string name="meal_plan">Meal Plan</string>
 </resources>
