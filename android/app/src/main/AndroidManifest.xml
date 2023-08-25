@@ -13,6 +13,13 @@
         android:theme="@style/Theme.NutriChief"
         tools:targetApi="31">
         <activity
+            android:name=".view.Instructions"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="false">
             <meta-data

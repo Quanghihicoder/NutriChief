@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".view.RecipeDetail"
     android:orientation="vertical"
-    android:background="@drawable/ramen">
+    android:background="@drawable/cook">
 
     <ImageView
         android:layout_width="25dp"
@@ -54,18 +54,15 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/food_name"
+                    android:id="@+id/cooking_step"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Ramen"
+                    android:text="Step 1"
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/ingredients_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
