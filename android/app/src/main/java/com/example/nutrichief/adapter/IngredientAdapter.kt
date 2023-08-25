@@ -21,6 +21,33 @@ class IngredientAdapter (
 
     override fun getItemCount(): Int = recipeIngredientList.size
 
+    // View holder class for holding view references
+    class IngredientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ingredientImage: ImageView = view.findViewById(R.id.ingredient_image)
+        val ingredientName: TextView = view.findViewById(R.id.ingredient_name)
+        val ingredientShortDesc: TextView = view.findViewById(R.id.ingredient_shortDesc)
+        val ingredientQuantity: TextView = view.findViewById(R.id.ingredient_qty)
+    }
+
+    private var searchIngredientList = ArrayList<RecipeIngredient>(recipeIngredientList)
+
+    // Create view holder for recycler view
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val view = layoutInflater.inflate(R.layout.ingredient_item, parent, false) as View
+        return IngredientViewHolder(view)
+    }
+
+    // Bind data to view holder
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
+        val menu = recipeIngredientList[position]
+        holder.ingredientName.text = menu.ingredient.ingre_name
+        holder.ingredientShortDesc.text = menu.ingredient.ingre_calo.toString() + "kcal, " + menu.ingredient.ingre_protein.toString() + "gr protein, " + menu.ingredient.ingre_fat.toString() + "gr fat, " + menu.ingredient.ingre_carb.toString() + "gr carb"
+        holder.ingredientQuantity.text = menu.recipeQty.toString() + "gr"
+        holder.ingredientImage.setImageResource(R.drawable.ramen)
+    }
+
     // Filter function
     override fun getFilter(): Filter {
         return searchFilter;
@@ -52,34 +79,6 @@ class IngredientAdapter (
         }
 
     }
-
-    // View holder class for holding view references
-    class IngredientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ingredientImage: ImageView = view.findViewById(R.id.ingredient_image)
-        val ingredientName: TextView = view.findViewById(R.id.ingredient_name)
-        val ingredientShortDesc: TextView = view.findViewById(R.id.ingredient_shortDesc)
-        val ingredientQuantity: TextView = view.findViewById(R.id.ingredient_qty)
-    }
-
-    private var searchIngredientList = ArrayList<RecipeIngredient>(recipeIngredientList)
-
-    // Create view holder for recycler view
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.ingredient_item, parent, false) as View
-        return IngredientViewHolder(view)
-    }
-
-    // Bind data to view holder
-    @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
-        val menu = recipeIngredientList[position]
-        holder.ingredientName.text = menu.ingredient.ingre_name
-        holder.ingredientShortDesc.text = menu.ingredient.ingre_calo.toString() + "kcal, " + menu.ingredient.ingre_protein.toString() + "gr protein, " + menu.ingredient.ingre_fat.toString() + "gr fat, " + menu.ingredient.ingre_carb.toString() + "gr carb"
-        holder.ingredientQuantity.text = menu.recipeQty.toString() + "gr"
-        holder.ingredientImage.setImageResource(R.drawable.ramen)
-    }
-
 
 
 }

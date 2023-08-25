@@ -9,6 +9,6 @@ data class Ingredient(
     var ingre_protein: Float,
     var ingre_carb: Float,
     var ingre_img: String,
+
     )
 
-//`ingredient` (ingre_name, ingre_price, ingre_calo, ingre_fat, ingre_protein, ingre_carb)

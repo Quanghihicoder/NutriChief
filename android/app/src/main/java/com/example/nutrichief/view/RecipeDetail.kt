@@ -19,20 +19,22 @@ class RecipeDetail : AppCompatActivity() {
 
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
         ingredientRecyclerView.layoutManager = LinearLayoutManager(this)
+
         val dummy = mutableListOf<RecipeIngredient>(
             RecipeIngredient(
             1,
-            Ingredient(1, "noodle", 100f, 100, 10f, 10f, 10f, "") ,
-            100f),
+            Ingredient(1, "noodle", 100f, 101, 10f, 10f, 10f, "") ,
+            104f),
             RecipeIngredient(
                 1,
-                Ingredient(2, "egg", 101f, 100, 10f, 10f, 10f, "") ,
-                100f),
+                Ingredient(2, "egg", 101f, 102, 10f, 10f, 10f, "") ,
+                123f),
             RecipeIngredient(
                 1,
-                Ingredient(3, "pork", 102f, 100, 10f, 10f, 10f, "") ,
-                100f),
+                Ingredient(3, "pork", 102f, 103, 10f, 10f, 10f, "") ,
+                352f),
         )
+
         ingredientRecyclerView.adapter = IngredientAdapter(dummy)
     }
 
