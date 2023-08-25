@@ -43,7 +43,7 @@ class RecipeDetail : AppCompatActivity() {
 //        )
 //        ingredientRecyclerView.adapter = IngredientAdapter(dummy)
 
-        val foodId = 123 // Replace with the desired food_id
+        val foodId = 1 // Replace with the desired food_id
         val requestBody = FormBody.Builder()
             .add("food_id", foodId.toString())
             .build()

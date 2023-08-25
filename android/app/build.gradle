@@ -61,4 +61,17 @@ dependencies {
 
     // refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+
+    //gridlayout
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    //circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }
