@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_fat FLOAT(8,1) NOT NULL, -- grams
     ingre_protein FLOAT(8,1) NOT NULL, -- grams
     ingre_carb FLOAT(8,1) NOT NULL, -- grams
-    ingre_img VARCHAR(255) NOT NULL
+    ingre_img VARCHAR(255) NOT NULL,
     
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB; 
