@@ -9,9 +9,14 @@ import com.example.nutrichief.R
 import com.example.nutrichief.adapter.IngredientAdapter
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 
 class RecipeDetail : AppCompatActivity() {
     private lateinit var ingredientRecyclerView: RecyclerView
+    private val httpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

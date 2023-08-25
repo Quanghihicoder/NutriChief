@@ -65,8 +65,6 @@ class OtpVerifyActivity : AppCompatActivity() {
 
                             if (userName === "null") {
                                 val otpIntent = Intent(this@OtpVerifyActivity, RegisterActivity::class.java)
-//                                otpIntent.putExtra("user_email", userEmail)
-//                                otpIntent.putExtra("user_id", userId)
                                 val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                                 val editor = sharedPrefs.edit()
                                 editor.putString("user_email", userEmail)
