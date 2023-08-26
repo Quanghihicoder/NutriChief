@@ -55,8 +55,13 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:text="Ingredients"
-                android:enabled="false" />
+                android:enabled="true" />
 
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingre_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
