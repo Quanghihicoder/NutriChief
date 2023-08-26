@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.IngredientSearchAdapter
+import com.example.nutrichief.adapter.RecyclerFoodAdapter
+import com.example.nutrichief.datamodels.Food
 import com.example.nutrichief.datamodels.Ingredient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,9 +28,9 @@ import java.io.IOException
 class SearchFragment : Fragment() {
 
 private lateinit var searchRecyclerView: RecyclerView
-//    private lateinit var dishAdapter: DishAdapter
+    private lateinit var dishAdapter: RecyclerFoodAdapter
     private lateinit var ingredientAdapter: IngredientSearchAdapter
-//    private lateinit var allDishes: List<Dish>
+    private lateinit var allDishes: List<Food>
     private lateinit var allIngredients: List<Ingredient>
     private var isSearchingIngredients = false
 
@@ -50,18 +52,24 @@ private lateinit var searchRecyclerView: RecyclerView
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize adapters
-//        dishAdapter = DishAdapter(requireContext(), mutableListOf())
+        dishAdapter = RecyclerFoodAdapter(mutableListOf())
         ingredientAdapter = IngredientSearchAdapter(mutableListOf())
 
         // Set the initial adapter to dishAdapter
-//        searchRecyclerView.adapter = dishAdapter
+        allDishes = getAllDishes()
+        dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
+
+        searchRecyclerView.adapter = dishAdapter
 
         dishBtn.setOnClickListener {
             isSearchingIngredients = false
-//            searchRecyclerView.adapter = dishAdapter
             // Replace this with your actual data retrieval method for dishes
-//            allDishes = getAllDishes()
-//            dishAdapter.filterList(allDishes)
+
+            dishAdapter.filterList(allDishes as MutableList<Food>)
+            dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
+
+            searchRecyclerView.adapter = dishAdapter
+
         }
 
         ingredientBtn.setOnClickListener {
@@ -77,9 +85,6 @@ private lateinit var searchRecyclerView: RecyclerView
                     Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
                 }
             }
-//            ingredientAdapter.filter.filter(searchBox.query) // Apply search filter
-
-
         }
 
         searchBox.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -92,11 +97,21 @@ private lateinit var searchRecyclerView: RecyclerView
                 if (isSearchingIngredients) {
                     ingredientAdapter.filter.filter(newText)
                     return true
+                } else {
+                    dishAdapter.filter.filter(newText)
+                    return true
                 }
                 return false
             }
         })
         return view
+    }
+
+    private fun getAllDishes(): List<Food> {
+        return listOf(
+            Food(1, "Banh Mi", "good",0, 10),
+            Food(2, "Milk", "good", 0,0)
+        )
     }
 
     private fun getAllIngredients(callback: (List<Ingredient>?) -> Unit){

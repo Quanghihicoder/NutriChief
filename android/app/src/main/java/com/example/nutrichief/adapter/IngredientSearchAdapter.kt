@@ -63,11 +63,6 @@ class IngredientSearchAdapter (
         }
     }
 
-    fun updateSearchList(newList: MutableList<Ingredient>) {
-        filteredIngredientList.clear()
-        filteredIngredientList.addAll(newList)
-    }
-
     // View holder class for holding view references
     class IngredientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val ingredientImage: ImageView = view.findViewById(R.id.ingredient_image)
