@@ -35,5 +35,7 @@
     <string name="ingredient_name">Ingredient Name</string>
     <string name="ingredient_description">Ingredient description</string>
     <string name="ingredient_qty">0gr</string>
+    <string name="dishes">Dishes</string>
+    <string name="ingredients">Ingredients</string>
 
 </resources>

@@ -28,8 +28,8 @@ class RecyclerFoodAdapter(private var foodList: MutableList<Food>)
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
         val food = foodList[position]
         holder.imageItemFood.setImageResource(R.drawable.ramen)
-        holder.textItemFoodName.text = food.foodName
-        holder.textItemFoodShortDesc.text = food.foodDesc
+        holder.textItemFoodName.text = food.food_name
+        holder.textItemFoodShortDesc.text = food.food_desc
     }
 
     override fun getItemCount(): Int = foodList.size
@@ -58,7 +58,7 @@ class RecyclerFoodAdapter(private var foodList: MutableList<Food>)
                 val filterPattern = constraint.toString().lowercase(Locale.ROOT).trim()
 
                 for (food in filteredFoodList) {
-                    if (food.foodName.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                    if (food.food_name.toLowerCase(Locale.ROOT).contains(filterPattern)) {
                         filteredList.add(food)
                     }
                 }

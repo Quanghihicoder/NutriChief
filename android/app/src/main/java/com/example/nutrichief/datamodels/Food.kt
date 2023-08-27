@@ -1,9 +1,9 @@
 package com.example.nutrichief.datamodels
 
 data class Food(
-    val foodId: Int,
-    val foodName: String,
-    val foodDesc: String,
-    val foodCTime: Int,
-    val foodPTime: Int,
+    val food_id: Int,
+    val food_name: String,
+    val food_desc: String,
+    val food_ctime: Int,
+    val food_ptime: Int,
 )

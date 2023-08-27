@@ -66,9 +66,8 @@
                 android:id="@+id/ingredient_qty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ingredient_qty"
                 android:textColor="@color/black"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

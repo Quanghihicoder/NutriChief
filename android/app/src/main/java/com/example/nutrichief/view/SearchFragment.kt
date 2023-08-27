@@ -1,5 +1,6 @@
 package com.example.nutrichief.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -33,6 +34,7 @@ private lateinit var searchRecyclerView: RecyclerView
     private lateinit var allDishes: List<Food>
     private lateinit var allIngredients: List<Ingredient>
     private var isSearchingIngredients = false
+    private var savedSearchQuery = ""
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -48,6 +50,10 @@ private lateinit var searchRecyclerView: RecyclerView
         val ingredientBtn = view.findViewById<Button>(R.id.ingredientButton)
         val searchBox = view.findViewById<SearchView>(R.id.search_menu_items)
 
+        //set button colors
+        ingredientBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+        dishBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+
         searchRecyclerView = view.findViewById(R.id.ingre_recycler_view)
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -56,17 +62,22 @@ private lateinit var searchRecyclerView: RecyclerView
         ingredientAdapter = IngredientSearchAdapter(mutableListOf())
 
         // Set the initial adapter to dishAdapter
-        allDishes = getAllDishes()
-        dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
-
-        searchRecyclerView.adapter = dishAdapter
+        getAllDishes { foods ->
+            if (foods != null) {
+                allDishes = foods
+                dishAdapter.filterList(allDishes as MutableList<Food>)
+                dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
+                searchRecyclerView.adapter = dishAdapter
+            } else {
+                Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+            }
+        }
 
         dishBtn.setOnClickListener {
             isSearchingIngredients = false
-            // Replace this with your actual data retrieval method for dishes
-
-            dishAdapter.filterList(allDishes as MutableList<Food>)
-            dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
+            dishBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            ingredientBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+            dishAdapter.filter.filter(savedSearchQuery)
 
             searchRecyclerView.adapter = dishAdapter
 
@@ -74,12 +85,15 @@ private lateinit var searchRecyclerView: RecyclerView
 
         ingredientBtn.setOnClickListener {
             isSearchingIngredients = true
+            ingredientBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            dishBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
 
             getAllIngredients { ingredients ->
                 if (ingredients != null) {
                     allIngredients = ingredients
                     ingredientAdapter.filterList(allIngredients as MutableList<Ingredient>)
                     ingredientAdapter = IngredientSearchAdapter(allIngredients as MutableList<Ingredient>)
+                    ingredientAdapter.filter.filter(savedSearchQuery)
                     searchRecyclerView.adapter = ingredientAdapter
                 } else {
                     Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
@@ -93,7 +107,7 @@ private lateinit var searchRecyclerView: RecyclerView
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.d("SearchFragment", "New text: $newText")
+                savedSearchQuery = newText ?: ""
                 if (isSearchingIngredients) {
                     ingredientAdapter.filter.filter(newText)
                     return true
@@ -107,11 +121,55 @@ private lateinit var searchRecyclerView: RecyclerView
         return view
     }
 
-    private fun getAllDishes(): List<Food> {
-        return listOf(
-            Food(1, "Banh Mi", "good",0, 10),
-            Food(2, "Milk", "good", 0,0)
-        )
+    private fun getAllDishes(callback: (List<Food>?) -> Unit) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val requestBody = JSONObject()
+
+                val request = Request.Builder()
+                    .url("http://10.0.2.2:8001/apis/foods")
+                    .post(
+                        RequestBody.create(
+                            "application/json".toMediaTypeOrNull(),
+                            requestBody.toString()
+                        )
+                    )
+                    .build()
+
+                val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
+
+                if (!response.isSuccessful) {
+                    throw IOException("Failed to retrieve foods")
+                }
+
+                val responseBody = response.body?.string()
+                val resultJson = JSONObject(responseBody ?: "")
+                val status = resultJson.optInt("status", 0)
+
+                if (status == 1) {
+                    val data = resultJson.optJSONArray("data")
+
+                    val foods = mutableListOf<Food>()
+                    for (i in 0 until data.length()) {
+                        val jsonFood: JSONObject = data.getJSONObject(i)
+                        val food = Food(
+                            jsonFood.getInt("food_id"),
+                            jsonFood.getString("food_name"),
+                            jsonFood.getString("food_desc"),
+                            jsonFood.getInt("food_ctime"),
+                            jsonFood.getInt("food_ptime")
+                        )
+                        foods.add(food)
+                    }
+                    callback(foods)
+                } else {
+                    callback(null)
+                }
+            }catch (e: Exception) {
+                // Handle the error here
+                Log.e("RecipeDetail", "Failed to retrieve foods: ${e.message}")
+            }
+        }
     }
 
     private fun getAllIngredients(callback: (List<Ingredient>?) -> Unit){
@@ -132,7 +190,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
 
                 if (!response.isSuccessful) {
-                    throw IOException("Failed to retrieve recipe ingredients")
+                    throw IOException("Failed to retrieve ingredients")
                 }
 
                 val responseBody = response.body?.string()
@@ -163,7 +221,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 }
             }catch (e: Exception) {
                 // Handle the error here
-                Log.e("RecipeDetail", "Failed to retrieve recipe ingredients: ${e.message}")
+                Log.e("RecipeDetail", "Failed to retrieve ingredients: ${e.message}")
             }
         }
     }
