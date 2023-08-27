@@ -60,3 +60,22 @@ export const getAllFoodsAndDetails = (data, result) => {
         }
     });
 };
+
+export const getFoods = (data, result) => {
+    db.query("SELECT * FROM food", [], (err, results) => {
+        if (err) {
+            console.log(err);
+            result({ status: 0, message: "Can not get foods", data: [] });
+        } else {
+            if (results) {
+                result({
+                    status: 1,
+                    message: "Successfully get foods",
+                    data: results,
+                });
+            } else {
+                result({ status: 0, message: "Can not get foods", data: [] });
+            }
+        }
+    });
+};
