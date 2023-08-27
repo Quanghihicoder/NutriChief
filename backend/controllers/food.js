@@ -1,6 +1,4 @@
-import {
-    getAllFoodsAndDetails
-} from "../models/FoodModel.js";
+import { getAllFoodsAndDetails, getFoods } from "../models/FoodModel.js";
 
 // get all foods
 export const getAllFoods = (req, res) => {
@@ -14,3 +12,13 @@ export const getAllFoods = (req, res) => {
     });
 };
 
+export const getFoodInfo = (req, res) => {
+    const data = req.body;
+    getFoods(data, (err, results) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+};

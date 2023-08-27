@@ -11,7 +11,7 @@ import {
     updateMealPref,
 } from "../controllers/mealpref.js";
 
-import { getAllFoods } from "../controllers/food.js";
+import { getAllFoods, getFoodInfo } from "../controllers/food.js";
 
 import { getIngres, getIngresFromRecipe } from "../controllers/ingre.js";
 
@@ -45,6 +45,9 @@ router.post("/apis/mealpref/update", updateMealPref);
 ////////////////////////// FOOD ////////////////////////////////
 // get foods
 router.post("/apis/food", getAllFoods);
+
+// get foods with basic info
+router.post("/apis/foodsearch", getFoodInfo);
 
 ////////////////////////// INGRE ////////////////////////////////
 // get ingres
