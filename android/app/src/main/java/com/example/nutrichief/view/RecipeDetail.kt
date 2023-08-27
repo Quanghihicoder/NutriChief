@@ -23,7 +23,7 @@ class RecipeDetail : AppCompatActivity() {
         val dummy = mutableListOf<RecipeIngredient>(
             RecipeIngredient(
             1,
-            Ingredient(1, "noodle", 100f, 101, 10f, 10f, 10f, "") ,
+                Ingredient(1, "noodle", 100f, 101, 10f, 10f, 10f, "") ,
             104f),
             RecipeIngredient(
                 1,

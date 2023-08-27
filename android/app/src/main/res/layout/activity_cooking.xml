@@ -39,6 +39,7 @@
             tools:layout_editor_absoluteY="128dp" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
@@ -62,10 +63,34 @@
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 
+                <LinearLayout
+                    android:id="@+id/buttonContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="39dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center|center_horizontal"
+                        android:gravity="center|center_horizontal"
+                        android:text="1"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="28dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
+
+
         </androidx.core.widget.NestedScrollView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
