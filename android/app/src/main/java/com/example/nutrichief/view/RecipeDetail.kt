@@ -109,6 +109,5 @@ class RecipeDetail : AppCompatActivity() {
         }
     }
 
-
-    fun goBack(view: View) {}
+    fun goBack(view: View) { onBackPressed() }
 }

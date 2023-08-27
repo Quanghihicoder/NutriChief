@@ -37,5 +37,7 @@
     <string name="ingredient_qty">0gr</string>
     <string name="dishes">Dishes</string>
     <string name="ingredients">Ingredients</string>
+    <string name="edit_profile" />
+    <string name="save">Save</string>
 
 </resources>

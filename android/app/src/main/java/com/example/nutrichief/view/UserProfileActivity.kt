@@ -1,5 +1,7 @@
 package com.example.nutrichief.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +28,7 @@ class UserProfileActivity : AppCompatActivity() {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
+    private var actLevelString : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +46,8 @@ class UserProfileActivity : AppCompatActivity() {
         val update = findViewById<ImageView>(R.id.update_profile)
 
         update.setOnClickListener {
-            // Handle the update profile action here
+            startActivity( Intent(this, UserProfileSettingsActivity::class.java) )
+            finish()
         }
 
         val userEmail = "chie.bow.gu@gmail.com"
@@ -54,7 +58,7 @@ class UserProfileActivity : AppCompatActivity() {
                 fullName.text = it.user_name
                 email.text = it.user_email
 
-                var genderProfile = if (it.user_gender == 0) "female" else "male"
+                var genderProfile = if (it.user_gender == 0) "Female" else "Male"
                 gender.text = genderProfile
                 val userBirth = it.user_year_of_birth
                 val currentYear = LocalDate.now().year
@@ -63,9 +67,30 @@ class UserProfileActivity : AppCompatActivity() {
                 }
                 height.text = "${it.user_height} cm"
                 weight.text = "${it.user_weight} kg"
-                actLevel.text = it.user_activity_level.toString()
+
+                var actLevelProfile = it.user_activity_level
+                if (actLevelProfile != null) {
+                    if (actLevelProfile.toInt() == 1) {
+                        actLevelString = "Sedentary"
+                    } else if (actLevelProfile.toInt() == 2) {
+                        actLevelString = "Lightly active"
+                    } else if (actLevelProfile.toInt() == 3) {
+                        actLevelString = "Moderately active"
+                    } else if (actLevelProfile.toInt() == 4) {
+                        actLevelString = "Very active"
+                    } else if (actLevelProfile.toInt() == 5) {
+                        actLevelString = "Super active"
+                    }
+                }
+
+                actLevel.text = actLevelString
                 bmi.text = it.user_bmi.toString()
                 tdee.text = it.user_tdee.toString()
+
+                val sharedPrefs = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                val editor = sharedPrefs.edit()
+                editor.putInt("user_id", it.user_id!!)
+                editor.apply()
             } ?: run {
                 // Handle the case when user is null (error occurred)
                 Toast.makeText(this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()
@@ -74,9 +99,7 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
-    fun goBack(view: View) {
-        onBackPressed()
-    }
+    fun goBack(view: View) { onBackPressed() }
 
     private fun fetchUserProfile(email: String, callback: (User?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {

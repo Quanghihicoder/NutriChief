@@ -225,4 +225,5 @@ private lateinit var searchRecyclerView: RecyclerView
             }
         }
     }
+
 }

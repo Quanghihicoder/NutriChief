@@ -1,5 +1,6 @@
 package com.example.nutrichief.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,15 +16,14 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
-import java.text.NumberFormat
 
-class RegisterActivity : AppCompatActivity() {
+class UserProfileSettingsActivity : AppCompatActivity() {
+
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
@@ -36,12 +36,11 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var activeLevelList: Spinner
     private var selectedActiveLevel: String? = null
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
-        val agreeCheckBox = findViewById<CheckBox>(R.id.register_agree_check_box)
-        val registerBtn = findViewById<Button>(R.id.register_emp_btn)
+        setContentView(R.layout.activity_user_profile_settings)
+        val saveBtn = findViewById<Button>(R.id.save_emp_btn)
 
         genderList = findViewById(R.id.gender)
         genderList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -86,19 +85,17 @@ class RegisterActivity : AppCompatActivity() {
             activeLevelList.adapter = adapter
         }
 
-        agreeCheckBox.setOnClickListener {
-            registerBtn.isEnabled = agreeCheckBox.isChecked
-        }
-
-        registerBtn.setOnClickListener {
+        saveBtn.setOnClickListener {
             val fullName = findViewById<TextInputEditText>(R.id.fullname).text.toString()
-//            val email = "chie.bow.gu@gmail.com"
-            val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val email = sharedPrefs.getString("user_email", "") ?: ""
-            val userId = sharedPrefs.getInt("user_id", 0)
+            val email = findViewById<TextInputEditText>(R.id.email).text.toString()
+            val sharedPrefs = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+//            val email = sharedPrefs.getString("user_email", "") ?: ""
+//            val userId = sharedPrefs.getInt("user_id", 0)
+            val userId = 1
 
             val yearOfBirthText = findViewById<TextInputEditText>(R.id.yearofbirth).text.toString()
             val gender = selectedGender.toString()
+
 
             val weightText = findViewById<TextInputEditText>(R.id.weight).text.toString()
             val heightText = findViewById<TextInputEditText>(R.id.height).text.toString()
@@ -118,7 +115,6 @@ class RegisterActivity : AppCompatActivity() {
             if (fullName.isNotEmpty() && yearOfBirthText.isNotEmpty() &&
                 weightText.isNotEmpty() &&
                 heightText.isNotEmpty() ) {
-
                 val yearOfBirth = yearOfBirthText.toInt()
 
 
@@ -136,6 +132,8 @@ class RegisterActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
+//                val actLevel = actLevelText.toInt()
+
                 val user = User(
                     userId,
                     fullName,
@@ -150,22 +148,22 @@ class RegisterActivity : AppCompatActivity() {
                 )
 
                 GlobalScope.launch(Dispatchers.IO) {
-                    registerUser(user) { response, errorMessage ->
+                    updateUser(user) { response, errorMessage ->
                         Log.e("confirm", "clicked")
                         runOnUiThread {
                             if (response.isSuccessful) {
                                 // Registration successful
-                                Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT)
+                                Toast.makeText(this@UserProfileSettingsActivity, "Update Profile Successful", Toast.LENGTH_SHORT)
                                     .show()
-                                val loginIntent = Intent(this@RegisterActivity, MainActivity::class.java)
+                                val loginIntent = Intent(this@UserProfileSettingsActivity, UserProfileActivity::class.java)
                                 startActivity(loginIntent)
                                 finish()
                             } else {
                                 // Registration failed
                                 if (errorMessage != null) {
-                                    Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@UserProfileSettingsActivity, errorMessage, Toast.LENGTH_SHORT).show()
                                 } else {
-                                    Toast.makeText(this@RegisterActivity, "Failed to register user", Toast.LENGTH_SHORT)
+                                    Toast.makeText(this@UserProfileSettingsActivity, "Failed to register user", Toast.LENGTH_SHORT)
                                         .show()
                                 }
                             }
@@ -173,13 +171,13 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                    Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+    }
 
-    private fun registerUser(customer: User, callback: (Response, String?) -> Unit) {
+    private fun updateUser(customer: User, callback: (Response, String?) -> Unit) {
         try {
             val jsonMediaType = "application/json; charset=utf-8".toMediaType()
             val requestBody = jacksonObjectMapper().writeValueAsString(customer)

@@ -51,12 +51,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/top_curve_profile_background" android:id="@+id/view"/>
+            android:layout_marginTop="35dp"
+            android:background="@drawable/top_curve_profile_background" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -78,7 +79,7 @@
                     android:src="@drawable/user_male"
                     android:transitionName="userIconTransition"
                     app:civ_border_color="@color/white"
-                    app:civ_border_width="2dp"/>
+                    app:civ_border_width="2dp" />
 
                 <TextView
                     android:id="@+id/profile_email"
@@ -88,7 +89,8 @@
                     android:layout_marginTop="5dp"
                     android:text="@string/e_mail"
                     android:textColor="@color/text_light_color"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
@@ -97,7 +99,7 @@
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:text="@string/welcome"
                     android:textColor="@color/purple_theme_color"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,7 +132,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/gender"
-                                android:src="@drawable/ic_gender"/>
+                                android:src="@drawable/ic_gender" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -143,7 +145,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/gender"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_gender"
@@ -151,7 +153,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/gender"
                                     android:textColor="@color/text_light_color"
-                                    android:textSize="15sp"/>
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -179,7 +181,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/age"
-                                android:src="@drawable/ic_age"/>
+                                android:src="@drawable/ic_age" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -192,7 +194,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/age"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_age"
@@ -200,7 +202,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/age"
                                     android:textColor="@color/text_light_color"
-                                    android:textSize="15sp"/>
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -228,7 +230,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/height"
-                                android:src="@drawable/ic_height"/>
+                                android:src="@drawable/ic_height" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -241,7 +243,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/height"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_height"
@@ -249,7 +251,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/height"
                                     android:textColor="@color/text_light_color"
-                                    android:textSize="15sp"/>
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -277,7 +279,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/weight"
-                                android:src="@drawable/ic_weight"/>
+                                android:src="@drawable/ic_weight" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -290,7 +292,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/weight"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_weight"
@@ -298,7 +300,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/weight"
                                     android:textColor="@color/text_light_color"
-                                    android:textSize="15sp"/>
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -326,7 +328,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/activity_level"
-                                android:src="@drawable/ic_act_level_custom"/>
+                                android:src="@drawable/ic_act_level_custom" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -339,7 +341,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/activity_level"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_activityLevel"
@@ -347,12 +349,13 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/activity_level"
                                     android:textColor="@color/text_light_color"
-                                    android:textSize="15sp"/>
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -388,17 +391,20 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/bmi"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
+
                                 <TextView
+                                    android:id="@+id/profile_bmi"
                                     android:layout_width="96dp"
-                                    android:layout_height="wrap_content" android:id="@+id/profile_bmi"
-                                    android:text="@string/bmi"/>
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/bmi" />
 
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -421,7 +427,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:contentDescription="@string/tdee"
                                 android:src="@drawable/tdee"
-                                app:tint="#6173DF"/>
+                                app:tint="#6173DF" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -434,7 +440,7 @@
                                     android:fontFamily="@font/montserrat_bold"
                                     android:text="@string/tdee"
                                     android:textColor="@color/purple_theme_color"
-                                    android:textSize="12sp"/>
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/profile_tdee"
