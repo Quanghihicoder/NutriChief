@@ -97,23 +97,23 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_email_til"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/register_email_til"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:errorEnabled="true"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_email"
-                        android:drawablePadding="10dp"
-                        android:hint="@string/e_mail"
-                        android:inputType="text" />
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/email"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:drawableStart="@drawable/ic_email"-->
+<!--                        android:drawablePadding="10dp"-->
+<!--                        android:hint="@string/e_mail"-->
+<!--                        android:inputType="text" />-->
 
-                </com.google.android.material.textfield.TextInputLayout>
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/register_year_of_birth_til"
@@ -250,24 +250,31 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="74dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.551">
 
                     <Button
                         android:id="@+id/save_emp_btn"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3"
+                        android:enabled="true"
                         android:text="@string/save"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:enabled="true"/>
+                        />
                 </LinearLayout>
+
+            </LinearLayout>
+
+
 
             </LinearLayout>
 

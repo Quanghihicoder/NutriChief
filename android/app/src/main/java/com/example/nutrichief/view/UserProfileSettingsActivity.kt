@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.example.nutrichief.MainActivity
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.User
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -87,11 +86,11 @@ class UserProfileSettingsActivity : AppCompatActivity() {
 
         saveBtn.setOnClickListener {
             val fullName = findViewById<TextInputEditText>(R.id.fullname).text.toString()
-            val email = findViewById<TextInputEditText>(R.id.email).text.toString()
-            val sharedPrefs = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-//            val email = sharedPrefs.getString("user_email", "") ?: ""
-//            val userId = sharedPrefs.getInt("user_id", 0)
-            val userId = 1
+//            val email = findViewById<TextInputEditText>(R.id.email).text.toString()
+            val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val email = sharedPrefs.getString("user_email", "") ?: ""
+            val userId = sharedPrefs.getInt("user_id", 0)
+//            val userId = 1
 
             val yearOfBirthText = findViewById<TextInputEditText>(R.id.yearofbirth).text.toString()
             val gender = selectedGender.toString()
@@ -131,8 +130,6 @@ class UserProfileSettingsActivity : AppCompatActivity() {
                 } catch (e: NumberFormatException) {
                     return@setOnClickListener
                 }
-
-//                val actLevel = actLevelText.toInt()
 
                 val user = User(
                     userId,

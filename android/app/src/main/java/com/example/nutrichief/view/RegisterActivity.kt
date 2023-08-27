@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
-import com.example.nutrichief.MainActivity
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.User
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -15,13 +14,11 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
-import java.text.NumberFormat
 
 class RegisterActivity : AppCompatActivity() {
     private val client = OkHttpClient.Builder()
@@ -121,7 +118,6 @@ class RegisterActivity : AppCompatActivity() {
 
                 val yearOfBirth = yearOfBirthText.toInt()
 
-
                 val genderInt = if (gender == "Female") 0 else 1
 
                 val height = try {
@@ -157,7 +153,7 @@ class RegisterActivity : AppCompatActivity() {
                                 // Registration successful
                                 Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT)
                                     .show()
-                                val loginIntent = Intent(this@RegisterActivity, MainActivity::class.java)
+                                val loginIntent = Intent(this@RegisterActivity, UserProfileActivity::class.java)
                                 startActivity(loginIntent)
                                 finish()
                             } else {
@@ -207,5 +203,5 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    fun goBack(view: View) { onBackPressed() }
+//    fun goBack(view: View) { onBackPressed() }
 }

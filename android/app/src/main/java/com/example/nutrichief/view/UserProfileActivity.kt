@@ -50,9 +50,12 @@ class UserProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        val userEmail = "chie.bow.gu@gmail.com"
+//        val userEmail = "chie.bow.gu@gmail.com"
+        val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userEmail = sharedPrefs.getString("user_email", "") ?: ""
+        val userId = sharedPrefs.getInt("user_id", 0)
 
-        fetchUserProfile(userEmail) { user ->
+        fetchUserProfile(userId) { user ->
             user?.let {
                 // Populate user profile data to TextViews
                 fullName.text = it.user_name
@@ -84,13 +87,9 @@ class UserProfileActivity : AppCompatActivity() {
                 }
 
                 actLevel.text = actLevelString
-                bmi.text = it.user_bmi.toString()
-                tdee.text = it.user_tdee.toString()
+                bmi.text = it.user_bmi.toString() + it.user_bmi?.let { it1 -> bmiRate(it1) }
+                tdee.text = it.user_tdee.toString() + " calories per day"
 
-                val sharedPrefs = getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-                val editor = sharedPrefs.edit()
-                editor.putInt("user_id", it.user_id!!)
-                editor.apply()
             } ?: run {
                 // Handle the case when user is null (error occurred)
                 Toast.makeText(this, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()
@@ -101,11 +100,11 @@ class UserProfileActivity : AppCompatActivity() {
 
     fun goBack(view: View) { onBackPressed() }
 
-    private fun fetchUserProfile(email: String, callback: (User?) -> Unit) {
+    private fun fetchUserProfile(userId: Int, callback: (User?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val requestBody = JSONObject()
-                requestBody.put("user_email", email)
+                requestBody.put("user_id", userId)
 
                 val request = Request.Builder()
                     .url("http://10.0.2.2:8001/apis/user/get")
@@ -136,5 +135,12 @@ class UserProfileActivity : AppCompatActivity() {
                 Log.e("UserProfile", "Failed to retrieve user profile: ${e.message}")
             }
         }
+    }
+
+    fun bmiRate (bmi : Float) : String {
+        if (bmi < 18.5 ) return  " Underweight"
+        else if (bmi in 18.5..25.0) return " Healthy"
+        else if (bmi in 25.0..30.0) return " Overweight"
+        else return  " Obesity"
     }
 }
