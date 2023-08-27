@@ -62,9 +62,9 @@ private lateinit var searchRecyclerView: RecyclerView
         ingredientAdapter = IngredientSearchAdapter(mutableListOf())
 
         // Set the initial adapter to dishAdapter
-        getAllDishes { foods ->
-            if (foods != null) {
-                allDishes = foods
+        getAllDishes { food ->
+            if (food != null) {
+                allDishes = food
                 dishAdapter.filterList(allDishes as MutableList<Food>)
                 dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
                 searchRecyclerView.adapter = dishAdapter
@@ -127,7 +127,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 val requestBody = JSONObject()
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/foods")
+                    .url("http://10.0.2.2:8001/apis/foodsearch")
                     .post(
                         RequestBody.create(
                             "application/json".toMediaTypeOrNull(),
@@ -139,7 +139,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
 
                 if (!response.isSuccessful) {
-                    throw IOException("Failed to retrieve foods")
+                    throw IOException("Failed to retrieve food")
                 }
 
                 val responseBody = response.body?.string()
@@ -149,25 +149,25 @@ private lateinit var searchRecyclerView: RecyclerView
                 if (status == 1) {
                     val data = resultJson.optJSONArray("data")
 
-                    val foods = mutableListOf<Food>()
+                    val food = mutableListOf<Food>()
                     for (i in 0 until data.length()) {
                         val jsonFood: JSONObject = data.getJSONObject(i)
-                        val food = Food(
+                        val foodItem = Food(
                             jsonFood.getInt("food_id"),
                             jsonFood.getString("food_name"),
                             jsonFood.getString("food_desc"),
                             jsonFood.getInt("food_ctime"),
                             jsonFood.getInt("food_ptime")
                         )
-                        foods.add(food)
+                        food.add(foodItem)
                     }
-                    callback(foods)
+                    callback(food)
                 } else {
                     callback(null)
                 }
             }catch (e: Exception) {
                 // Handle the error here
-                Log.e("RecipeDetail", "Failed to retrieve foods: ${e.message}")
+                Log.e("RecipeDetail", "Failed to retrieve food: ${e.message}")
             }
         }
     }
