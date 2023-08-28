@@ -11,9 +11,9 @@ import {
     updateMealPref,
 } from "../controllers/mealpref.js";
 
-import { getAllFoods, getFoodInfo } from "../controllers/food.js";
+import { getFoods, getFoodDetail } from "../controllers/food.js";
 
-import { getIngres, getIngresFromRecipe } from "../controllers/ingre.js";
+import { getIngres, getAllFoodsByIngre } from "../controllers/ingre.js";
 
 // init express router
 const router = express.Router();
@@ -44,17 +44,17 @@ router.post("/apis/mealpref/update", updateMealPref);
 
 ////////////////////////// FOOD ////////////////////////////////
 // get foods
-router.post("/apis/food", getAllFoods);
+router.post("/apis/food", getFoods);
 
 // get foods with basic info
-router.post("/apis/foodsearch", getFoodInfo);
+router.post("/apis/food/detail", getFoodDetail);
 
 ////////////////////////// INGRE ////////////////////////////////
 // get ingres
 router.post("/apis/ingre", getIngres);
 
 // get ingres
-router.post("/apis/recipe/ingre", getIngresFromRecipe);
+router.post("/apis/ingre/foods", getAllFoodsByIngre);
 
 // export default router
 export default router;
