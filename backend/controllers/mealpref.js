@@ -1,5 +1,8 @@
 import {
-    getMealPrefInfo, createMealPrefInfo, updateMealPrefInfo
+    getMealPrefInfo,
+    createMealPrefInfo,
+    updateMealPrefInfo,
+
 } from "../models/MealPrefModel.js";
 
 // get user meal pref
@@ -14,7 +17,6 @@ export const getMealPref = (req, res) => {
     });
 };
 
-
 // create user meal pref
 export const createMealPref = (req, res) => {
     const data = req.body;
@@ -26,7 +28,6 @@ export const createMealPref = (req, res) => {
         }
     });
 };
-
 
 // update user meal pref
 export const updateMealPref = (req, res) => {
