@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_meal"
+        android:title="Meal Plan" />
+    <item
+        android:id="@+id/room"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/ic_collection"
+        android:title="Collection" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_community"
+        android:title="Community" />
+</menu>
