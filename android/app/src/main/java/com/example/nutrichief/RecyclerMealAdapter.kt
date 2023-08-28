@@ -3,7 +3,7 @@ package com.example.nutrichief
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.CheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.model.Meal
@@ -18,7 +18,7 @@ class RecyclerMealAdapter(private var mealList: List<Meal>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MealItemViewHolder, position: Int) {
         val meal = mealList[position]
-        holder.textMealType.text = meal.mealType
+        holder.cboxIsConsumed.text = meal.mealType
 
         holder.recyclerViewMealItem.layoutManager = LinearLayoutManager(holder.itemView.context)
         holder.recyclerViewMealItem.adapter = RecyclerFoodAdapter(meal.foodList)
@@ -27,7 +27,7 @@ class RecyclerMealAdapter(private var mealList: List<Meal>): RecyclerView.Adapte
     override fun getItemCount(): Int = mealList.size
 
     inner class MealItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textMealType: TextView = itemView.findViewById(R.id.text_meal_type)
+        val cboxIsConsumed: CheckBox = itemView.findViewById(R.id.cbox_is_consumed)
         val recyclerViewMealItem: RecyclerView = itemView.findViewById(R.id.recycler_view_food)
     }
 }
