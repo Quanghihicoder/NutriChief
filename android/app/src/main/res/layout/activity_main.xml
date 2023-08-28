@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+
     <!-- Bottom navigation   -->
     <FrameLayout
         android:id="@+id/fragment_main"

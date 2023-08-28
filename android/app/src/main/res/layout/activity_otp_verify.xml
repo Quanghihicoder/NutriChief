@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.OtpVerifyActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/verify_account"
+        android:textColor="@color/purple_theme_color"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="32sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Please fill in OTP"
+        android:textSize="18sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:layout_gravity="center"/>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/otpGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:columnCount="6"
+        app:rowCount="1">
+
+        <!-- You can customize the appearance of each cell, like adding background, padding, etc. -->
+        <!-- For simplicity, this example uses TextView for each cell -->
+
+        <EditText
+            android:id="@+id/digit1"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+        <EditText
+            android:id="@+id/digit2"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+        <EditText
+            android:id="@+id/digit3"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+        <EditText
+            android:id="@+id/digit4"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+        <EditText
+            android:id="@+id/digit5"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+        <EditText
+            android:id="@+id/digit6"
+            style="@style/OtpDigitStyle"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:background="@drawable/otp_digit_box" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <Button
+        android:id="@+id/verifyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verify OTP"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

@@ -23,16 +23,12 @@ export const getMealPrefInfo = (data, result) => {
 
 export const createMealPrefInfo = (data, result) => {
     if (data.user_id) {
-        db.query("INSERT INTO user SET user_id = ?, pref_calo = ?, pref_time = ?, pref_goal = ?, pref_date_range = ?", [data.user_id, data.pref_calo, data.pref_time, pref_goal, pref_date_range], (err, results) => {
+        db.query("INSERT INTO mealpref SET user_id = ?, pref_calo = ?, pref_time = ?, pref_goal = ?, pref_date_range = ?", [data.user_id, data.pref_calo, data.pref_time, data.pref_goal, data.pref_date_range], (err, results) => {
             if (err) {
                 console.log(err);
                 result({ "status": 0, "message": "Can not create user's meal pref", "data": [] });
             } else {
-                if (results[0]) {
-                    result({ "status": 1, "message": "Successfully create user's meal pref", "data": [results[0]] });
-                } else {
-                    result({ "status": 0, "message": "Can not create user's meal pref", "data": [] });
-                }
+                result({ "status": 1, "message": "Successfully create user's meal pref", "data": [] });
             }
         });
     } else {
@@ -44,17 +40,39 @@ export const createMealPrefInfo = (data, result) => {
 export const updateMealPrefInfo = (data, result) => { 
     if (data.user_id) {
 
-        
-        db.query("INSERT INTO user SET user_id = ?, pref_calo = ?, pref_time = ?, pref_goal = ?, pref_date_range = ?", [data.user_id, data.pref_calo, data.pref_time, pref_goal, pref_date_range], (err, results) => {
+        var query = "UPDATE mealpref SET"
+        var queryData = []
+
+        if (data.pref_calo) {
+            query += " pref_calo = ?,"
+            queryData.push(data.pref_calo)
+        }
+
+        if (data.pref_time) {
+            query += " pref_time = ?,"
+            queryData.push(data.pref_time)
+        }
+
+        if (data.pref_goal) {
+            query += " pref_goal = ?,"
+            queryData.push(data.pref_goal)
+        }
+
+        if (data.pref_date_range) {
+            query += " pref_date_range = ?,"
+            queryData.push(data.pref_date_range)
+        }
+
+        query = query.slice(0, -1);
+        query += " WHERE user_id = ?"
+        queryData.push(data.user_id)
+
+        db.query(query, queryData, (err, results) => {
             if (err) {
                 console.log(err);
                 result({ "status": 0, "message": "Can not update user's meal pref", "data": [] });
             } else {
-                if (results[0]) {
-                    result({ "status": 1, "message": "Successfully update user's meal pref", "data": [results[0]] });
-                } else {
-                    result({ "status": 0, "message": "Can not update user's meal pref", "data": [] });
-                }
+                result({ "status": 1, "message": "Successfully update user's meal pref", "data": [] });
             }
         });
     } else {
