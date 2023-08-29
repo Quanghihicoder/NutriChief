@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `meal` (
     user_id INT(11) NOT NULL,
     meal_food VARCHAR(255) NOT NULL,
     meal_date DATE NOT NULL,
-    meal_type VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (meal_id, user_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
@@ -352,7 +351,7 @@ VALUES
 (2,80, NULL, 75, "Prepare tomatoes.", "1/2 cup tomatoes, diced"),
 (2,67, NULL, 30, "Add cheese.", "1/4 cup grated cheese"),
 
-(3,113, NULL, 720, "Prepare bread.", "3 thick slices bread"),
+(3,113, NULL, 120, "Prepare bread.", "3 thick slices bread"),
 (3,65, NULL, 120, "Add milk.", "1/2 cup milk"),
 (3,72, NULL, 200, "Prepare eggs.", "2 large eggs"),
 (3,114, NULL, 6, "Add vanilla extract.", "1 teaspoon vanilla extract"),

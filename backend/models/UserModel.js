@@ -19,7 +19,7 @@ export const getUserInfo = (data, result) => {
                         result({
                             status: 1,
                             message: "Successfully get user",
-                            data: [results[0]],
+                            data: results,
                         });
                     } else {
                         result({
@@ -48,7 +48,7 @@ export const getUserInfo = (data, result) => {
                         result({
                             status: 1,
                             message: "Successfully get user",
-                            data: [results[0]],
+                            data: results,
                         });
                     } else {
                         result({

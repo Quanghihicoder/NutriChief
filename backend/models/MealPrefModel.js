@@ -9,7 +9,7 @@ export const getMealPrefInfo = (data, result) => {
                 result({ "status": 0, "message": "Can not get user's meal pref", "data": [] });
             } else {
                 if (results[0]) {
-                    result({ "status": 1, "message": "Successfully get user's meal pref", "data": [results[0]] });
+                    result({ "status": 1, "message": "Successfully get user's meal pref", "data": results });
                 } else {
                     result({ "status": 0, "message": "Can not get user's meal pref", "data": [] });
                 }
@@ -37,7 +37,7 @@ export const createMealPrefInfo = (data, result) => {
     }
 }
 
-export const updateMealPrefInfo = (data, result) => { 
+export const updateMealPrefInfo = (data, result) => {
     if (data.user_id) {
 
         var query = "UPDATE mealpref SET"

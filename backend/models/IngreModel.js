@@ -7,7 +7,7 @@ export const getAllIngres = (result) => {
             console.log(err);
             result({ status: 0, message: "Can not get ingredients", data: [] });
         } else {
-            if (results) {
+            if (results[0]) {
                 result({
                     status: 1,
                     message: "Successfully get ingredients",
@@ -31,7 +31,7 @@ export const getAllFoods = (data, result) => {
             console.log(err);
             result({ status: 0, message: "Can not get foods", data: [] });
         } else {
-            if (results) {
+            if (results[0]) {
                 result({
                     status: 1,
                     message: "Successfully get foods",

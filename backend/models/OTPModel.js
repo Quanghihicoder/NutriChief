@@ -85,7 +85,7 @@ export const verifyUserOtp = (data, result) => {
                     } else {
                         if (results[0]) {
                             // Return existed user
-                            result({ "status": 1, "message": "Successfully verified OTP code", "data": [results[0]] });
+                            result({ "status": 1, "message": "Successfully verified OTP code", "data": results });
 
                             // Delete OTP code
                             db.query("DELETE FROM otp WHERE user_email = ?", [data.user_email], (err, results) => {
@@ -107,7 +107,7 @@ export const verifyUserOtp = (data, result) => {
                                             console.log(err);
                                             result({ "status": 0, "message": "Can not verify OTP code", "data": [] });
                                         } else {
-                                            result({ "status": 1, "message": "Successfully verified OTP code", "data": [results[0]] });
+                                            result({ "status": 1, "message": "Successfully verified OTP code", "data": results });
 
                                             // Delete OTP code
                                             db.query("DELETE FROM otp WHERE user_email = ?", [data.user_email], (err, results) => {
