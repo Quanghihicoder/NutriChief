@@ -44,7 +44,7 @@ class IngredientAdapter (
         val menu = recipeIngredientList[position]
         holder.ingredientName.text = menu.ingredient.ingre_name
         holder.ingredientShortDesc.text = menu.ingredient.ingre_calo.toString() + "kcal, " + menu.ingredient.ingre_protein.toString() + "gr protein, " + menu.ingredient.ingre_fat.toString() + "gr fat, " + menu.ingredient.ingre_carb.toString() + "gr carb"
-        holder.ingredientQuantity.text = menu.recipeQty.toString() + "gr"
+        holder.ingredientQuantity.text = menu.recipe_qty.toString() + "gr"
         holder.ingredientImage.setImageResource(R.drawable.ramen)
     }
 

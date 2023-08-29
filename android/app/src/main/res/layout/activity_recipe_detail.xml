@@ -202,7 +202,7 @@
                         android:textAlignment="center">
 
                         <TextView
-                            android:id="@+id/kcalValue"
+                            android:id="@+id/caloriesValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="100 kcal"
@@ -290,7 +290,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/startCookingButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
