@@ -25,7 +25,7 @@ export const getDetails = (data, result) => {
         db.query(
             `
             SELECT 
-                ingredient.ingre_name,
+                ingredient.*,
                 recipe.recipe_title,
                 recipe.recipe_desc,
                 recipe.recipe_qty,
@@ -42,7 +42,11 @@ export const getDetails = (data, result) => {
             (err, results) => {
                 if (err) {
                     console.log(err);
-                    result({ status: 0, message: "Can not get food's detail", data: [] });
+                    result({
+                        status: 0,
+                        message: "Can not get food's detail",
+                        data: [],
+                    });
                 } else {
                     if (results) {
                         result({
@@ -51,7 +55,11 @@ export const getDetails = (data, result) => {
                             data: results,
                         });
                     } else {
-                        result({ status: 0, message: "Can not get food's detail", data: [] });
+                        result({
+                            status: 0,
+                            message: "Can not get food's detail",
+                            data: [],
+                        });
                     }
                 }
             }
@@ -60,5 +68,3 @@ export const getDetails = (data, result) => {
         result({ status: 0, message: "Can not get food's detail", data: [] });
     }
 };
-
-

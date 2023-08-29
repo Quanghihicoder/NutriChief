@@ -127,7 +127,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 val requestBody = JSONObject()
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/foodsearch")
+                    .url("http://10.0.2.2:8001/apis/food")
                     .post(
                         RequestBody.create(
                             "application/json".toMediaTypeOrNull(),
