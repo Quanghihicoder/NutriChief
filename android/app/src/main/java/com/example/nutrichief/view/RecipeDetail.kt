@@ -83,8 +83,8 @@ class RecipeDetail : AppCompatActivity() {
                     val cTimeTV = findViewById<TextView>(R.id.cTimeTV)
                     val foodNameTV = findViewById<TextView>(R.id.foodName)
 
-                    pTimeTV.text = food_ptime.toString()
-                    cTimeTV.text = food_ctime.toString()
+                    pTimeTV.text = food_ptime.toString() + "mins to prepare"
+                    cTimeTV.text = food_ctime.toString() + "mins to cook"
                     foodNameTV.text = food_name
                 }
             } ?: run {
@@ -117,7 +117,7 @@ class RecipeDetail : AppCompatActivity() {
                 val resultJson = JSONObject(responseBody ?: "")
                 val status = resultJson.optInt("status", 0)
 
-//                if (status == 1) {
+                if (status == 1) {
                     val data = resultJson.optJSONArray("data")
 
                     val recipeIngredients = mutableListOf<RecipeIngredient>()
@@ -147,9 +147,9 @@ class RecipeDetail : AppCompatActivity() {
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)
-//                } else {
-//                    callback(null)
-//                }
+                } else {
+                    callback(null)
+                }
             } catch (e: Exception) {
                 // Handle the error here
                 callback(null)
@@ -164,8 +164,8 @@ class RecipeDetail : AppCompatActivity() {
                 val requestBody = JSONObject()
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/food/?food_id=$foodId")
-                    .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+                    .url("http://10.0.2.2:8001/apis/food/$foodId")
+                    .get()
                     .build()
 
                 val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
@@ -178,7 +178,7 @@ class RecipeDetail : AppCompatActivity() {
                 val resultJson = JSONObject(responseBody ?: "")
                 val status = resultJson.optInt("status", 0)
 
-//                if (status == 1) {
+                if (status == 1) {
                     val data = resultJson.optJSONArray("data")
 
                     val foods = mutableListOf<Food>()
@@ -194,9 +194,9 @@ class RecipeDetail : AppCompatActivity() {
                         foods.add(food)
                     }
                     callback(foods)
-//                } else {
-//                    callback(null)
-//                }
+                } else {
+                    callback(null)
+                }
             } catch (e: Exception) {
                 // Handle the error here
                 callback(null)
