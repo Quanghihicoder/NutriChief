@@ -15,6 +15,8 @@ import { getFoods, getFoodDetail, getFoodById } from "../controllers/food.js";
 
 import { getIngres, getAllFoodsByIngre } from "../controllers/ingre.js";
 
+import { createMeal } from "../controllers/meal.js";
+
 // init express router
 const router = express.Router();
 
@@ -58,6 +60,10 @@ router.post("/apis/ingre", getIngres);
 
 // get ingres
 router.post("/apis/ingre/foods", getAllFoodsByIngre);
+
+////////////////////////// MEAL ////////////////////////////////
+// get meals
+router.post("/apis/meal/create", createMeal);
 
 // export default router
 export default router;
