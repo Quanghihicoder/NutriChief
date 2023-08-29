@@ -146,32 +146,16 @@ export const createUserMeal = (data, result) => {
 
                     let r = await generateMeal(userPref.pref_calo)
 
+                    // INSERT INTO meal (user_id,meal_food,meal_date) VALUES (1, "1,2,3", "2023-08-23")
+
                     result({ "status": 1, "message": "Successfully generate user's meals", "data": r });
                 } else {
                     result({ "status": 0, "message": "Can not generate user's meals", "data": [] });
                 }
             }
         });
-
-
-        // db.query("SELECT * FROM meal WHERE user_id = ? AND meal_date = ?", [data.user_id, data.meal_date], (err, results) => {
-        //     if (err) {
-        //         console.log(err);
-        //         result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
-        //     } else {
-        //         if (results[0]) {
-        //             result({ "status": 1, "message": "Successfully get user's date meal", "data": results });
-        //         } else {
-        //             result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
-        //         }
-        //     }
-        // });
-
-        // SELECT r.food_id, SUM(r.recipe_price), SUM(r.recipe_calories), SUM(r.recipe_carb), SUM(r.recipe_fat), SUM(r.recipe_protein) FROM(SELECT recipe.food_id AS food_id, (recipe.recipe_qty / 100 * ingredient.ingre_price) AS recipe_price, (recipe.recipe_qty / 100 * ingredient.ingre_calo) AS recipe_calories, (recipe.recipe_qty / 100 * ingredient.ingre_carb) AS recipe_carb, (recipe.recipe_qty / 100 * ingredient.ingre_fat) AS recipe_fat, (recipe.recipe_qty / 100 * ingredient.ingre_protein) AS recipe_protein FROM recipe INNER JOIN ingredient ON recipe.ingre_id = ingredient.ingre_id) AS r GROUP BY food_id;
     } else {
         console.log(err);
         result({ "status": 0, "message": "Can not generate user's meals", "data": [] });
     }
 }
-
-// INSERT INTO meal (user_id,meal_food,meal_date) VALUES (1, "1,2,3", "2023-08-23")
