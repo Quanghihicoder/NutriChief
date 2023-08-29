@@ -1,23 +1,29 @@
 package com.example.nutrichief.adapter
 
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Food
+import com.example.nutrichief.view.RecipeDetail
+import com.example.nutrichief.view.SearchFragment
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RecyclerFoodAdapter(private var foodList: MutableList<Food>)
+class RecyclerFoodAdapter(private var foodList: MutableList<Food>,
+                          private val listener: OnItemClickListener
+)
     : RecyclerView.Adapter<RecyclerFoodAdapter.FoodItemViewHolder>(), Filterable {
 
     private var filteredFoodList = ArrayList<Food>(foodList)
+
+    // Interface for defining click listener callbacks
+    interface OnItemClickListener {
+        fun onFoodClick(item: Food)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,6 +36,10 @@ class RecyclerFoodAdapter(private var foodList: MutableList<Food>)
         holder.imageItemFood.setImageResource(R.drawable.ramen)
         holder.textItemFoodName.text = food.food_name
         holder.textItemFoodShortDesc.text = food.food_desc
+
+        holder.itemView.setOnClickListener{
+            listener.onFoodClick(food)
+        }
     }
 
     override fun getItemCount(): Int = foodList.size

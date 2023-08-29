@@ -6,6 +6,7 @@
         android:title="Meal Plan" />
     <item
         android:id="@+id/nav_item_search"
+
         android:icon="@drawable/ic_search"
         android:title="Search" />
     <item

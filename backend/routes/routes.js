@@ -11,9 +11,11 @@ import {
     updateMealPref,
 } from "../controllers/mealpref.js";
 
-import { getFoods, getFoodDetail } from "../controllers/food.js";
+import { getFoods, getFoodDetail, getFoodById } from "../controllers/food.js";
 
 import { getIngres, getAllFoodsByIngre } from "../controllers/ingre.js";
+
+import { createMeal } from "../controllers/meal.js";
 
 // init express router
 const router = express.Router();
@@ -46,6 +48,9 @@ router.post("/apis/mealpref/update", updateMealPref);
 // get foods
 router.post("/apis/food", getFoods);
 
+//get food by id
+router.post("/apis/food/:food_id", getFoodById);
+
 // get foods with basic info
 router.post("/apis/food/detail", getFoodDetail);
 
@@ -55,6 +60,10 @@ router.post("/apis/ingre", getIngres);
 
 // get ingres
 router.post("/apis/ingre/foods", getAllFoodsByIngre);
+
+////////////////////////// MEAL ////////////////////////////////
+// get meals
+router.post("/apis/meal/create", createMeal);
 
 // export default router
 export default router;

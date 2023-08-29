@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +12,6 @@ import com.example.nutrichief.R
 import com.example.nutrichief.adapter.IngredientAdapter
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
-import com.example.nutrichief.datamodels.User
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -23,14 +21,21 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
-import java.time.LocalDate
 
 class RecipeDetail : AppCompatActivity() {
     private lateinit var ingredientRecyclerView: RecyclerView
     private lateinit var adapter: IngredientAdapter
+    private lateinit var recipeIngredientList: MutableList<RecipeIngredient>
+
+    private var recipeCalories: Float = 0.0f
+    private var recipeProtein: Float = 0.0f
+    private var recipeFat: Float = 0.0f
+    private var recipeCarb: Float = 0.0f
+
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,8 @@ class RecipeDetail : AppCompatActivity() {
 
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
 
-        val foodId = 1 // Replace with the desired food_id
+//        val foodId = 1 // Replace with the desired food_id
+        val foodId = intent.getIntExtra("food_id", 1)
 
         getRecipeData(foodId) { recipeIngredients ->
             recipeIngredients?.let {
@@ -46,6 +52,16 @@ class RecipeDetail : AppCompatActivity() {
                     adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
                     ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetail)
                     ingredientRecyclerView.adapter = adapter
+
+                    val kcalTV = findViewById<TextView>(R.id.kcalValue)
+                    val proteinTV = findViewById<TextView>(R.id.proteinValue)
+                    val fatTV = findViewById<TextView>(R.id.fatValue)
+                    val carbTV = findViewById<TextView>(R.id.carbValue)
+
+                    kcalTV.text = recipeCalories.toString() + " kcal"
+                    proteinTV.text = recipeProtein.toString() + "g"
+                    fatTV.text = recipeFat.toString() + "g"
+                    carbTV.text = recipeCarb.toString() + "g"
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
@@ -62,7 +78,7 @@ class RecipeDetail : AppCompatActivity() {
                 requestBody.put("food_id", foodId)
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/recipe/ingre")
+                    .url("http://10.0.2.2:8001/apis/food/detail")
                     .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
                     .build()
 
@@ -92,9 +108,17 @@ class RecipeDetail : AppCompatActivity() {
                             ingredientJson.getDouble("ingre_carb").toFloat(),
                             ingredientJson.getString("ingre_img")
                         )
-                        val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
 
-                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty)
+                        val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
+                        val recipeTitle = ingredientJson.getString("recipe_title")
+                        val recipeDesc = ingredientJson.getString("recipe_desc")
+                        val recipePrice = ingredientJson.getDouble("recipe_price").toFloat()
+                        recipeCalories = ingredientJson.getDouble("recipe_calories").toFloat()
+                        recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
+                        recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
+                        recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
+
+                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein)
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)
