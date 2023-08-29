@@ -36,20 +36,20 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_ctime INT(5) NOT NULL, -- mins
     food_ptime INT(5) NOT NULL, -- mins
     food_type INT(1) NOT NULL,
-    
+
     PRIMARY KEY (food_id)
-) ENGINE=INNODB; 
+) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_id INT(11) NOT NULL AUTO_INCREMENT,
-    ingre_name VARCHAR(255) NOT NULL, 
-    ingre_price FLOAT(11,1) NOT NULL, 
-    ingre_calo INT(5) NOT NULL, 
+    ingre_name VARCHAR(255) NOT NULL,
+    ingre_price FLOAT(11,1) NOT NULL,
+    ingre_calo INT(5) NOT NULL,
     ingre_fat FLOAT(8,1) NOT NULL, -- grams
     ingre_protein FLOAT(8,1) NOT NULL, -- grams
     ingre_carb FLOAT(8,1) NOT NULL, -- grams
-    ingre_img VARCHAR(255) NOT NULL, 
-	
+    ingre_img VARCHAR(255) NOT NULL,
+
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
 
@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `meal` (
     user_id INT(11) NOT NULL,
     meal_food VARCHAR(255) NOT NULL,
     meal_date DATE NOT NULL,
+    meal_type VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (meal_id, user_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
@@ -315,6 +316,10 @@ VALUES
 ("Pumpkin Soup", "A fall favorite featuring pumpkin, onion, garlic, nutmeg, cinnamon, vegetable broth, and a touch of cream.", 40, 25, 3),
 ("Creamy Spinach and Parmesan Soup", "A velvety spinach soup with sautéed onion, garlic, Parmesan cheese, vegetable broth, and a luxurious creaminess.", 35, 20, 3),
 ("Creamy Broccoli Cheddar Soup", "A comforting soup combining broccoli florets, cheddar cheese, onion, garlic, vegetable broth, and a creamy finish.", 40, 25, 3),
+("Crab Soup (Gejang)", "A Korean specialty soup featuring crab, soy sauce, chili paste, garlic, ginger, rice wine, and a sprinkling of sesame seeds.", 45, 30, 3),
+("Canh Bap Cai", "A Vietnamese cabbage soup made with cabbage, ground meat, and mushrooms for a simple and satisfying dish.", 30, 20, 3),
+("Canh Chua", "A tangy Vietnamese sour soup with fish or shrimp, pineapple, tomato, okra, and tamarind for a burst of flavor.", 35, 25, 3),
+("Sup Mang Cua", "A crab and asparagus soup featuring crab meat, fresh asparagus, and delicate quail eggs for an elegant touch.", 40, 30, 3),
 -- Main courses
 ("Ginseng Chicken Soup", "A nourishing chicken soup with tender chicken, sticky rice, ginseng, garlic, jujubes, and a hint of ginger, served with ginseng tea.", 45, 30, 4),
 ("Creamy Mushroom Risotto", "Creamy risotto made with Arborio rice, mushrooms, and Parmesan cheese.", 25, 20, 4),
@@ -329,9 +334,9 @@ VALUES
 
 INSERT INTO `recipe` (food_id, ingre_id, media_id, recipe_qty, recipe_desc, recipe_title)
 VALUES
-(1,3, NULL, 150, "Cut the ripe avocado in half, remove the pit, and scoop out the flesh into a bowl. Use a fork to mash the avocado until it reaches your desired consistency.", "1 ripe avocado"),
-(1,113, NULL, 50, "Toast the bread.", "2 slices of bread"),
-(1,93, NULL, 50, "Cook the bacon until crispy.", "2 slices of bacon"),
+(1,3, NULL, 200, "Cut the ripe avocado in half, remove the pit, and scoop out the flesh into a bowl. Use a fork to mash the avocado until it reaches your desired consistency.", "1 ripe avocado"),
+(1,113, NULL, 200, "Toast the bread.", "2 slices of bread"),
+(1,93, NULL, 100, "Cook the bacon until crispy.", "2 slices of bacon"),
 (1,29, NULL, 3, "Add salt.", "1/2 teaspoon salt"),
 (1,25, NULL, 1.5, "Add black pepper.", "1/4 teaspoon black pepper"),
 (1,9, NULL, 15, "Add lemon juice.", "1 tablespoon lemon juice"),
@@ -347,9 +352,9 @@ VALUES
 (2,80, NULL, 75, "Prepare tomatoes.", "1/2 cup tomatoes, diced"),
 (2,67, NULL, 30, "Add cheese.", "1/4 cup grated cheese"),
 
-(3,113, NULL, 100, "Prepare bread.", "3 thick slices bread"),
+(3,113, NULL, 720, "Prepare bread.", "3 thick slices bread"),
 (3,65, NULL, 120, "Add milk.", "1/2 cup milk"),
-(3,72, NULL, 150, "Prepare eggs.", "2 large eggs"),
+(3,72, NULL, 200, "Prepare eggs.", "2 large eggs"),
 (3,114, NULL, 6, "Add vanilla extract.", "1 teaspoon vanilla extract"),
 (3,31, NULL, 3, "Add cinnamon powder.", "1/2 teaspoon cinnamon powder"),
 (3,29, NULL, 1.5, "Add salt.", "1/4 teaspoon salt"),
@@ -396,8 +401,8 @@ VALUES
 (8, 164, NULL, NULL, "Heat a non-stick pan over medium heat. Pour in the beaten eggs and gently scramble them with a spatula until they're softly set.\n\nAdd the sliced smoked salmon and chopped dill to the eggs. Continue to cook for another minute, stirring gently.\n\nDrizzle the lemon juice over the eggs and salmon. Stir briefly to combine.\n\nRemove from heat and serve the scrambled eggs with smoked salmon hot.", "Cooking Instructions"),
 
 (9, 77, NULL, 200, "Peel and dice the potatoes into small cubes.", "200g potatoes"),
-(9, 79, NULL, 100, "Dice the onion.", "1 medium onion"),
-(9, 92, NULL, 100, "Dice the bell pepper.", "1 medium bell pepper"),
+(9, 79, NULL, 150, "Dice the onion.", "1 medium onion"),
+(9, 92, NULL, 150, "Dice the bell pepper.", "1 medium bell pepper"),
 (9, 107, NULL, 150, "Remove the casing from the sausage and crumble it.", "150g sausage"),
 (9, 72, NULL, 120, "Crack the eggs into a bowl and beat them.", "2 large eggs"),
 (9, 164, NULL, NULL, "Heat a skillet over medium heat. Add a bit of oil.\n\nAdd the diced potatoes and cook until they're golden and crispy.", "Cooking Instructions"),
@@ -601,8 +606,8 @@ VALUES
 
 -- SOUP
 -- Creamy Tomato Basil Soup
-(35, 80, NULL, 200, "Dice tomatoes", "2 medium tomatoes, diced"),
-(35, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(35, 80, NULL, 400, "Dice tomatoes", "4 medium tomatoes, diced"),
+(35, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (35, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
 (35, 99, NULL, 10, "Tear basil leaves", "10 fresh basil leaves, torn"),
 (35, 137, NULL, 100, "Prepare heavy cream", "100g heavy cream"),
@@ -611,84 +616,84 @@ VALUES
 
 -- Chicken Noodle Soup
 (36, 55, NULL, 200, "Cook chicken", "200g chicken, cooked and shredded"),
-(36, 78, NULL, 50, "Dice carrot", "1 medium carrot, diced"),
-(36, 102, NULL, 30, "Dice celery", "1 stalk celery, diced"),
-(36, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(36, 78, NULL, 100, "Dice carrot", "1 medium carrot, diced"),
+(36, 102, NULL, 100, "Dice celery", "1 stalk celery, diced"),
+(36, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (36, 138, NULL, 100, "Add egg noodles", "100g egg noodles"),
-(36, 139, NULL, 300, "Add chicken broth", "300ml chicken broth"),
+(36, 139, NULL, 400, "Add chicken broth", "400ml chicken broth"),
 (36, 164, NULL, NULL, "In a pot, combine shredded chicken, diced carrot, diced celery, diced onion, and chicken broth. Simmer until vegetables are tender. Add egg noodles and cook until tender.", "Cooking Instructions"),
 
 -- Spicy Black Bean Soup
-(37, 73, NULL, 100, "Cook black beans", "100g black beans, cooked"),
-(37, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(37, 73, NULL, 200, "Cook black beans", "200g black beans, cooked"),
+(37, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (37, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
 (37, 48, NULL, 20, "Coat with olive oil", "2 tablespoons olive oil"),
 (37, 26, NULL, 5, "Sprinkle chili powder", "1 teaspoon chili powder"),
 (37, 32, NULL, 5, "Add cumin powder", "1/2 teaspoon cumin powder"),
-(37, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
+(37, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
 (37, 164, NULL, NULL, "Sauté diced onion and minced garlic. Add cooked black beans, chili powder, cumin powder, and vegetable broth. Simmer until flavors meld.", "Cooking Instructions"),
 
 -- Butternut Squash Soup
-(38, 141, NULL, 200, "Dice butternut squash", "200g butternut squash, diced"),
-(38, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(38, 141, NULL, 500, "Dice butternut squash", "500g butternut squash, diced"),
+(38, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (38, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
 (38, 132, NULL, 5, "Add nutmeg", "1/2 teaspoon nutmeg"),
-(38, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
-(38, 137, NULL, 50, "Cube cream", "50g cream, cubed"),
+(38, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
+(38, 137, NULL, 100, "Cube cream", "100g cream, cubed"),
 (38, 164, NULL, NULL, "Sauté diced onion and minced garlic. Add diced butternut squash, nutmeg, and vegetable broth. Simmer until squash is soft. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 
 -- Minestrone Soup
-(39, 80, NULL, 200, "Dice tomatoes", "2 medium tomatoes, diced"),
-(39, 78, NULL, 50, "Dice carrot", "1 medium carrot, diced"),
-(39, 102, NULL, 50, "Dice celery", "1 stalk celery, diced"),
-(39, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
-(39, 142, NULL, 50, "Cook cannellini beans", "50g cannellini beans, cooked"),
+(39, 80, NULL, 400, "Dice tomatoes", "4 medium tomatoes, diced"),
+(39, 78, NULL, 100, "Dice carrot", "1 medium carrot, diced"),
+(39, 102, NULL, 100, "Dice celery", "1 stalk celery, diced"),
+(39, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
+(39, 142, NULL, 200, "Cook cannellini beans", "200g cannellini beans, cooked"),
 (39, 143, NULL, 100, "Add pasta", "100g pasta"),
-(39, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
+(39, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
 (39, 164, NULL, NULL, "In a pot, combine diced tomatoes, diced carrot, diced celery, diced onion, cooked cannellini beans, pasta, and vegetable broth. Simmer until vegetables are tender.", "Cooking Instructions"),
 
 -- Coconut Curry Chicken Soup
-(40, 55, NULL, 100, "Cook chicken", "100g chicken, cooked and shredded"),
-(40, 95, NULL, 300, "Add coconut milk", "300ml coconut milk"),
+(40, 55, NULL, 200, "Cook chicken", "200g chicken, cooked and shredded"),
+(40, 95, NULL, 400, "Add coconut milk", "400ml coconut milk"),
 (40, 144, NULL, 5, "Sprinkle curry powder", "1 teaspoon curry powder"),
 (40, 28, NULL, 5, "Add ginger powder", "1/2 teaspoon ginger powder"),
 (40, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
 (40, 164, NULL, NULL, "In a pot, combine cooked and shredded chicken, coconut milk, curry powder, ginger powder, minced garlic, and vegetables. Simmer until heated through.", "Cooking Instructions"),
 
 -- Potato Leek Soup
-(41, 77, NULL, 100, "Dice potatoes", "100g potatoes, diced"),
-(41, 145, NULL, 50, "Slice leek", "1 leek, sliced"),
-(41, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(41, 77, NULL, 400, "Dice potatoes", "400g potatoes, diced"),
+(41, 145, NULL, 100, "Slice leek", "1 leek, sliced"),
+(41, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (41, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
-(41, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
-(41, 137, NULL, 50, "Cube cream", "50g cream, cubed"),
+(41, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
+(41, 137, NULL, 100, "Cube cream", "100g cream, cubed"),
 (41, 164, NULL, NULL, "Sauté sliced leek, diced onion, and minced garlic. Add diced potatoes and vegetable broth. Simmer until potatoes are soft. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 
 -- Pumpkin Soup
-(42, 101, NULL, 100, "Dice pumpkin", "100g pumpkin, diced"),
-(42, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(42, 101, NULL, 500, "Dice pumpkin", "500g pumpkin, diced"),
+(42, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (42, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
 (42, 132, NULL, 5, "Add nutmeg", "1/2 teaspoon nutmeg"),
 (42, 31, NULL, 5, "Add cinnamon powder", "1/2 teaspoon cinnamon powder"),
-(42, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
-(42, 137, NULL, 50, "Cube cream", "50g cream, cubed"),
+(42, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
+(42, 137, NULL, 100, "Cube cream", "100g cream, cubed"),
 (42, 164, NULL, NULL, "Sauté diced onion and minced garlic. Add diced pumpkin, nutmeg, cinnamon powder, and vegetable broth. Simmer until pumpkin is soft. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 
 -- Creamy Spinach and Parmesan Soup
-(43, 86, NULL, 100, "Chop spinach", "100g spinach, chopped"),
-(43, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(43, 86, NULL, 200, "Chop spinach", "200g spinach, chopped"),
+(43, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (43, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
-(43, 124, NULL, 100, "Cube Parmesan cheese", "100g Parmesan cheese, cubed"),
-(43, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
-(43, 137, NULL, 50, "Cube cream", "50g cream, cubed"),
+(43, 124, NULL, 200, "Cube Parmesan cheese", "200g Parmesan cheese, cubed"),
+(43, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
+(43, 137, NULL, 100, "Cube cream", "100g cream, cubed"),
 (43, 164, NULL, NULL, "Sauté diced onion and minced garlic. Add chopped spinach, cubed Parmesan cheese, and vegetable broth. Simmer until spinach is wilted. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 
 -- Creamy Broccoli Cheddar Soup
-(44, 88, NULL, 100, "Divide broccoli into florets", "100g broccoli florets"),
-(44, 103, NULL, 50, "Dice Cheddar cheese", "50g Cheddar cheese, diced"),
-(44, 79, NULL, 50, "Dice onion", "1 small onion, diced"),
+(44, 88, NULL, 300, "Divide broccoli into florets", "300g broccoli florets"),
+(44, 103, NULL, 200, "Dice Cheddar cheese", "200g Cheddar cheese, diced"),
+(44, 79, NULL, 100, "Dice onion", "1 small onion, diced"),
 (44, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
-(44, 140, NULL, 300, "Add vegetable broth", "300ml vegetable broth"),
+(44, 140, NULL, 400, "Add vegetable broth", "400ml vegetable broth"),
 (44, 137, NULL, 100, "Cube cream", "100g cream, cubed"),
 (44, 164, NULL, NULL, "Steam broccoli florets. Sauté diced onion and minced garlic. Add steamed broccoli florets, diced Cheddar cheese, and vegetable broth. Simmer until broccoli is tender. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 

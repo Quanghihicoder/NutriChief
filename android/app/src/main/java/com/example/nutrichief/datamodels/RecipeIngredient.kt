@@ -12,3 +12,4 @@ data class RecipeIngredient(
     val recipe_fat: Float,
     val recipe_protein: Float,
 )
+

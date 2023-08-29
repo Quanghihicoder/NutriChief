@@ -175,7 +175,7 @@ class Instructions : AppCompatActivity() {
                             ingredientJson.getInt("ingre_id"),
                             ingredientJson.getString("ingre_name"),
 
-                        )
+                            )
                         val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
 
                         val recipeIngredient =
@@ -194,3 +194,4 @@ class Instructions : AppCompatActivity() {
         }
     }
 }
+
