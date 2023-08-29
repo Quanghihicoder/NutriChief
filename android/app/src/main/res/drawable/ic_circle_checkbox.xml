@@ -1,0 +1,17 @@
+<!-- res/drawable/circle_checkbox.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" /> <!-- Color when unchecked -->
+        </shape>
+    </item>
+    <item android:id="@android:id/secondaryProgress">
+        <scale
+            android:scaleWidth="90%"
+            android:scaleHeight="90%">
+            <shape android:shape="oval">
+                <solid android:color="#8A47EB" /> <!-- Color when checked -->
+            </shape>
+        </scale>
+    </item>
+</layer-list>

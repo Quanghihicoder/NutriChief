@@ -62,7 +62,7 @@ class RecipeDetail : AppCompatActivity() {
                 requestBody.put("food_id", foodId)
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/recipe/ingre")
+                    .url("http://10.0.2.2:8001/apis/food/detail")
                     .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
                     .build()
 
