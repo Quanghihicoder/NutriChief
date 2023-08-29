@@ -2,12 +2,12 @@
 import db from "../config/database.js";
 
 export const getAllFoods = (result) => {
-    db.query("SELECT * FROM food", [], (err, results) => {
+    db.query("SELECT f.food_id, food.food_name, food.food_desc, food.food_ctime, food.food_ptime, food.food_type, f.food_price, f.food_calories, f.food_carb, f.food_fat, f.food_protein FROM (SELECT r.food_id AS food_id, SUM(r.recipe_price) AS food_price, SUM(r.recipe_calories) AS food_calories, SUM(r.recipe_carb) AS food_carb, SUM(r.recipe_fat) AS food_fat, SUM(r.recipe_protein) AS food_protein FROM (SELECT recipe.food_id AS food_id, (recipe.recipe_qty / 100 * ingredient.ingre_price) AS recipe_price, (recipe.recipe_qty / 100 * ingredient.ingre_calo) AS recipe_calories, (recipe.recipe_qty / 100 * ingredient.ingre_carb) AS recipe_carb, (recipe.recipe_qty / 100 * ingredient.ingre_fat) AS recipe_fat, (recipe.recipe_qty / 100 * ingredient.ingre_protein) AS recipe_protein FROM recipe INNER JOIN ingredient ON recipe.ingre_id = ingredient.ingre_id) AS r GROUP BY food_id) AS f INNER JOIN food ON f.food_id = food.food_id;", [], (err, results) => {
         if (err) {
             console.log(err);
             result({ status: 0, message: "Can not get foods", data: [] });
         } else {
-            if (results) {
+            if (results[0]) {
                 result({
                     status: 1,
                     message: "Successfully get foods",
@@ -83,7 +83,7 @@ export const getDetails = (data, result) => {
                         data: [],
                     });
                 } else {
-                    if (results) {
+                    if (results[0]) {
                         result({
                             status: 1,
                             message: "Successfully get food's detail",
