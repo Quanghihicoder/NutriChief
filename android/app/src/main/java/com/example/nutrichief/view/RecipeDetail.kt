@@ -133,11 +133,5 @@ class RecipeDetail : AppCompatActivity() {
         }
     }
 
-    fun onBind(position: Int) {
-
-        val menu = recipeIngredientList[position]
-//        kcalTV.text = menu.recipe_calories.toString()
-    }
-
     fun goBack(view: View) { onBackPressed() }
 }
