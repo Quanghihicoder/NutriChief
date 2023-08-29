@@ -85,7 +85,4 @@ class IngredientSearchAdapter (
         holder.ingredientShortDesc.text = menu.ingre_calo.toString() + "kcal, " + menu.ingre_protein.toString() + "gr protein, " + menu.ingre_fat.toString() + "gr fat, " + menu.ingre_carb.toString() + "gr carb"
         holder.ingredientImage.setImageResource(R.drawable.ramen)
     }
-
-
-
 }

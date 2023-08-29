@@ -21,7 +21,6 @@ import java.util.ArrayList
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_MEAL_LIST = "meal_list"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [MealPlanFragment.newInstance] factory method to
@@ -49,10 +48,10 @@ class MealPlanFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_meal_plan, container, false)
-        val textView = view.findViewById<TextView>(R.id.text_view_generate_plan)
+        val textViewGeneratePlan = view.findViewById<TextView>(R.id.text_view_generate_plan)
         val layoutMealPlanOptions = view.findViewById<LinearLayout>(R.id.layout_meal_plan_options)
         val layoutSuggestedMealPlan = view.findViewById<FrameLayout>(R.id.layout_suggested_meal_plan)
-        textView.setOnClickListener {
+        textViewGeneratePlan.setOnClickListener {
             val breakfastFoods = mutableListOf(
                 Food(1, "Banh Mi", "good", 0, 10),
                 Food(2, "Milk", "good", 0, 0)
@@ -84,6 +83,16 @@ class MealPlanFragment : Fragment() {
         recyclerViewMeal.adapter = RecyclerMealAdapter(mealList)
         recyclerViewMeal.layoutManager = LinearLayoutManager(activity)
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mealList.isNotEmpty()) {
+            val layoutMealPlanOptions = this.view?.findViewById<LinearLayout>(R.id.layout_meal_plan_options)
+            val layoutSuggestedMealPlan = this.view?.findViewById<FrameLayout>(R.id.layout_suggested_meal_plan)
+            layoutMealPlanOptions?.visibility = View.GONE
+            layoutSuggestedMealPlan?.visibility = View.VISIBLE
+        }
     }
 
     companion object {
