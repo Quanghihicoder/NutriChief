@@ -48,7 +48,7 @@ class SplashScreenActivity : AppCompatActivity() {
         } else {
             //go to register screen
             Handler().postDelayed({
-                val intent = Intent(this, AccountVerifyActivity::class.java)
+                val intent = Intent(this, RecipeDetail::class.java)
                 startActivity(intent)
                 finish()
 

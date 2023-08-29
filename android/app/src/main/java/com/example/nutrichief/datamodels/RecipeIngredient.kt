@@ -5,4 +5,6 @@ data class RecipeIngredient(
     val ingredient: Ingredient,
     val recipeQty: Float,
 
+    val recipeTitle: String,
+    val recipeDesc: String,
     )

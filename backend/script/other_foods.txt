@@ -215,3 +215,23 @@
 -- ("Pineapple Ginger Lemonade", ""): Pineapple, Ginger Powder, Lemon, Sugar, Water
 -- ("Cucumber Watermelon Cooler", ""): Cucumber, Watermelon, Mint Leaves, Lime, Sugar, Water
 -- ("Wine","")
+
+("Seafood Udon Soup", "A hearty udon noodle soup featuring an array of seafood (shrimp, crab, squid), fish cake, green onions, and a flavorful dashi broth.", 30/60, 20/60, 4),
+("BBQ Pulled Pork Sandwich", "A classic BBQ pulled pork sandwich with tender pork coated in smoky BBQ sauce, served on soft hamburger buns and topped with coleslaw.", 180/60, 10/60, 4),
+("Honey Mustard Glazed Salmon", "Succulent salmon fillet glazed with honey mustard sauce, served with a squeeze of lemon, rice, and tender asparagus.", 25/60, 15/60, 4),
+("Baked Chicken Parmesan", "Breaded and baked chicken topped with tomato sauce, melted mozzarella cheese, and Parmesan cheese, served with pasta.", 40/60, 20/60, 4),
+("Sweet and Sour Meatballs", "Savory meatballs made from ground meat (beef/pork/chicken) with chunks of pineapple, bell pepper, and onion, smothered in sweet and sour sauce, served with rice.", 30/60, 20/60, 4),
+("Stuffed Bell Peppers", "Bell peppers stuffed with a mixture of ground meat (chicken/beef/pork), rice, and tomato sauce, then baked to perfection with a layer of melted cheese.", 35/60, 25/60, 4),
+("Lemon Garlic Butter Shrimp", "Juicy shrimp sautéed in a lemon garlic butter sauce, served with a sprinkle of fresh parsley and a side of pasta.", 20/60, 15/60, 4),
+("Spicy Korean Beef Bulgogi", "Tender slices of marinated beef cooked in a spicy gochujang sauce, served with fragrant rice and a side of kimchi.", 25/60, 20/60, 4),
+("Baked Teriyaki Salmon", "Flaky salmon fillet glazed with teriyaki sauce and sprinkled with sesame seeds, served with rice and steamed vegetables.", 25/60, 15/60, 4),
+("Chicken Alfredo Pasta", "Succulent chicken pieces served over creamy Alfredo pasta, made with cream, Parmesan cheese, and garlic.", 30/60, 20/60, 4),
+("Honey Glazed Ham", "Juicy ham coated with a sweet honey glaze and a touch of Dijon mustard, served with roasted potatoes and crisp green beans.", 180/60, 20/60, 4),
+("Beef Stir-Fry with Vegetables", "Slices of beef stir-fried with mixed vegetables (broccoli, carrot, bell pepper) in soy sauce, served with rice.", 25/60, 15/60, 4),
+("Shrimp Scampi Pasta", "Tender shrimp sautéed in garlic and butter, then tossed with lemon juice, white wine, and parsley, served over pasta.", 25/60, 20/60, 4),
+("Sticky Teriyaki Tofu", "Crispy tofu glazed with sticky teriyaki sauce, sprinkled with sesame seeds, and served with rice and steamed broccoli.", 25/60, 15/60, 4),
+("Spaghetti Aglio e Olio", "A simple yet flavorful pasta dish made with spaghetti, garlic, chili flakes, olive oil, and parsley.", 15/60, 10/60, 4),
+("Pan-Seared Steak with Chimichurri Sauce", "Tender steak pan-seared to perfection, topped with vibrant chimichurri sauce, and served with roasted potatoes and asparagus.", 30/60, 20/60, 4),
+("Baked BBQ Chicken", "Juicy chicken pieces coated in BBQ sauce and baked to perfection, served with roasted potatoes and corn on the cob.", 35/60, 25/60, 4),
+("Pork Tenderloin with Apple Compote", "Tender pork tenderloin served with a flavorful apple compote infused with cinnamon and sugar, accompanied by mashed potatoes and steamed green beans.", 40/60, 25/60, 4),
+("Chicken and Vegetable Curry", "Tender chicken pieces cooked in a fragrant curry made with mixed vegetables (carrot, bell pepper, onion) and creamy coconut milk, served with rice.", 35/60, 25/60, 4);

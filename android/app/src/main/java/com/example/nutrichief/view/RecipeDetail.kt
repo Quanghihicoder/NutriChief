@@ -11,9 +11,6 @@ import com.example.nutrichief.R
 import com.example.nutrichief.adapter.IngredientAdapter
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
-import com.example.nutrichief.datamodels.User
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -23,7 +20,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
-import java.time.LocalDate
 
 class RecipeDetail : AppCompatActivity() {
     private lateinit var ingredientRecyclerView: RecyclerView
@@ -94,7 +90,7 @@ class RecipeDetail : AppCompatActivity() {
                         )
                         val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
 
-                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty)
+                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, "" ,"")
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)
@@ -109,5 +105,5 @@ class RecipeDetail : AppCompatActivity() {
         }
     }
 
-    fun goBack(view: View) { onBackPressed() }
+    fun goBack(view: View) { onBackPressedDispatcher.onBackPressed() }
 }
