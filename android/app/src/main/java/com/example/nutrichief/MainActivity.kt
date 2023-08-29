@@ -18,6 +18,7 @@ import com.example.nutrichief.model.Food
 import com.example.nutrichief.model.Meal
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.example.nutrichief.view.SearchFragment
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     private fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_main, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 }

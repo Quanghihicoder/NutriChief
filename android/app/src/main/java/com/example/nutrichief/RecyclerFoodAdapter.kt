@@ -21,6 +21,9 @@ class RecyclerFoodAdapter(private var foodList: List<Food>): RecyclerView.Adapte
         holder.imageItemFood.setImageResource(R.drawable.img_ramen)
         holder.textItemFoodName.text = food.foodName
         holder.textItemFoodShortDesc.text = food.foodDesc
+        holder.itemView.setOnClickListener {
+            // TODO: code to launch Food Detail Activity when food item is clicked
+        }
     }
 
     override fun getItemCount(): Int = foodList.size
