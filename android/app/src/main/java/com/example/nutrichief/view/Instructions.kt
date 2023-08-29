@@ -62,36 +62,22 @@ class Instructions : AppCompatActivity() {
         videoView.setMediaController(mediaController)
         videoView.setVideoURI(Uri.parse(videoPath))
 
-        val dummy = mutableListOf<RecipeIngredient>(
-            RecipeIngredient(
-                1,
-                Ingredient(3, "Avocado", 100f, 101, 10f, 10f, 10f, ""),
-                200f,
-                "1 ripe avocado",
-                "Cut the ripe avocado in half, remove the pit, and scoop out the flesh into a bowl. Use a fork to mash the avocado until it reaches your desired consistency."
-            ),
-            RecipeIngredient(
-                1,
-                Ingredient(113, "Bread", 101f, 102, 10f, 10f, 10f, ""),
-                50f, "2 slices of bread", "Toast the bread."
-            ),
-            RecipeIngredient(
-                1,
-                Ingredient(93, "Bacon", 102f, 103, 10f, 10f, 10f, ""),
-                100f, "Cook the bacon until crispy.", "2 slices of bacon"
-            ),
-        )
+        var cookingSteps = mutableListOf<RecipeIngredient>()
 
-//        recipeTitle.text = dummy[currentPage - 1].recipeTitle
-//        recipeQty.text = dummy[currentPage - 1].recipeQty.toString()
-//        recipeDesc.text = dummy[currentPage - 1].recipeDesc
+        val food_id = intent.getIntExtra("food_id", 1)
 
-        val foodId = 1 // Replace with the desired food_id
-
-        getRecipeData(foodId) { recipeIngredients ->
+        getRecipeData(food_id) { recipeIngredients ->
             recipeIngredients?.let {
                 runOnUiThread {
+                    cookingSteps = it as MutableList<RecipeIngredient>
 
+                    recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                    recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                    recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
+
+                    totalPages = cookingSteps.size
+
+                    updateButtonVisibility()
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
@@ -101,23 +87,15 @@ class Instructions : AppCompatActivity() {
             }
         }
 
-        recipeTitle.text = dummy[currentPage - 1].recipeTitle
-        recipeQty.text = dummy[currentPage - 1].recipeQty.toString()
-        recipeDesc.text = dummy[currentPage - 1].recipeDesc
-
-        totalPages = dummy.size
-
-        updateButtonVisibility()
-
         previousButton.setOnClickListener {
             if (currentPage > 1) {
                 currentPage--
                 stepNumber.text = "Step $currentPage"
                 updateButtonVisibility()
                 // Handle page change here
-                recipeTitle.text = dummy[currentPage - 1].recipeTitle
-                recipeQty.text = dummy[currentPage - 1].recipeQty.toString()
-                recipeDesc.text = dummy[currentPage - 1].recipeDesc
+                recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
             }
         }
 
@@ -127,9 +105,9 @@ class Instructions : AppCompatActivity() {
                 stepNumber.text = "Step $currentPage"
                 updateButtonVisibility()
                 // Handle page change here
-                recipeTitle.text = dummy[currentPage - 1].recipeTitle
-                recipeQty.text = dummy[currentPage - 1].recipeQty.toString()
-                recipeDesc.text = dummy[currentPage - 1].recipeDesc
+                recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
             }
         }
     }
@@ -146,13 +124,8 @@ class Instructions : AppCompatActivity() {
                 requestBody.put("food_id", foodId)
 
                 val request = Request.Builder()
-                    .url("http://10.0.2.2:8001/apis/recipe/ingre")
-                    .post(
-                        RequestBody.create(
-                            "application/json".toMediaTypeOrNull(),
-                            requestBody.toString()
-                        )
-                    )
+                    .url("http://10.0.2.2:8001/apis/food/detail")
+                    .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
                     .build()
 
                 val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
@@ -174,12 +147,24 @@ class Instructions : AppCompatActivity() {
                         val ingredient = Ingredient(
                             ingredientJson.getInt("ingre_id"),
                             ingredientJson.getString("ingre_name"),
+                            ingredientJson.getDouble("ingre_price").toFloat(),
+                            ingredientJson.getInt("ingre_calo"),
+                            ingredientJson.getDouble("ingre_fat").toFloat(),
+                            ingredientJson.getDouble("ingre_protein").toFloat(),
+                            ingredientJson.getDouble("ingre_carb").toFloat(),
+                            ingredientJson.getString("ingre_img")
+                        )
 
-                            )
                         val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
+                        val recipeTitle = ingredientJson.getString("recipe_title")
+                        val recipeDesc = ingredientJson.getString("recipe_desc")
+                        val recipePrice = ingredientJson.getDouble("recipe_price").toFloat()
+                        val recipeCalories = ingredientJson.getDouble("recipe_calories").toFloat()
+                        val recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
+                        val recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
+                        val recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
 
-                        val recipeIngredient =
-                            RecipeIngredient(foodId, ingredient, recipeQty, "", "")
+                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein)
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)

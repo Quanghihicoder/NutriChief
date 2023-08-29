@@ -53,9 +53,9 @@ class RecipeDetail : AppCompatActivity() {
         fatValue = findViewById(R.id.fatValue)
         carbValue = findViewById(R.id.carbValue)
 
-        val foodId = 1 // Replace with the desired food_id
+        val food_id = intent.getIntExtra("food_id", 1)
 
-        getRecipeData(foodId) { recipeIngredients ->
+        getRecipeData(food_id) { recipeIngredients ->
             recipeIngredients?.let {
                 runOnUiThread {
                     adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
@@ -77,6 +77,7 @@ class RecipeDetail : AppCompatActivity() {
         val startCookingButton = findViewById<Button>(R.id.startCookingButton)
         startCookingButton.setOnClickListener {
             val intent = Intent(this, Instructions::class.java)
+            intent.putExtra("food_id", food_id)
             startActivity(intent)
         }
 
