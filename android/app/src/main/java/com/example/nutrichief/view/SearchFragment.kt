@@ -1,5 +1,6 @@
 package com.example.nutrichief.view
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +27,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), RecyclerFoodAdapter.OnItemClickListener {
 
 private lateinit var searchRecyclerView: RecyclerView
     private lateinit var dishAdapter: RecyclerFoodAdapter
@@ -58,7 +59,7 @@ private lateinit var searchRecyclerView: RecyclerView
         searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize adapters
-        dishAdapter = RecyclerFoodAdapter(mutableListOf())
+        dishAdapter = RecyclerFoodAdapter(mutableListOf(), this)
         ingredientAdapter = IngredientSearchAdapter(mutableListOf())
 
         // Set the initial adapter to dishAdapter
@@ -66,7 +67,7 @@ private lateinit var searchRecyclerView: RecyclerView
             if (food != null) {
                 allDishes = food
                 dishAdapter.filterList(allDishes as MutableList<Food>)
-                dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>)
+                dishAdapter = RecyclerFoodAdapter(allDishes as MutableList<Food>, this)
                 searchRecyclerView.adapter = dishAdapter
             } else {
                 Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
@@ -224,6 +225,12 @@ private lateinit var searchRecyclerView: RecyclerView
                 Log.e("RecipeDetail", "Failed to retrieve ingredients: ${e.message}")
             }
         }
+    }
+
+    override fun onFoodClick(item: Food) {
+        val searchIntent = Intent(activity, RecipeDetail::class.java)
+        searchIntent.putExtra("food_id", item.food_id)
+        startActivity(searchIntent)
     }
 
 }
