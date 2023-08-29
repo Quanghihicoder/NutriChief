@@ -28,7 +28,7 @@ import java.io.IOException
 
 class SearchFragment : Fragment() {
 
-private lateinit var searchRecyclerView: RecyclerView
+    private lateinit var searchRecyclerView: RecyclerView
     private lateinit var dishAdapter: RecyclerFoodAdapter
     private lateinit var ingredientAdapter: IngredientSearchAdapter
     private lateinit var allDishes: List<Food>
@@ -92,7 +92,8 @@ private lateinit var searchRecyclerView: RecyclerView
                 if (ingredients != null) {
                     allIngredients = ingredients
                     ingredientAdapter.filterList(allIngredients as MutableList<Ingredient>)
-                    ingredientAdapter = IngredientSearchAdapter(allIngredients as MutableList<Ingredient>)
+                    ingredientAdapter =
+                        IngredientSearchAdapter(allIngredients as MutableList<Ingredient>)
                     ingredientAdapter.filter.filter(savedSearchQuery)
                     searchRecyclerView.adapter = ingredientAdapter
                 } else {
@@ -165,14 +166,14 @@ private lateinit var searchRecyclerView: RecyclerView
                 } else {
                     callback(null)
                 }
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 // Handle the error here
                 Log.e("RecipeDetail", "Failed to retrieve food: ${e.message}")
             }
         }
     }
 
-    private fun getAllIngredients(callback: (List<Ingredient>?) -> Unit){
+    private fun getAllIngredients(callback: (List<Ingredient>?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val requestBody = JSONObject()
@@ -219,7 +220,7 @@ private lateinit var searchRecyclerView: RecyclerView
                 } else {
                     callback(null)
                 }
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 // Handle the error here
                 Log.e("RecipeDetail", "Failed to retrieve ingredients: ${e.message}")
             }
