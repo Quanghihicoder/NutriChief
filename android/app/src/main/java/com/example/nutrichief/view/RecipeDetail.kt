@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.IngredientAdapter
+import com.example.nutrichief.datamodels.Food
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,9 @@ class RecipeDetail : AppCompatActivity() {
     private var recipeProtein: Float = 0F
     private var recipeFat: Float = 0F
     private var recipeCarb: Float = 0F
+    private lateinit var foodName: String
+    private var food_cooktime: Int = 0
+    private var food_preparetime: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +65,10 @@ class RecipeDetail : AppCompatActivity() {
             }
         }
 
-        caloriesValue.text = recipeCalories.toString()
-        proteinValue.text = recipeProtein.toString()
-        fatValue.text = recipeFat.toString()
-        carbValue.text = recipeCarb.toString()
+        caloriesValue.text = recipeCalories.toString() + "kcal"
+        proteinValue.text = recipeProtein.toString() + "g"
+        fatValue.text = recipeFat.toString() + "g"
+        carbValue.text = recipeCarb.toString() + "g"
 
         val startCookingButton = findViewById<Button>(R.id.startCookingButton)
         startCookingButton.setOnClickListener {
@@ -72,6 +76,67 @@ class RecipeDetail : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    private fun getFoodData(foodId: Int, callback: Food) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val requestBody = JSONObject()
+                requestBody.put("food_id", foodId)
+
+                val request = Request.Builder()
+                    .url("http://10.0.2.2:8001/apis/food")
+                    .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+                    .build()
+
+                val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
+
+                if (!response.isSuccessful) {
+                    throw IOException("Failed to retrieve food data")
+                }
+
+                val responseBody = response.body?.string()
+                val resultJson = JSONObject(responseBody ?: "")
+                val status = resultJson.optInt("status", 0)
+
+                if (status == 1) {
+                    val data = resultJson.optJSONArray("data")
+
+                    val foodData = mutableListOf<RecipeIngredient>()
+                    for (i in 0 until data.length()) {
+                        val ingredientJson = data.optJSONObject(i)
+                        val ingredient = Ingredient(
+                            ingredientJson.getInt("ingre_id"),
+                            ingredientJson.getString("ingre_name"),
+                            ingredientJson.getDouble("ingre_price").toFloat(),
+                            ingredientJson.getInt("ingre_calo"),
+                            ingredientJson.getDouble("ingre_fat").toFloat(),
+                            ingredientJson.getDouble("ingre_protein").toFloat(),
+                            ingredientJson.getDouble("ingre_carb").toFloat(),
+                            ingredientJson.getString("ingre_img")
+                        )
+
+                        val recipeQty = ingredientJson.getDouble("recipe_qty").toFloat()
+                        val recipeTitle = ingredientJson.getString("recipe_title")
+                        val recipeDesc = ingredientJson.getString("recipe_desc")
+                        val recipePrice = ingredientJson.getDouble("recipe_price").toFloat()
+                        recipeCalories = ingredientJson.getDouble("recipe_calories").toFloat()
+                        recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
+                        recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
+                        recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
+
+                        val foodData = Food()
+                    }
+                    callback(recipeIngredients)
+                } else {
+                    callback(null)
+                }
+            } catch (e: Exception) {
+                // Handle the error here
+                callback(null)
+                Log.e("RecipeDetail", "Failed to retrieve recipe ingredients: ${e.message}")
+            }
+        }
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {
