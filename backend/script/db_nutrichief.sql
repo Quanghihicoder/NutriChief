@@ -36,20 +36,20 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_ctime INT(5) NOT NULL, -- mins
     food_ptime INT(5) NOT NULL, -- mins
     food_type INT(1) NOT NULL,
-    
+
     PRIMARY KEY (food_id)
-) ENGINE=INNODB; 
+) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_id INT(11) NOT NULL AUTO_INCREMENT,
-    ingre_name VARCHAR(255) NOT NULL, 
-    ingre_price FLOAT(11,1) NOT NULL, 
-    ingre_calo INT(5) NOT NULL, 
+    ingre_name VARCHAR(255) NOT NULL,
+    ingre_price FLOAT(11,1) NOT NULL,
+    ingre_calo INT(5) NOT NULL,
     ingre_fat FLOAT(8,1) NOT NULL, -- grams
     ingre_protein FLOAT(8,1) NOT NULL, -- grams
     ingre_carb FLOAT(8,1) NOT NULL, -- grams
-    ingre_img VARCHAR(255) NOT NULL, 
-	
+    ingre_img VARCHAR(255) NOT NULL,
+
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
 
@@ -77,13 +77,14 @@ CREATE TABLE IF NOT EXISTS `recipe` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `meal` (
-    meal_id INT(11) NOT NULL AUTO_INCREMENT,
     user_id INT(11) NOT NULL,
-    meal_food VARCHAR(255) NOT NULL,
+    food_id INT(11) NOT NULL,
     meal_date DATE NOT NULL,
+    meal_checked INT (1) NOT NULL, -- 0 - false; 1 - true 
 
-    PRIMARY KEY (meal_id, user_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
+    PRIMARY KEY (user_id, food_id, meal_date),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (food_id) REFERENCES food(food_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `otp` (
@@ -315,10 +316,6 @@ VALUES
 ("Pumpkin Soup", "A fall favorite featuring pumpkin, onion, garlic, nutmeg, cinnamon, vegetable broth, and a touch of cream.", 40, 25, 3),
 ("Creamy Spinach and Parmesan Soup", "A velvety spinach soup with sautéed onion, garlic, Parmesan cheese, vegetable broth, and a luxurious creaminess.", 35, 20, 3),
 ("Creamy Broccoli Cheddar Soup", "A comforting soup combining broccoli florets, cheddar cheese, onion, garlic, vegetable broth, and a creamy finish.", 40, 25, 3),
-("Crab Soup (Gejang)", "A Korean specialty soup featuring crab, soy sauce, chili paste, garlic, ginger, rice wine, and a sprinkling of sesame seeds.", 45, 30, 3),
-("Canh Bap Cai", "A Vietnamese cabbage soup made with cabbage, ground meat, and mushrooms for a simple and satisfying dish.", 30, 20, 3),
-("Canh Chua", "A tangy Vietnamese sour soup with fish or shrimp, pineapple, tomato, okra, and tamarind for a burst of flavor.", 35, 25, 3),
-("Sup Mang Cua", "A crab and asparagus soup featuring crab meat, fresh asparagus, and delicate quail eggs for an elegant touch.", 40, 30, 3),
 -- Main courses
 ("Ginseng Chicken Soup", "A nourishing chicken soup with tender chicken, sticky rice, ginseng, garlic, jujubes, and a hint of ginger, served with ginseng tea.", 45, 30, 4),
 ("Creamy Mushroom Risotto", "Creamy risotto made with Arborio rice, mushrooms, and Parmesan cheese.", 25, 20, 4),
@@ -351,7 +348,7 @@ VALUES
 (2,80, NULL, 75, "Prepare tomatoes.", "1/2 cup tomatoes, diced"),
 (2,67, NULL, 30, "Add cheese.", "1/4 cup grated cheese"),
 
-(3,113, NULL, 120, "Prepare bread.", "3 thick slices bread"),
+(3,113, NULL, 720, "Prepare bread.", "3 thick slices bread"),
 (3,65, NULL, 120, "Add milk.", "1/2 cup milk"),
 (3,72, NULL, 200, "Prepare eggs.", "2 large eggs"),
 (3,114, NULL, 6, "Add vanilla extract.", "1 teaspoon vanilla extract"),

@@ -1,74 +1,124 @@
 package com.example.nutrichief.view
 
+import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.*
 import com.example.nutrichief.R
-import com.example.nutrichief.adapter.IngredientAdapter
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
 
-class RecipeDetail : AppCompatActivity() {
-    private lateinit var ingredientRecyclerView: RecyclerView
-    private lateinit var adapter: IngredientAdapter
-    private lateinit var recipeIngredientList: MutableList<RecipeIngredient>
+class InstructionsActivity : AppCompatActivity() {
+    private var currentPage = 1
+    private var totalPages = 0
 
-    private var recipeCalories: Float = 0.0f
-    private var recipeProtein: Float = 0.0f
-    private var recipeFat: Float = 0.0f
-    private var recipeCarb: Float = 0.0f
+    private lateinit var previousButton: Button
+    private lateinit var nextButton: Button
+    private lateinit var stepNumber: TextView
+    private lateinit var recipeTitle: TextView
+    private lateinit var recipeQty: TextView
+    private lateinit var recipeDesc: TextView
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recipe_detail)
+        setContentView(R.layout.activity_cooking)
 
-        ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
+        stepNumber = findViewById(R.id.cooking_step)
+        stepNumber.text = "Step $currentPage"
 
-//        val foodId = 1 // Replace with the desired food_id
-        val foodId = intent.getIntExtra("food_id", 1)
+        recipeTitle = findViewById(R.id.recipeTitle)
+        recipeQty = findViewById(R.id.recipeQty)
+        recipeDesc = findViewById(R.id.recipeDesc)
 
-        getRecipeData(foodId) { recipeIngredients ->
+        val buttonContainer: LinearLayout = findViewById(R.id.buttonContainer)
+
+        previousButton = findViewById(R.id.previousButton)
+        nextButton = findViewById(R.id.nextButton)
+
+        val videoView = findViewById<VideoView>(R.id.videoView)
+        val videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
+
+        val mediaController = MediaController(this)
+        mediaController.setAnchorView(videoView)
+        videoView.setMediaController(mediaController)
+        videoView.setVideoURI(Uri.parse(videoPath))
+
+        var cookingSteps = mutableListOf<RecipeIngredient>()
+
+        val food_id = intent.getIntExtra("food_id", 1)
+
+        getRecipeData(food_id) { recipeIngredients ->
             recipeIngredients?.let {
                 runOnUiThread {
-                    adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
-                    ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetail)
-                    ingredientRecyclerView.adapter = adapter
+                    cookingSteps = it as MutableList<RecipeIngredient>
 
-                    val kcalTV = findViewById<TextView>(R.id.kcalValue)
-                    val proteinTV = findViewById<TextView>(R.id.proteinValue)
-                    val fatTV = findViewById<TextView>(R.id.fatValue)
-                    val carbTV = findViewById<TextView>(R.id.carbValue)
+                    recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                    recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                    recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
 
-                    kcalTV.text = recipeCalories.toString() + " kcal"
-                    proteinTV.text = recipeProtein.toString() + "g"
-                    fatTV.text = recipeFat.toString() + "g"
-                    carbTV.text = recipeCarb.toString() + "g"
+                    totalPages = cookingSteps.size
+
+                    updateButtonVisibility()
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
-                Toast.makeText(this, "Failed to retrieve recipe ingredients", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to retrieve recipe ingredients", Toast.LENGTH_SHORT)
+                    .show()
                 Log.e("RecipeDetail", "Failed to retrieve recipe ingredients")
             }
         }
+
+        previousButton.setOnClickListener {
+            if (currentPage > 1) {
+                currentPage--
+                stepNumber.text = "Step $currentPage"
+                updateButtonVisibility()
+                // Handle page change here
+                recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
+            }
+        }
+
+        nextButton.setOnClickListener {
+            if (currentPage < totalPages) {
+                currentPage++
+                stepNumber.text = "Step $currentPage"
+                updateButtonVisibility()
+                // Handle page change here
+                recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
+                recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
+                recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
+            }
+        }
+    }
+
+    private fun updateButtonVisibility() {
+        previousButton.visibility = if (currentPage == 1) View.GONE else View.VISIBLE
+        if (currentPage == totalPages) {
+            nextButton.text = "Finish"
+            nextButton.setOnClickListener { finish() }
+        }
+        else View.VISIBLE
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {
@@ -113,10 +163,10 @@ class RecipeDetail : AppCompatActivity() {
                         val recipeTitle = ingredientJson.getString("recipe_title")
                         val recipeDesc = ingredientJson.getString("recipe_desc")
                         val recipePrice = ingredientJson.getDouble("recipe_price").toFloat()
-                        recipeCalories = ingredientJson.getDouble("recipe_calories").toFloat()
-                        recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
-                        recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
-                        recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
+                        val recipeCalories = ingredientJson.getDouble("recipe_calories").toFloat()
+                        val recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
+                        val recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
+                        val recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
 
                         val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein)
                         recipeIngredients.add(recipeIngredient)
@@ -132,6 +182,5 @@ class RecipeDetail : AppCompatActivity() {
             }
         }
     }
-
-    fun goBack(view: View) { onBackPressed() }
 }
+
