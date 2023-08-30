@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `food` (
     food_ctime INT(5) NOT NULL, -- mins
     food_ptime INT(5) NOT NULL, -- mins
     food_type INT(1) NOT NULL,
+    food_img VARCHAR(255),
 
     PRIMARY KEY (food_id)
 ) ENGINE=INNODB;
@@ -266,66 +267,66 @@ VALUES
 
 -- ctime: cook time, ptime: prepare time
 -- meal: 1=breakfast, 2=lunch, 3=snack, 4=dinner,drinks
-INSERT INTO `food` (food_name, food_desc, food_ctime, food_ptime, food_type)
+INSERT INTO `food` (food_name, food_desc, food_ctime, food_ptime, food_type, food_img)
 VALUES
-("Avocado Toast", "Sliced avocado on toasted bread.", 5, 10, 1),
-("Omelette with Vegetables", "Fluffy omelette filled with assorted vegetables.", 10, 5, 1),
-("French Toast", "Bread soaked in egg batter and pan-fried.", 10, 5, 1),
-("Tomato Cucumber Salad", "Refreshing salad with tomatoes and cucumbers.", 0, 10, 2),
-("Creamy Coleslaw", "Cabbage and carrot coleslaw in a creamy dressing.", 0, 10, 2),
-("Russian Salad", "Diced vegetables in a creamy dressing.", 10, 10, 2),
-("Chicken Salad", "Mixed salad with grilled chicken strips.", 15, 10, 2),
+("Avocado Toast", "Sliced avocado on toasted bread.", 5, 10, 1, null),
+("Omelette with Vegetables", "Fluffy omelette filled with assorted vegetables.", 10, 5, 1, null),
+("French Toast", "Bread soaked in egg batter and pan-fried.", 10, 5, 1, null),
+("Tomato Cucumber Salad", "Refreshing salad with tomatoes and cucumbers.", 0, 10, 2, null),
+("Creamy Coleslaw", "Cabbage and carrot coleslaw in a creamy dressing.", 0, 10, 2, null),
+("Russian Salad", "Diced vegetables in a creamy dressing.", 10, 10, 2, null),
+("Chicken Salad", "Mixed salad with grilled chicken strips.", 15, 10, 2, null),
 -- Breakfast
-("Scrambled Eggs with Smoked Salmon", "Fluffy scrambled eggs served with smoked salmon, fresh dill, and a squeeze of lemon juice.", 10, 5, 1),
-("Breakfast Hash", "A hearty breakfast dish made with diced potatoes, onions, bell peppers, sausage, and a sunny-side-up egg on top.", 15, 10, 1),
-("Shakshuka", "A Middle Eastern favorite featuring a savory tomato and bell pepper stew with poached eggs, garlic, and a touch of cumin powder.", 20, 15, 1),
-("Bread with Cream Cheese and Smoked Salmon", "Toasted bread topped with creamy cream cheese, smoked salmon, thinly sliced red onion, and zesty capers.", 5, 5, 1),
-("Peanut Butter Banana Toast", "A simple yet satisfying breakfast with sliced banana and a drizzle of honey over peanut butter spread on toasted bread.", 5, 5, 1),
-("Breakfast BLT", "A breakfast twist on the classic BLT sandwich, featuring crispy bacon, fresh lettuce, tomato slices, a fried egg, and a spread of mayonnaise on bread.", 10, 5, 1),
+("Scrambled Eggs with Smoked Salmon", "Fluffy scrambled eggs served with smoked salmon, fresh dill, and a squeeze of lemon juice.", 10, 5, 1, null),
+("Breakfast Hash", "A hearty breakfast dish made with diced potatoes, onions, bell peppers, sausage, and a sunny-side-up egg on top.", 15, 10, 1, null),
+("Shakshuka", "A Middle Eastern favorite featuring a savory tomato and bell pepper stew with poached eggs, garlic, and a touch of cumin powder.", 20, 15, 1, null),
+("Bread with Cream Cheese and Smoked Salmon", "Toasted bread topped with creamy cream cheese, smoked salmon, thinly sliced red onion, and zesty capers.", 5, 5, 1, null),
+("Peanut Butter Banana Toast", "A simple yet satisfying breakfast with sliced banana and a drizzle of honey over peanut butter spread on toasted bread.", 5, 5, 1, null),
+("Breakfast BLT", "A breakfast twist on the classic BLT sandwich, featuring crispy bacon, fresh lettuce, tomato slices, a fried egg, and a spread of mayonnaise on bread.", 10, 5, 1, null),
 -- Salads
-("Mexican Corn Salad", "A refreshing salad made with grilled corn, black beans, bell pepper, chili, cilantro, and a zesty lime dressing.", 0, 10, 3),
-("Grapefruit Salad (Goi Buoi)", "A vibrant Vietnamese salad featuring grapefruit, shrimp, chicken, peanuts, mint leaves, basil, and a flavorful dressing made with lime, fish sauce, and sugar.", 0, 15, 3),
-("Mango Salad (Nom Xoai)", "A delightful Southeast Asian salad combining ripe mango, shrimp, red onion, peanuts, mint leaves, and a zingy dressing made with fish sauce and lime.", 0, 15, 3),
-("Caprese Salad", "A classic Italian salad showcasing slices of ripe tomato, fresh mozzarella cheese, fragrant basil leaves, and a drizzle of balsamic glaze.", 0, 5, 3),
+("Mexican Corn Salad", "A refreshing salad made with grilled corn, black beans, bell pepper, chili, cilantro, and a zesty lime dressing.", 0, 10, 3, null),
+("Grapefruit Salad (Goi Buoi)", "A vibrant Vietnamese salad featuring grapefruit, shrimp, chicken, peanuts, mint leaves, basil, and a flavorful dressing made with lime, fish sauce, and sugar.", 0, 15, 3, null),
+("Mango Salad (Nom Xoai)", "A delightful Southeast Asian salad combining ripe mango, shrimp, red onion, peanuts, mint leaves, and a zingy dressing made with fish sauce and lime.", 0, 15, 3, null),
+("Caprese Salad", "A classic Italian salad showcasing slices of ripe tomato, fresh mozzarella cheese, fragrant basil leaves, and a drizzle of balsamic glaze.", 0, 5, 3, null),
 -- Side dishes
-("Roasted Garlic Parmesan Potatoes", "Roasted potatoes seasoned with garlic powder, Parmesan cheese, and drizzled with olive oil.", 30, 15, 2),
-("Grilled Asparagus with Lemon Butter", "Grilled asparagus spears topped with a drizzle of lemon butter and a sprinkle of black pepper.", 15, 10, 2),
-("Sesame Ginger Green Beans", "Tender green beans tossed with sesame seeds, ginger powder, and a splash of soy sauce.", 20, 10, 2),
-("Garlic Butter Green Beans", "Crisp green beans sautéed in garlic-infused butter, finished with a touch of lemon zest.", 20, 10, 2),
-("Roasted Brussels Sprouts with Balsamic Glaze", "Oven-roasted Brussels sprouts drizzled with balsamic glaze and a hint of olive oil.", 25, 10, 2),
-("Caprese Skewers", "Skewers of cherry tomatoes, fresh mozzarella cheese, and basil leaves drizzled with balsamic glaze.", 15, 10, 2),
-("Sweet and Spicy Roasted Cauliflower", "Cauliflower florets roasted with a blend of chili powder, sugar, and olive oil.", 25, 15, 2),
-("Spinach and Feta Stuffed Mushrooms", "Mushroom caps stuffed with a mixture of spinach, feta cheese, garlic, and olive oil.", 20, 15, 2),
-("Cheesy Broccoli Casserole", "Broccoli florets baked with cheddar cheese, a sprinkle of garlic powder, and topped with bread crumbs.", 30, 15, 2),
-("Baked Parmesan Zucchini Fries", "Zucchini sticks coated in Parmesan cheese, bread crumbs, and garlic powder, then baked until crispy.", 25, 15, 2),
-("Creamed Spinach", "Sautéed spinach in a creamy sauce made with cream cheese, garlic, onion, and a touch of nutmeg.", 20, 15, 2),
-("Fruit Salsa with Cinnamon Chips", "Fresh fruit salsa made with apple, apricot, kiwi, and lemon, served with crispy cinnamon-dusted tortilla chips.", 15, 15, 2),
-("Avocado Bruschetta", "Toasted baguette slices topped with a mixture of diced avocado, tomato, garlic, and basil.", 15, 10, 2),
-("Crab Cakes", "Savory crab cakes made with crab meat, bread crumbs, mayonnaise, Dijon mustard, lemon, and Old Bay seasoning.", 25, 20, 2),
-("Thai Beef Lettuce Wraps", "Lettuce wraps filled with seasoned beef, sautéed onions, garlic, ginger, and a drizzle of soy sauce.", 25, 15, 2),
-("Smoked Salmon Cucumber Bites", "Cucumber slices topped with cream cheese, smoked salmon, and a sprig of dill.", 20, 10, 2),
-("Tomato Basil Bruschetta", "Classic bruscheta with diced tomatoes, fresh basil, minced garlic, and a drizzle of olive oil on toasted baguette slices.", 15, 10, 2),
+("Roasted Garlic Parmesan Potatoes", "Roasted potatoes seasoned with garlic powder, Parmesan cheese, and drizzled with olive oil.", 30, 15, 2, null),
+("Grilled Asparagus with Lemon Butter", "Grilled asparagus spears topped with a drizzle of lemon butter and a sprinkle of black pepper.", 15, 10, 2, null),
+("Sesame Ginger Green Beans", "Tender green beans tossed with sesame seeds, ginger powder, and a splash of soy sauce.", 20, 10, 2, null),
+("Garlic Butter Green Beans", "Crisp green beans sautéed in garlic-infused butter, finished with a touch of lemon zest.", 20, 10, 2, null),
+("Roasted Brussels Sprouts with Balsamic Glaze", "Oven-roasted Brussels sprouts drizzled with balsamic glaze and a hint of olive oil.", 25, 10, 2, null),
+("Caprese Skewers", "Skewers of cherry tomatoes, fresh mozzarella cheese, and basil leaves drizzled with balsamic glaze.", 15, 10, 2, null),
+("Sweet and Spicy Roasted Cauliflower", "Cauliflower florets roasted with a blend of chili powder, sugar, and olive oil.", 25, 15, 2, null),
+("Spinach and Feta Stuffed Mushrooms", "Mushroom caps stuffed with a mixture of spinach, feta cheese, garlic, and olive oil.", 20, 15, 2, null),
+("Cheesy Broccoli Casserole", "Broccoli florets baked with cheddar cheese, a sprinkle of garlic powder, and topped with bread crumbs.", 30, 15, 2, null),
+("Baked Parmesan Zucchini Fries", "Zucchini sticks coated in Parmesan cheese, bread crumbs, and garlic powder, then baked until crispy.", 25, 15, 2, null),
+("Creamed Spinach", "Sautéed spinach in a creamy sauce made with cream cheese, garlic, onion, and a touch of nutmeg.", 20, 15, 2, null),
+("Fruit Salsa with Cinnamon Chips", "Fresh fruit salsa made with apple, apricot, kiwi, and lemon, served with crispy cinnamon-dusted tortilla chips.", 15, 15, 2, null),
+("Avocado Bruschetta", "Toasted baguette slices topped with a mixture of diced avocado, tomato, garlic, and basil.", 15, 10, 2, null),
+("Crab Cakes", "Savory crab cakes made with crab meat, bread crumbs, mayonnaise, Dijon mustard, lemon, and Old Bay seasoning.", 25, 20, 2, null),
+("Thai Beef Lettuce Wraps", "Lettuce wraps filled with seasoned beef, sautéed onions, garlic, ginger, and a drizzle of soy sauce.", 25, 15, 2, null),
+("Smoked Salmon Cucumber Bites", "Cucumber slices topped with cream cheese, smoked salmon, and a sprig of dill.", 20, 10, 2, null),
+("Tomato Basil Bruschetta", "Classic bruscheta with diced tomatoes, fresh basil, minced garlic, and a drizzle of olive oil on toasted baguette slices.", 15, 10, 2, null),
 -- Soup
-("Creamy Tomato Basil Soup", "A rich and velvety tomato soup infused with the flavors of onion, garlic, basil, cream, and olive oil.", 30, 20, 3),
-("Chicken Noodle Soup", "A comforting soup made with tender chicken, carrots, celery, onion, egg noodles, and nourishing chicken broth.", 40, 25, 3),
-("Spicy Black Bean Soup", "A hearty soup featuring black beans, onion, garlic, chili powder, cumin, and vegetable broth for a touch of heat.", 35, 20, 3),
-("Butternut Squash Soup", "Smooth butternut squash soup with notes of onion, garlic, nutmeg, vegetable broth, and a creamy finish.", 40, 25, 3),
-("Minestrone Soup", "A classic Italian soup filled with tomato, carrot, celery, onion, cannellini beans, pasta, and hearty vegetable broth.", 45, 30, 3),
-("Coconut Curry Chicken Soup", "A flavorful soup combining tender chicken, creamy coconut milk, curry powder, ginger, garlic, and an assortment of vegetables.", 40, 25, 3),
-("Potato Leek Soup", "A creamy soup made with potato, leek, onion, garlic, vegetable broth, and a touch of cream for a luxurious texture.", 35, 20, 3),
-("Pumpkin Soup", "A fall favorite featuring pumpkin, onion, garlic, nutmeg, cinnamon, vegetable broth, and a touch of cream.", 40, 25, 3),
-("Creamy Spinach and Parmesan Soup", "A velvety spinach soup with sautéed onion, garlic, Parmesan cheese, vegetable broth, and a luxurious creaminess.", 35, 20, 3),
-("Creamy Broccoli Cheddar Soup", "A comforting soup combining broccoli florets, cheddar cheese, onion, garlic, vegetable broth, and a creamy finish.", 40, 25, 3),
+("Creamy Tomato Basil Soup", "A rich and velvety tomato soup infused with the flavors of onion, garlic, basil, cream, and olive oil.", 30, 20, 3, null),
+("Chicken Noodle Soup", "A comforting soup made with tender chicken, carrots, celery, onion, egg noodles, and nourishing chicken broth.", 40, 25, 3, null),
+("Spicy Black Bean Soup", "A hearty soup featuring black beans, onion, garlic, chili powder, cumin, and vegetable broth for a touch of heat.", 35, 20, 3, null),
+("Butternut Squash Soup", "Smooth butternut squash soup with notes of onion, garlic, nutmeg, vegetable broth, and a creamy finish.", 40, 25, 3, null),
+("Minestrone Soup", "A classic Italian soup filled with tomato, carrot, celery, onion, cannellini beans, pasta, and hearty vegetable broth.", 45, 30, 3, null),
+("Coconut Curry Chicken Soup", "A flavorful soup combining tender chicken, creamy coconut milk, curry powder, ginger, garlic, and an assortment of vegetables.", 40, 25, 3, null),
+("Potato Leek Soup", "A creamy soup made with potato, leek, onion, garlic, vegetable broth, and a touch of cream for a luxurious texture.", 35, 20, 3, null),
+("Pumpkin Soup", "A fall favorite featuring pumpkin, onion, garlic, nutmeg, cinnamon, vegetable broth, and a touch of cream.", 40, 25, 3, null),
+("Creamy Spinach and Parmesan Soup", "A velvety spinach soup with sautéed onion, garlic, Parmesan cheese, vegetable broth, and a luxurious creaminess.", 35, 20, 3, null),
+("Creamy Broccoli Cheddar Soup", "A comforting soup combining broccoli florets, cheddar cheese, onion, garlic, vegetable broth, and a creamy finish.", 40, 25, 3, null),
 -- Main courses
-("Ginseng Chicken Soup", "A nourishing chicken soup with tender chicken, sticky rice, ginseng, garlic, jujubes, and a hint of ginger, served with ginseng tea.", 45, 30, 4),
-("Creamy Mushroom Risotto", "Creamy risotto made with Arborio rice, mushrooms, and Parmesan cheese.", 25, 20, 4),
-("Black Pepper Beef Stir-Fry", "Beef stir-fry with black pepper, onions, garlic, and savory sauces.", 20, 15, 4),
-("Glass Noodle with Chicken - Mien Ga", "Delicious dish with chicken, wood ear mushroom, ginger, and glass noodles.", 15, 10, 4),
-("Stir-Fried Water Spinach - Rau muong xao toi", "Stir-fried water spinach with garlic and peanut oil.", 10, 5, 4),
-("Avocado Kimbap", "Korean dish with avocado, rice, seaweed, carrot, cucumber, egg, and sesame seeds.", 20, 15, 4),
-("Jajangmyeon", "Classic Korean dish with noodles, pork, black bean paste, onion, zucchini, and potatoes.", 30, 15, 4),
-("Korean Fried Chicken", "Crispy Korean fried chicken made with chicken, flour, cornstarch, soy sauce, garlic, ginger, honey, Korean chili paste, and vegetable oil.", 30, 20, 4),
-("Bacon Wrapped Asparagus", "Asparagus wrapped in bacon, seasoned and roasted.", 20, 15, 4);
+("Ginseng Chicken Soup", "A nourishing chicken soup with tender chicken, sticky rice, ginseng, garlic, jujubes, and a hint of ginger, served with ginseng tea.", 45, 30, 4, null),
+("Creamy Mushroom Risotto", "Creamy risotto made with Arborio rice, mushrooms, and Parmesan cheese.", 25, 20, 4, null),
+("Black Pepper Beef Stir-Fry", "Beef stir-fry with black pepper, onions, garlic, and savory sauces.", 20, 15, 4, null),
+("Glass Noodle with Chicken - Mien Ga", "Delicious dish with chicken, wood ear mushroom, ginger, and glass noodles.", 15, 10, 4, null),
+("Stir-Fried Water Spinach - Rau muong xao toi", "Stir-fried water spinach with garlic and peanut oil.", 10, 5, 4, null),
+("Avocado Kimbap", "Korean dish with avocado, rice, seaweed, carrot, cucumber, egg, and sesame seeds.", 20, 15, 4, null),
+("Jajangmyeon", "Classic Korean dish with noodles, pork, black bean paste, onion, zucchini, and potatoes.", 30, 15, 4, null),
+("Korean Fried Chicken", "Crispy Korean fried chicken made with chicken, flour, cornstarch, soy sauce, garlic, ginger, honey, Korean chili paste, and vegetable oil.", 30, 20, 4, null),
+("Bacon Wrapped Asparagus", "Asparagus wrapped in bacon, seasoned and roasted.", 20, 15, 4, null);
 
 
 INSERT INTO `recipe` (food_id, ingre_id, media_id, recipe_qty, recipe_desc, recipe_title)
@@ -823,4 +824,3 @@ VALUES
 -- ("Peach Iced Tea", ""): Peach, Black Tea, Sugar, Ice
 -- ("Lemon Limeade", ""): Lemon, Lime, Sugar, Water, Ice
 -- ("Coca-Cola","")
-

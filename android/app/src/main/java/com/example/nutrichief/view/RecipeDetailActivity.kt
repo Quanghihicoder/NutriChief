@@ -152,8 +152,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                         recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
                         recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
                         recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
+                        val recipeVideo = ingredientJson.getString("media_url")
 
-                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein)
+                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein, recipeVideo)
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)
@@ -171,8 +172,6 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun getFoodData(foodId: Int, callback: (List<Food>?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
-                val requestBody = JSONObject()
-
                 val request = Request.Builder()
                     .url("http://10.0.2.2:8001/apis/food/$foodId")
                     .get()
@@ -199,8 +198,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                         food_desc = foodJson.getString("food_desc")
                         food_ctime = foodJson.getInt("food_ctime")
                         food_ptime = foodJson.getInt("food_ptime")
+                        val food_img = foodJson.getString("food_img")
 
-                        val food = Food(foodId, food_name, food_desc, food_ctime, food_ptime)
+                        val food = Food(foodId, food_name, food_desc, food_ctime, food_ptime, food_img)
                         foods.add(food)
                     }
                     callback(foods)

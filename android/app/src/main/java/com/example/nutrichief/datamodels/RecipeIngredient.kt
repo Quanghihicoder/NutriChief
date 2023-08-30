@@ -11,5 +11,6 @@ data class RecipeIngredient(
     val recipe_carb: Float,
     val recipe_fat: Float,
     val recipe_protein: Float,
+    val media_url: String
 )
 

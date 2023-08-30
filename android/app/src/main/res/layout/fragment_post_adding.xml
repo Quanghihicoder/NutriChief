@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Add a post"
+            android:textColor="@color/purple_theme_color"
+            android:textSize="30sp"
+            android:transitionName="totalOrderedItemsPriceTransition" />
+
+        <TextView
+            android:id="@+id/post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Post title: "
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/register_full_name_til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:hint="Add a post title.."
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/post_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Post detail: "
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:transitionName="totalOrderedItemsTransition" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/post_detail_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/post_detail_input_box"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:drawablePadding="10dp"
+                android:hint="Add post detail.."
+                android:singleLine="false"
+                android:scrollHorizontally="false"
+                android:inputType="textCapSentences|textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/purple_theme_color"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/post_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Post"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:enabled="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

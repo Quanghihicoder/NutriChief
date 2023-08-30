@@ -41,8 +41,18 @@
             android:id="@+id/update_profile"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="120dp"
             android:src="@drawable/ic_manage_accounts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textProfile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/current_order"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="50dp"
+            android:src="@drawable/ic_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/textProfile"
             app:layout_constraintTop_toTopOf="parent" />

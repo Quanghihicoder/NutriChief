@@ -6,4 +6,5 @@ data class Food(
     val food_desc: String,
     val food_ctime: Int,
     val food_ptime: Int,
+    val food_img: String
 )
