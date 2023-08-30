@@ -49,7 +49,7 @@ router.post("/apis/mealpref/update", updateMealPref);
 router.post("/apis/food", getFoods);
 
 //get food by id
-router.post("/apis/food/:food_id", getFoodById);
+router.get("/apis/food/:food_id", getFoodById);
 
 // get foods with basic info
 router.post("/apis/food/detail", getFoodDetail);

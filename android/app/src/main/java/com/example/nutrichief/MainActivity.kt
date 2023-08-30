@@ -1,20 +1,10 @@
 package com.example.nutrichief
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
-import androidx.fragment.app.FragmentContainerView
-import com.example.nutrichief.view.UserProfileActivity
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import com.example.nutrichief.model.Food
 import com.example.nutrichief.model.Meal
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
