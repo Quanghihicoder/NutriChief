@@ -25,7 +25,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
 
-class RecipeDetail : AppCompatActivity() {
+class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var ingredientRecyclerView: RecyclerView
     private lateinit var adapter: IngredientAdapter
 
@@ -42,27 +42,13 @@ class RecipeDetail : AppCompatActivity() {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
-    private lateinit var caloriesValue: TextView
-    private lateinit var proteinValue: TextView
-    private lateinit var fatValue: TextView
-    private lateinit var carbValue: TextView
-    private var recipeCalories: Float = 0F
-    private var recipeProtein: Float = 0F
-    private var recipeFat: Float = 0F
-    private var recipeCarb: Float = 0F
-    private lateinit var foodName: String
-    private var food_cooktime: Int = 0
-    private var food_preparetime: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_detail)
 
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
-        caloriesValue = findViewById(R.id.caloriesValue)
-        proteinValue = findViewById(R.id.proteinValue)
-        fatValue = findViewById(R.id.fatValue)
-        carbValue = findViewById(R.id.carbValue)
 
 //        val foodId = 2 // Replace with the desired food_id
         val foodId = intent.getIntExtra("food_id", 1)
@@ -73,19 +59,17 @@ class RecipeDetail : AppCompatActivity() {
         val fatTV = findViewById<TextView>(R.id.fatValue)
         val carbTV = findViewById<TextView>(R.id.carbValue)
 
-
-        getRecipeData(food_id) { recipeIngredients ->
+        getRecipeData(foodId) { recipeIngredients ->
             recipeIngredients?.let {
                 runOnUiThread {
                     adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
-                    ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetail)
+                    ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetailActivity)
                     ingredientRecyclerView.adapter = adapter
 
                     kcalTV.text = recipeCalories.toString() + " kcal"
                     proteinTV.text = recipeProtein.toString() + "g"
                     fatTV.text = recipeFat.toString() + "g"
                     carbTV.text = recipeCarb.toString() + "g"
-
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
@@ -111,6 +95,13 @@ class RecipeDetail : AppCompatActivity() {
                     .show()
                 Log.e("RecipeDetail", "Failed to retrieve food")
             }
+        }
+
+        val startCookingButton = findViewById<Button>(R.id.startCookingButton)
+        startCookingButton.setOnClickListener {
+            val intent = Intent(this, InstructionsActivity::class.java)
+            intent.putExtra("food_id", foodId)
+            startActivity(intent)
         }
 
     }
@@ -224,6 +215,5 @@ class RecipeDetail : AppCompatActivity() {
         }
     }
 
-    fun goBack(view: View) { onBackPressed() }
-
+    fun goBack(view: View) { onBackPressedDispatcher.onBackPressed() }
 }

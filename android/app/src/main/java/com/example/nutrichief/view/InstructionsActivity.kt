@@ -22,7 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
 
-class Instructions : AppCompatActivity() {
+class InstructionsActivity : AppCompatActivity() {
     private var currentPage = 1
     private var totalPages = 0
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RecipeDetail"
+    tools:context=".view.RecipeDetailActivity"
     android:orientation="vertical"
     android:background="@drawable/cook">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".view.Instructions">
+        tools:context=".view.InstructionsActivity">
 
         <VideoView
             android:id="@+id/videoView"
