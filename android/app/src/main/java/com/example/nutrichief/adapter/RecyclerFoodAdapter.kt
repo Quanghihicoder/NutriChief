@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Food
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -30,7 +31,8 @@ class RecyclerFoodAdapter(private var foodList: MutableList<Food>,
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
         val food = foodList[position]
-        holder.imageItemFood.setImageResource(R.drawable.ramen)
+//        holder.imageItemFood.setImageResource(R.drawable.ramen)
+        Picasso.get().load(food.food_img).into(holder.imageItemFood)
         holder.textItemFoodName.text = food.food_name
         holder.textItemFoodShortDesc.text = food.food_desc
 

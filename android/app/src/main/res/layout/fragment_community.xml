@@ -91,11 +91,4 @@
         android:clickable="true"
         android:src="@drawable/ic_input_add_custom" />
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/fragment_community"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
 </FrameLayout>

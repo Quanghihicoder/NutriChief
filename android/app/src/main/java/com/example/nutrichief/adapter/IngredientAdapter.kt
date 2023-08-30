@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.RecipeIngredient
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -44,7 +45,14 @@ class IngredientAdapter (
         holder.ingredientName.text = menu.ingredient.ingre_name
         holder.ingredientShortDesc.text = menu.ingredient.ingre_calo.toString() + "kcal, " + menu.ingredient.ingre_protein.toString() + "gr protein, " + menu.ingredient.ingre_fat.toString() + "gr fat, " + menu.ingredient.ingre_carb.toString() + "gr carb"
         holder.ingredientQuantity.text = menu.recipe_qty.toString() + "gr"
-        holder.ingredientImage.setImageResource(R.drawable.ramen)
+//        holder.ingredientImage.setImageResource(R.drawable.ramen)
+//        Picasso.get().load(menu.ingredient.ingre_img).into(holder.ingredientImage)
+        val imageUrl = menu.ingredient.ingre_img
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl).into(holder.ingredientImage)
+        } else {
+            holder.ingredientImage.setImageResource(R.drawable.default_item_image)
+        }
     }
 
     // Filter function
