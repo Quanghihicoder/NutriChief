@@ -159,7 +159,8 @@ class SearchFragment : Fragment(), RecyclerFoodAdapter.OnItemClickListener {
                             jsonFood.getString("food_name"),
                             jsonFood.getString("food_desc"),
                             jsonFood.getInt("food_ctime"),
-                            jsonFood.getInt("food_ptime")
+                            jsonFood.getInt("food_ptime"),
+//                            jsonFood.getString("food_img")
                         )
                         food.add(foodItem)
                     }
