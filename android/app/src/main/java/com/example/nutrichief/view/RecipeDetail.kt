@@ -1,9 +1,11 @@
 package com.example.nutrichief.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,13 +42,27 @@ class RecipeDetail : AppCompatActivity() {
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
-
+    private lateinit var caloriesValue: TextView
+    private lateinit var proteinValue: TextView
+    private lateinit var fatValue: TextView
+    private lateinit var carbValue: TextView
+    private var recipeCalories: Float = 0F
+    private var recipeProtein: Float = 0F
+    private var recipeFat: Float = 0F
+    private var recipeCarb: Float = 0F
+    private lateinit var foodName: String
+    private var food_cooktime: Int = 0
+    private var food_preparetime: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_detail)
 
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
+        caloriesValue = findViewById(R.id.caloriesValue)
+        proteinValue = findViewById(R.id.proteinValue)
+        fatValue = findViewById(R.id.fatValue)
+        carbValue = findViewById(R.id.carbValue)
 
 //        val foodId = 2 // Replace with the desired food_id
         val foodId = intent.getIntExtra("food_id", 1)
@@ -57,7 +73,8 @@ class RecipeDetail : AppCompatActivity() {
         val fatTV = findViewById<TextView>(R.id.fatValue)
         val carbTV = findViewById<TextView>(R.id.carbValue)
 
-        getRecipeData(foodId) { recipeIngredients ->
+
+        getRecipeData(food_id) { recipeIngredients ->
             recipeIngredients?.let {
                 runOnUiThread {
                     adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
@@ -68,6 +85,7 @@ class RecipeDetail : AppCompatActivity() {
                     proteinTV.text = recipeProtein.toString() + "g"
                     fatTV.text = recipeFat.toString() + "g"
                     carbTV.text = recipeCarb.toString() + "g"
+
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
@@ -94,6 +112,7 @@ class RecipeDetail : AppCompatActivity() {
                 Log.e("RecipeDetail", "Failed to retrieve food")
             }
         }
+
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {
@@ -206,4 +225,5 @@ class RecipeDetail : AppCompatActivity() {
     }
 
     fun goBack(view: View) { onBackPressed() }
+
 }
