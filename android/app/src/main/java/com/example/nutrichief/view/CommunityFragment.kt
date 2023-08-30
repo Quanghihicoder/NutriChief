@@ -67,11 +67,6 @@ class CommunityFragment : Fragment() {
         communityRecyclerView.adapter = communityAdapter
 
         addPostBtn.setOnClickListener {
-//            startActivity(Intent(activity, MainActivity::class.java))
-//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragment_community, PostAddingFragment())
-//            transaction.addToBackStack(null)
-//            transaction.commit()
             val bottomDialog = PostAddingFragment()
             bottomDialog.show(requireActivity().supportFragmentManager, null)
         }
