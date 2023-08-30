@@ -1,47 +1,6 @@
 // import connection
 import db from "../config/database.js";
 
-export const getAllMeals = (data, result) => {
-    if (data.user_id) {
-        db.query("SELECT * FROM meal WHERE user_id = ?", [data.user_id], (err, results) => {
-            if (err) {
-                console.log(err);
-                result({ "status": 0, "message": "Can not get user's meals", "data": [] });
-            } else {
-                if (results[0]) {
-                    result({ "status": 1, "message": "Successfully get user's meals", "data": results });
-                } else {
-                    result({ "status": 0, "message": "Can not get user's meals", "data": [] });
-                }
-            }
-        });
-    } else {
-        console.log(err);
-        result({ "status": 0, "message": "Can not get user's meals", "data": [] });
-    }
-}
-
-export const getDateMeal = (data, result) => {
-    // YYYY-MM-DD
-
-    if (data.user_id && data.meal_date) {
-        db.query("SELECT * FROM meal WHERE user_id = ? AND meal_date = ?", [data.user_id, data.meal_date], (err, results) => {
-            if (err) {
-                console.log(err);
-                result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
-            } else {
-                if (results[0]) {
-                    result({ "status": 1, "message": "Successfully get user's date meal", "data": results });
-                } else {
-                    result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
-                }
-            }
-        });
-    } else {
-        console.log(err);
-        result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
-    }
-}
 
 function randomInRange(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -123,12 +82,34 @@ const generateMeal = async (calories) => {
     //     results.push(snackPool[randomInRange(0, snackPool.length - 1)])
     // }
 
-    console.log(results)
     return results
 }
 
+export const getDateMeal = (data, result) => {
+    // YYYY-MM-DD
+
+    if (data.user_id && data.meal_date) {
+        db.query("SELECT food_id, meal_checked FROM meal WHERE user_id = ? AND meal_date = ?", [data.user_id, data.meal_date], (err, results) => {
+            if (err) {
+                console.log(err);
+                result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
+            } else {
+                if (results[0]) {
+                    result({ "status": 1, "message": "Successfully get user's date meal", "data": results });
+                } else {
+                    result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
+                }
+            }
+        });
+    } else {
+        console.log(err);
+        result({ "status": 0, "message": "Can not get user's date meal", "data": [] });
+    }
+}
+
 export const createUserMeal = (data, result) => {
-    if (data.user_id) {
+    if (data.user_id && data.meal_date) {
+
         db.query("SELECT * FROM mealpref WHERE user_id = ?", [data.user_id], async (err, results) => {
             if (err) {
                 console.log(err);
@@ -136,19 +117,19 @@ export const createUserMeal = (data, result) => {
             } else {
                 if (results[0]) {
                     var userPref = results[0]
-                    var date = new Date();
 
-                    var getYear = date.toLocaleString("default", { year: "numeric" });
-                    var getMonth = date.toLocaleString("default", { month: "2-digit" });
-                    var getDay = date.toLocaleString("default", { day: "2-digit" });
+                    let meal = await generateMeal(userPref.pref_calo)
 
-                    var today = getYear + "-" + getMonth + "-" + getDay;
+                    db.query("DELETE FROM meal WHERE user_id = ? AND meal_date = ?", [data.user_id, data.meal_date], (err, results) => {
 
-                    let r = await generateMeal(userPref.pref_calo)
+                    });
 
-                    // INSERT INTO meal (user_id,meal_food,meal_date) VALUES (1, "1,2,3", "2023-08-23")
+                    for (let item of meal) {
+                        db.query("INSERT INTO meal SET user_id = ?, food_id = ?, meal_date = ?, meal_checked = ?", [data.user_id, item.food_id, data.meal_date, 0], (err, results) => {
 
-                    result({ "status": 1, "message": "Successfully generate user's meals", "data": r });
+                        });
+                    }
+                    result({ "status": 1, "message": "Successfully generate user's meals", "data": meal });
                 } else {
                     result({ "status": 0, "message": "Can not generate user's meals", "data": [] });
                 }
@@ -157,5 +138,35 @@ export const createUserMeal = (data, result) => {
     } else {
         console.log(err);
         result({ "status": 0, "message": "Can not generate user's meals", "data": [] });
+    }
+}
+
+export const updateDateMeal = (data, result) => {
+    // YYYY-MM-DD
+
+    if (data.user_id && data.meal_date && data.meal_checked) {
+        let query = "UPDATE meal SET meal_checked = ? WHERE user_id = ? "
+        let queryArray = [data.meal_checked, data.user_id]
+
+        if (data.food_id) {
+            query += "AND food_id = ? "
+            queryArray.push(data.food_id)
+        }
+
+        query += "AND meal_date = ?"
+        queryArray.push(data.meal_date)
+
+        db.query(query, queryArray, (err, results) => {
+            if (err) {
+                console.log(err);
+                result({ "status": 0, "message": "Can not update user's date meal", "data": [] });
+            } else {
+                result({ "status": 1, "message": "Successfully update user's date meal", "data": [] });
+
+            }
+        });
+    } else {
+        console.log(err);
+        result({ "status": 0, "message": "Can not update user's date meal", "data": [] });
     }
 }
