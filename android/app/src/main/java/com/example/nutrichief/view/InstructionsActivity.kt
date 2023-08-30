@@ -10,6 +10,7 @@ import android.widget.*
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -40,7 +41,7 @@ class InstructionsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cooking)
+        setContentView(R.layout.activity_instructions)
 
         stepNumber = findViewById(R.id.cooking_step)
         stepNumber.text = "Step $currentPage"
@@ -76,6 +77,12 @@ class InstructionsActivity : AppCompatActivity() {
                     recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
 
                     totalPages = cookingSteps.size
+
+                    for (i in 0 until totalPages) {
+                        val circle = findViewById<MaterialButton>(R.id.step_circle)
+                        circle.text = "${i + 1}"
+                        buttonContainer.addView(circle)
+                    }
 
                     updateButtonVisibility()
                 }
@@ -114,11 +121,13 @@ class InstructionsActivity : AppCompatActivity() {
 
     private fun updateButtonVisibility() {
         previousButton.visibility = if (currentPage == 1) View.GONE else View.VISIBLE
-        if (currentPage == totalPages) {
-            nextButton.text = "Finish"
-            nextButton.setOnClickListener { finish() }
-        }
-        else View.VISIBLE
+        nextButton.visibility = if (currentPage == totalPages) View.GONE else View.VISIBLE
+//        if (currentPage == totalPages) {
+//            nextButton.text = "Finish"
+//            if (nextButton.text == "Finish")
+//                nextButton.setOnClickListener { finish() }
+//        }
+//        else nextButton.text = "Next step"
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {

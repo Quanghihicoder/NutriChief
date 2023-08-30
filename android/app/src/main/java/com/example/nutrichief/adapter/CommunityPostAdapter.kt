@@ -16,7 +16,6 @@ class CommunityPostAdapter (private var postList: MutableList<CommunityPost>,
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {
-        fun onFoodClick(post: CommunityPost)
         fun onLikeClick(post: CommunityPost)
         fun onDislikeClick(post: CommunityPost)
         fun onCommentClick(post: CommunityPost)

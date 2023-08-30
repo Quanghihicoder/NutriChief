@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.MainActivity
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.CommunityPostAdapter
+import com.example.nutrichief.adapter.RecyclerFoodAdapter
 import com.example.nutrichief.datamodels.CommunityPost
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -26,7 +27,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [CommunityFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CommunityFragment : Fragment() {
+class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -56,14 +57,14 @@ class CommunityFragment : Fragment() {
         communityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize adapters
-        communityAdapter = CommunityPostAdapter(mutableListOf(), )
+//        communityAdapter = CommunityPostAdapter(mutableListOf(), this)
 
         val posts = mutableListOf(
             CommunityPost(1, "Banh Mi", "good", "Chi Pham", 10, 0),
             CommunityPost(2, "Vegetable", "bad", "Tri Luu", 20, 10),
         )
 
-        communityAdapter = CommunityPostAdapter(posts)
+        communityAdapter = CommunityPostAdapter(posts, this)
         communityRecyclerView.adapter = communityAdapter
 
 
@@ -96,6 +97,18 @@ class CommunityFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onLikeClick(post: CommunityPost) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDislikeClick(post: CommunityPost) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCommentClick(post: CommunityPost) {
+
     }
 
 
