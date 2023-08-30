@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RecipeDetailActivity"
+    android:background="@drawable/cook"
     android:orientation="vertical"
-    android:background="@drawable/cook">
+    tools:context=".view.RecipeDetailActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,14 +33,15 @@
         app:tint="@android:color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="414dp"
-        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="NotSibling">
 
         <View
             android:id="@+id/view"
@@ -168,9 +169,7 @@
         </androidx.core.widget.NestedScrollView>
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@
         app:tint="@android:color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="550dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +60,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
                 android:text="Ramen"
                 android:textColor="@color/black"
-                android:textSize="26sp"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="26sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,9 +160,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginRight="10dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -185,9 +185,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/pTimeTV"
@@ -210,9 +210,9 @@
                 android:id="@+id/ingredientText"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
                 android:text="Ingredients"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"/>
+                android:textStyle="bold" />
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
