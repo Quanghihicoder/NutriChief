@@ -10,6 +10,7 @@ import android.widget.*
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ class InstructionsActivity : AppCompatActivity() {
     private lateinit var recipeTitle: TextView
     private lateinit var recipeQty: TextView
     private lateinit var recipeDesc: TextView
+    private var videoPath: String? = null
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -55,16 +57,15 @@ class InstructionsActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.nextButton)
 
         val videoView = findViewById<VideoView>(R.id.videoView)
-        val videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
-
         val mediaController = MediaController(this)
-        mediaController.setAnchorView(videoView)
-        videoView.setMediaController(mediaController)
-        videoView.setVideoURI(Uri.parse(videoPath))
 
         var cookingSteps = mutableListOf<RecipeIngredient>()
 
         val food_id = intent.getIntExtra("food_id", 1)
+
+        if (videoPath == null) {
+            videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
+        }
 
         getRecipeData(food_id) { recipeIngredients ->
             recipeIngredients?.let {
@@ -76,6 +77,11 @@ class InstructionsActivity : AppCompatActivity() {
                     recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
 
                     totalPages = cookingSteps.size
+
+                    videoPath = cookingSteps[currentPage - 1].media_url
+                    mediaController.setAnchorView(videoView)
+                    videoView.setMediaController(mediaController)
+                    videoView.setVideoURI(Uri.parse(videoPath))
 
                     updateButtonVisibility()
                 }
@@ -96,6 +102,10 @@ class InstructionsActivity : AppCompatActivity() {
                 recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
                 recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
                 recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
+                videoPath = cookingSteps[currentPage - 1].media_url
+                mediaController.setAnchorView(videoView)
+                videoView.setMediaController(mediaController)
+                videoView.setVideoURI(Uri.parse(videoPath))
             }
         }
 
@@ -108,6 +118,10 @@ class InstructionsActivity : AppCompatActivity() {
                 recipeTitle.text = cookingSteps[currentPage - 1].recipe_title
                 recipeQty.text = cookingSteps[currentPage - 1].recipe_qty.toString() + "g"
                 recipeDesc.text = cookingSteps[currentPage - 1].recipe_desc
+                videoPath = cookingSteps[currentPage - 1].media_url
+                mediaController.setAnchorView(videoView)
+                videoView.setMediaController(mediaController)
+                videoView.setVideoURI(Uri.parse(videoPath))
             }
         }
     }
@@ -167,8 +181,9 @@ class InstructionsActivity : AppCompatActivity() {
                         val recipeProtein = ingredientJson.getDouble("recipe_protein").toFloat()
                         val recipeFat = ingredientJson.getDouble("recipe_fat").toFloat()
                         val recipeCarb = ingredientJson.getDouble("recipe_carb").toFloat()
+                        val recipeVideo = ingredientJson.getString("media_url")
 
-                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein)
+                        val recipeIngredient = RecipeIngredient(foodId, ingredient, recipeQty, recipeTitle, recipeDesc, recipePrice, recipeCalories, recipeCarb, recipeFat, recipeProtein, recipeVideo)
                         recipeIngredients.add(recipeIngredient)
                     }
                     callback(recipeIngredients)

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.CartItem
+import com.squareup.picasso.Picasso
 
 class RecyclerOrderItemAdapter(var context: Context,
                                private val itemOrderedList: ArrayList<CartItem>,
@@ -61,7 +62,7 @@ class RecyclerOrderItemAdapter(var context: Context,
         holder.removeOrderedItem.visibility = ViewGroup.VISIBLE
 
         if(loadDefaultImage == 1) holder.itemImageIV.setImageResource(R.drawable.default_item_image)
-//        else Picasso.get().load(currentItem.imageUrl).into(holder.itemImageIV)
+        else Picasso.get().load(currentItem.imageUrl).into(holder.itemImageIV)
 
         holder.itemNameTV.text = currentItem.itemName
         holder.itemPriceTV.text = "$${currentItem.itemPrice}"
