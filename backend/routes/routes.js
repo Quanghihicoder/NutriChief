@@ -16,6 +16,7 @@ import { getFoods, getFoodDetail, getFoodById } from "../controllers/food.js";
 import { getIngres, getAllFoodsByIngre } from "../controllers/ingre.js";
 
 import { getMeal, createMeal, updateMeal } from "../controllers/meal.js";
+import { webViewFood } from "../controllers/webview.js";
 
 // init express router
 const router = express.Router();
@@ -70,6 +71,10 @@ router.post("/apis/meal/create", createMeal);
 
 // update meals
 router.post("/apis/meal/update", updateMeal);
+
+////////////////////////// WEB VIEW ////////////////////////////////
+// return html
+router.get("/food/:food_id", webViewFood)
 
 // export default router
 export default router;

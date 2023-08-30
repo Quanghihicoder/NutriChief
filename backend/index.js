@@ -30,6 +30,35 @@ app.get('/apis', (req, res) => {
     res.status(200).send("<p>Welcome to NutriChief APIs</p>");
 });
 
+app.use(function (req, res) {
+    res.status(404);
+
+    if (req.accepts('html')) {
+        res.set('Content-Type', 'text/html');
+        res.status(404).send(`
+            <!doctype html>
+            <html lang="en">
+            <head>
+                <meta charset="utf-8">
+                <title>NutriChief</title>
+                <meta name="description" content="Description Goes Here">
+            </head>
+            <body>
+                <p>Not Found! Please check your url.</p>
+            </body>
+            </html>
+        `);
+        return;
+    }
+
+    // respond with json
+    if (req.accepts('json')) {
+        res.json({ status: 0, message: "API not found!", data: [] });
+        return;
+    }
+
+});
+
 const PORT = process.env.PORT || 8001;
 app.listen(PORT, (error) => {
     if (!error) {
