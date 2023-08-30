@@ -114,7 +114,11 @@ class Instructions : AppCompatActivity() {
 
     private fun updateButtonVisibility() {
         previousButton.visibility = if (currentPage == 1) View.GONE else View.VISIBLE
-        nextButton.visibility = if (currentPage == totalPages) View.GONE else View.VISIBLE
+        if (currentPage == totalPages) {
+            nextButton.text = "Finish"
+            nextButton.setOnClickListener { finish() }
+        }
+        else View.VISIBLE
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {
