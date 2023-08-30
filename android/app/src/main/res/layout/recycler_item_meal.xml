@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_circle_checkbox"
             android:layout_weight="1"
-            android:text="Meal Type" />
+            android:text="Meal Type"
+            android:textSize="14dp"
+            android:textStyle="bold"/>
 
 <!--        <TextView-->
 <!--            android:id="@+id/text_meal_type"-->

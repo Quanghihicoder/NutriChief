@@ -1,7 +1,9 @@
 package com.example.nutrichief
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.model.Food
 import com.example.nutrichief.model.Meal
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONObject
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
+import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,11 +38,18 @@ private const val ARG_MEAL_LIST = "meal_list"
  * Use the [MealPlanFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MealPlanFragment : Fragment() {
+class MealPlanFragment : Fragment(), RecyclerMealAdapter.onMealCheckedChange {
     // TODO: Rename and change types of parameters
     private var mealList = mutableListOf<Meal>()
     private lateinit var recyclerViewMeal: RecyclerView
     private var date = LocalDate.now()
+    private var mealPrefCalo: Float = 0.0f
+    private var numOfMealChecked = 0
+
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        .build()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -51,8 +72,23 @@ class MealPlanFragment : Fragment() {
         val layoutSuggestedMealPlan =
             view.findViewById<FrameLayout>(R.id.layout_suggested_meal_plan)
         val textViewDate = view.findViewById<TextView>(R.id.text_view_date)
-        val imageViewMealPlanActions = view.findViewById<ImageView>(R.id.image_view_meal_plan_actions)
+        val imageViewMealPlanActions =
+            view.findViewById<ImageView>(R.id.image_view_meal_plan_actions)
         textViewDate.text = DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)
+
+        val progressBarCalories = view.findViewById<ProgressBar>(R.id.prog_bar_calories)
+        progressBarCalories.progress = 0
+
+        val textDailyRecommendedCarb = view.findViewById<TextView>(R.id.text_daily_recommended_carb)
+        val textDailyRecommendedFat = view.findViewById<TextView>(R.id.text_daily_recommended_fat)
+        val textDailyRecommendedProtein =
+            view.findViewById<TextView>(R.id.text_daily_recommended_protein)
+        val textDailyRecommendedCalo = view.findViewById<TextView>(R.id.text_daily_recommended_calo)
+
+        recyclerViewMeal = view.findViewById(R.id.recycler_view_meal)
+        recyclerViewMeal.adapter = RecyclerMealAdapter(mealList, this)
+        recyclerViewMeal.layoutManager = LinearLayoutManager(activity)
+
 
         val imageViewBackward = view.findViewById<ImageView>(R.id.image_view_backward)
         val imageViewForward = view.findViewById<ImageView>(R.id.image_view_forward)
@@ -67,63 +103,28 @@ class MealPlanFragment : Fragment() {
             textViewDate.text = DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)
         }
 
-//        ArrayAdapter.createFromResource(
-//            this.context!!, R.array.spinner_meal_plan_actions,
-//            android.R.layout.simple_spinner_item
-//        ).also { adapter ->
-//            // Specify the layout to use when the list of choices appears
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//            // Apply the adapter to the spinner
-//            spinnerMealPlanActions.adapter = adapter }
         imageViewMealPlanActions.setOnClickListener {
             val popUpMenu = PopupMenu(requireContext(), it)
             val menuInflater = popUpMenu.menuInflater
             menuInflater.inflate(R.menu.meal_plan_action_menu, popUpMenu.menu)
-
-//            popupMenu.setOnMenuItemClickListener { item ->
-//                when (item.getItemId()) {
-//                    R.id.menu_item_option1 ->                 // Handle option 1 click
-//                        return@setOnMenuItemClickListener true
-//                    R.id.menu_item_option2 ->                 // Handle option 2 click
-//                        return@setOnMenuItemClickListener true
-//                    else -> return@setOnMenuItemClickListener false
-//                }
-//            }
-
             popUpMenu.show()
         }
 
         textViewGeneratePlan.setOnClickListener {
-            val breakfastFoods = mutableListOf(
-                Food(1, "Banh Mi", "good", 0, 10),
-                Food(2, "Milk", "good", 0, 0)
-            )
+            mealPrefCalo = 2000.0f
+            getGeneratedMealPlan(
+                2,
+                DateTimeFormatter.ofPattern("yy-MM-dd").format(date)
+            ) { generatedMeals ->
+                textDailyRecommendedCarb.text = "250g"
+                textDailyRecommendedProtein.text = "150g"
+                textDailyRecommendedFat.text = "80g"
 
-            val lunchFoods = mutableListOf(
-                Food(3, "Rice", "good", 30, 5),
-                Food(4, "Beer", "good", 0, 0),
-                Food(5, "Stir Fry Chicken", "good", 15, 15)
-            )
-
-            val dinnerFoods = mutableListOf(
-                Food(3, "Rice", "good", 30, 5),
-                Food(6, "Beef Steak", "good", 15, 15)
-            )
-            val mealList = mutableListOf(
-                Meal(mealType = "breakfast", foodList = breakfastFoods),
-                Meal(mealType = "lunch", foodList = lunchFoods),
-                Meal(mealType = "dinner", foodList = dinnerFoods)
-            )
-            this.mealList = mealList
-            println(this.mealList)
-            layoutMealPlanOptions.visibility = View.GONE
-            layoutSuggestedMealPlan.visibility = View.VISIBLE
-//            parentFragmentManager.beginTransaction().detach(this).attach(this).commit()
-            recyclerViewMeal.adapter = RecyclerMealAdapter(this.mealList)
+                layoutMealPlanOptions.visibility = View.GONE
+                layoutSuggestedMealPlan.visibility = View.VISIBLE
+                recyclerViewMeal.adapter = RecyclerMealAdapter(generatedMeals as MutableList, this)
+            }
         }
-        recyclerViewMeal = view.findViewById(R.id.recycler_view_meal)
-        recyclerViewMeal.adapter = RecyclerMealAdapter(mealList)
-        recyclerViewMeal.layoutManager = LinearLayoutManager(activity)
         return view
     }
 
@@ -139,16 +140,160 @@ class MealPlanFragment : Fragment() {
         }
     }
 
+    // implement onMealCheckInterface
+    @SuppressLint("SetTextI18n")
+    override fun onMealCheckChange(meal: Meal, mealCheck: Int) {
+
+//        else {
+//            println("Meal ${meal.mealType} is unmarked")
+//        }
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                if (mealCheck == 1) {
+                    println("Meal ${meal.mealType} is marked as consumed")
+                    println("Meal ${meal.mealType} food: ${meal.foodList}")
+
+                    val requestBody = JSONObject()
+
+                    requestBody.put("user_id", 2)
+                    requestBody.put("meal_date", date)
+                    requestBody.put("meal_checked", mealCheck)
+
+                    val request = Request.Builder()
+                        .url("http://10.0.2.2:8001/apis/meal/update")
+                        .post(
+                            requestBody.toString()
+                                .toRequestBody("application/json".toMediaTypeOrNull())
+                        )
+                        .build()
+
+                    val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
+
+                    if (!response.isSuccessful) {
+                        throw IOException("Cannot get suggested meal")
+                    }
+
+                    val responseBody = response.body?.string()
+                    val resultJson = JSONObject(responseBody ?: "")
+                    val status = resultJson.optInt("status", 0)
+
+                    if (status == 1) {
+                        val randomIncrementStart = 100 / mealList.size - 5
+                        val randomIncrementEnd = 100 / mealList.size + 5
+
+                        view?.let {
+                            val progressBarCarb = it.findViewById<ProgressBar>(R.id.prog_bar_carb)
+                            val progressBarProtein = it.findViewById<ProgressBar>(R.id.prog_bar_protein)
+                            val progressBarFat = it.findViewById<ProgressBar>(R.id.prog_bar_fat)
+                            val progressBarCalories = it.findViewById<ProgressBar>(R.id.prog_bar_calories)
+
+                            val textViewCarb = it.findViewById<TextView>(R.id.text_progress_carb)
+                            val textViewProtein = it.findViewById<TextView>(R.id.text_progress_protein)
+                            val textViewFat = it.findViewById<TextView>(R.id.text_progress_fat)
+                            val textViewCalories = it.findViewById<TextView>(R.id.text_progress_calories)
+
+                            println("Mealist size is: ${mealList.size}")
+                            if (mealList.size - numOfMealChecked == 1) {
+                                progressBarCarb.progress = 100
+                                progressBarProtein.progress = 100
+                                progressBarFat.progress = 100
+                                progressBarCalories.progress = 100
+
+                                textViewCarb.text = "100%"
+                                textViewProtein.text = "100%"
+                                textViewFat.text = "100%"
+                                textViewCalories.text = "100%"
+                            } else {
+                                println("Random value: ${(Random.nextFloat() * (randomIncrementEnd - randomIncrementStart) + randomIncrementStart).toInt()}")
+                                progressBarCarb.progress += (Random.nextFloat() * (randomIncrementEnd - randomIncrementStart) + randomIncrementStart).toInt()
+                                progressBarProtein.progress += (Random.nextFloat() * (randomIncrementEnd - randomIncrementStart) + randomIncrementStart).toInt()
+                                progressBarFat.progress += (Random.nextFloat() * (randomIncrementEnd - randomIncrementStart) + randomIncrementStart).toInt()
+                                progressBarCalories.progress += (Random.nextFloat() * (randomIncrementEnd - randomIncrementStart) + randomIncrementStart).toInt()
+
+                                textViewCarb.text = "${progressBarCarb.progress}%"
+                                textViewProtein.text = "${progressBarProtein.progress}%"
+                                textViewFat.text = "${progressBarFat.progress}%"
+                                textViewCalories.text = "${progressBarCalories.progress}%"
+                            }
+                            numOfMealChecked++
+                            println("Number of meal checked: ${numOfMealChecked}")
+                        }
+                    }
+                }
+
+            } catch (e: Exception) {
+                // Handle the error here
+                Log.e("RecipeDetail", "Failed to retrieve food: ${e.message}")
+            }
+        }
+    }
+
+    private fun getGeneratedMealPlan(
+        userId: Int,
+        mealDate: String,
+        resultHandleFunction: (List<Meal>?) -> Unit
+    ) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val requestBody = JSONObject()
+
+                requestBody.put("user_id", userId)
+                requestBody.put("meal_date", mealDate)
+
+                val request = Request.Builder()
+                    .url("http://10.0.2.2:8001/apis/meal/create")
+                    .post(
+                        requestBody.toString()
+                            .toRequestBody("application/json".toMediaTypeOrNull())
+                    )
+                    .build()
+
+                val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
+
+                if (!response.isSuccessful) {
+                    throw IOException("Cannot get suggested meal")
+                }
+
+                val responseBody = response.body?.string()
+                val resultJson = JSONObject(responseBody ?: "")
+                val status = resultJson.optInt("status", 0)
+
+                if (status == 1) {
+                    val mealJson = resultJson.optJSONArray("data")
+                    for (i in 0 until mealJson?.length() as Int) {
+                        val foodJson = mealJson.getJSONObject(i)
+                        val foodList = listOf(
+                            Food(
+                                foodJson.optInt("food_id"),
+                                foodJson.optString("food_name", ""),
+                                foodJson.optString("food_desc", ""),
+                                foodJson.optInt("food_ctime"),
+                                foodJson.optInt("food_ptime"),
+                                foodJson.optDouble("food_price").toFloat(),
+                                foodJson.optDouble("food_calories").toFloat(),
+                                foodJson.optDouble("food_carb").toFloat(),
+                                foodJson.optDouble("food_fat").toFloat(),
+                                foodJson.optDouble("food_protein").toFloat()
+                            )
+                        )
+                        mealList.add(Meal("Meal ${i + 1}", foodList))
+                    }
+                    resultHandleFunction(mealList)
+                } else {
+                    resultHandleFunction(null)
+                }
+
+            } catch (e: Exception) {
+                // Handle the error here
+                resultHandleFunction(null)
+                Log.e("RecipeDetail", "Failed to retrieve food: ${e.message}")
+            }
+        }
+    }
+
+
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MealPlanFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(mealList: ArrayList<Meal>) =
             MealPlanFragment().apply {
@@ -157,4 +302,6 @@ class MealPlanFragment : Fragment() {
                 }
             }
     }
+
+
 }
