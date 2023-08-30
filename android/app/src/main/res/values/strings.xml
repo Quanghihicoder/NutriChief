@@ -31,6 +31,9 @@
         <item>Very active</item>
         <item>Super active</item>
     </string-array>
+    <string-array name="spinner_meal_plan_actions">
+        <item>Regenerate today meal plan</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ingredient_name">Ingredient Name</string>

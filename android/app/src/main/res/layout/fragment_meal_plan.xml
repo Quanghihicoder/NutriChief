@@ -51,12 +51,54 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/image_view_meal_plan_actions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more_horiz" />
+<!--        <Spinner-->
+<!--            android:id="@+id/spinner_meal_plan_actions"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:spinnerMode="dropdown"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="SpeakableTextPresentCheck">-->
+
+<!--        </Spinner>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/image_view_backward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_backward">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/text_view_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            >
+        </TextView>
+
+        <ImageView
+            android:id="@+id/image_view_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_forward">
+        </ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_meal_plan_options"
@@ -96,7 +138,7 @@
         android:id="@+id/layout_suggested_meal_plan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -121,10 +163,10 @@
                     android:layout_marginBottom="5dp"
                     >
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="">
+                        android:layout_height="wrap_content">
 
                         <!-- Carb progress widget -->
                         <androidx.constraintlayout.widget.ConstraintLayout
