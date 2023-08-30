@@ -22,7 +22,7 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {
-        fun onFoodClick(item: MenuItem)
+//        fun onFoodClick(item: MenuItem)
         fun onPlusBtnClick(item: MenuItem)
         fun onMinusBtnClick(item: MenuItem)
     }
@@ -41,7 +41,7 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
         holder.itemPrice.text = "$" + food.food_price.toString()
 
         holder.itemView.setOnClickListener{
-            listener.onFoodClick(food)
+//            listener.onFoodClick(food)
         }
 
         holder.itemPlus.setOnClickListener {

@@ -68,5 +68,7 @@
     <string name="payment_method">Payment Method</string>
     <string name="pay_securely">Pay Securely</string>
     <string name="confirm_payment">Confirm Payment</string>
+    <string name="seems_like_you_have_not_ordered_anything">Seems like you have not ordered anything</string>
+    <string name="my_orders">My Orders</string>
 
 </resources>

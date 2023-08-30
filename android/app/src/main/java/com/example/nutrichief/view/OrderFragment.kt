@@ -93,9 +93,9 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
         return view
     }
 
-    override fun onFoodClick(item: MenuItem) {
-        TODO("Not yet implemented")
-    }
+//    override fun onFoodClick(item: MenuItem) {
+//        TODO("Not yet implemented")
+//    }
 
     override fun onPlusBtnClick(item: MenuItem) {
         item.food_quantity += 1
