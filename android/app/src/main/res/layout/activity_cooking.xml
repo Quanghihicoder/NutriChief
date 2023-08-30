@@ -33,7 +33,7 @@
         app:tint="@android:color/black" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +166,6 @@
 
 
         </androidx.core.widget.NestedScrollView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

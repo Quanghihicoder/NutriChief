@@ -155,6 +155,9 @@ class RegisterActivity : AppCompatActivity() {
                                 Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT)
                                     .show()
                                 val loginIntent = Intent(this@RegisterActivity, MainActivity::class.java)
+                                val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                                val editor = sharedPrefs.edit()
+                                editor.putString("user_name", fullName)
                                 startActivity(loginIntent)
                                 finish()
                             } else {
