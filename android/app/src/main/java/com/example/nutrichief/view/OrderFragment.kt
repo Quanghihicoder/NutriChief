@@ -48,7 +48,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
     private lateinit var foodAdapter: FoodOrderAdapter
     private lateinit var allDishes: List<MenuItem>
     private lateinit var cartRepository: CartRepository
-
+    private var num: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +69,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
 
         // Initialize the cart repository
         cartRepository = CartRepository(requireContext())
+        cartRepository.clearCartTable()
         orderRecyclerView = view.findViewById(R.id.order_recycler_view)
         orderRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -120,7 +121,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
 
         Log.i("quantity: ", item.food_quantity.toString())
         Log.i("cart: ", cartItem.toString())
-
+        num = item.food_quantity
     }
 
     //minus button handler
@@ -148,6 +149,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
                 }
                 Log.i("quantity: ", item.food_quantity.toString())
                 Log.i("cart: ", cartItem.toString())
+                num = item.food_quantity
             }
         }
     }
@@ -212,7 +214,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
                             jsonFood.getInt("food_ptime"),
                             jsonFood.getString("food_img"),
                             jsonFood.getDouble("food_price").toFloat(),
-//                            food_quantity = 1
+//                            num
                         )
                         food.add(foodItem)
                     }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Food
 import com.example.nutrichief.datamodels.MenuItem
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,13 +29,13 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.recycler_item_food, parent, false,) as View
+        val view = layoutInflater.inflate(R.layout.recycler_item_food_order, parent, false,) as View
         return FoodItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
         val food = foodList[position]
-        holder.imageItemFood.setImageResource(R.drawable.ramen)
+        Picasso.get().load(food.food_img).into(holder.imageItemFood)
         holder.textItemFoodName.text = food.food_name
         holder.textItemFoodShortDesc.text = food.food_desc
         holder.itemPrice.text = "$" + food.food_price.toString()
