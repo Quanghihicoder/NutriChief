@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.MainActivity
@@ -56,7 +56,7 @@ class CommunityFragment : Fragment() {
         communityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // Initialize adapters
-        communityAdapter = CommunityPostAdapter(mutableListOf())
+        communityAdapter = CommunityPostAdapter(mutableListOf(), )
 
         val posts = mutableListOf(
             CommunityPost(1, "Banh Mi", "good", "Chi Pham", 10, 0),
@@ -66,12 +66,9 @@ class CommunityFragment : Fragment() {
         communityAdapter = CommunityPostAdapter(posts)
         communityRecyclerView.adapter = communityAdapter
 
+
+
         addPostBtn.setOnClickListener {
-//            startActivity(Intent(activity, MainActivity::class.java))
-//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragment_community, PostAddingFragment())
-//            transaction.addToBackStack(null)
-//            transaction.commit()
             val bottomDialog = PostAddingFragment()
             bottomDialog.show(requireActivity().supportFragmentManager, null)
         }

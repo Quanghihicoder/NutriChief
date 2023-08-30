@@ -64,7 +64,6 @@
                 android:text="Ramen"
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:layout_marginBottom="8dp"
                 android:textAlignment="center"/>
 
             <LinearLayout

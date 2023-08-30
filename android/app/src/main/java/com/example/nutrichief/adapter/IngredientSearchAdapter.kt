@@ -1,7 +1,6 @@
 package com.example.nutrichief.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Ingredient
-import com.example.nutrichief.datamodels.RecipeIngredient
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -73,7 +71,7 @@ class IngredientSearchAdapter (
     // Create view holder for recycler view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.ingredient_item, parent, false) as View
+        val view = layoutInflater.inflate(R.layout.recycler_item_ingredient, parent, false) as View
         return IngredientViewHolder(view)
     }
 

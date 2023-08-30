@@ -49,6 +49,7 @@
             android:id="@+id/post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="Post title"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -60,14 +61,22 @@
             android:layout_height="100dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:padding="5dp"
             android:text="Post detail"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:transitionName="itemDescTransition" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:background="@color/purple_theme_color"
+            android:layout_height="1dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingVertical="5dp">
 
             <ImageView
                 android:id="@+id/post_like"
@@ -79,9 +88,11 @@
             <TextView
                 android:id="@+id/post_like_number"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 android:layout_weight="1"
-                android:text="100" />
+                android:gravity="center"
+                android:text="100"
+                android:textColor="@color/purple_theme_color" />
 
             <ImageView
                 android:id="@+id/post_dislike"
@@ -91,8 +102,17 @@
                 android:rotation="180"
                 app:srcCompat="@drawable/ic_like_custom" />
 
+            <TextView
+                android:id="@+id/post_dislike_number"
+                android:layout_width="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="100"
+                android:textColor="@color/purple_theme_color" />
+
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/post_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -113,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_more_horiz_custom"
-                app:tint="@color/purple_theme_color"/>
+                app:tint="@color/purple_theme_color" />
         </LinearLayout>
 
     </LinearLayout>

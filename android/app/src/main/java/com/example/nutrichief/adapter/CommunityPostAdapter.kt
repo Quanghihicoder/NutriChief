@@ -1,5 +1,6 @@
 package com.example.nutrichief.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,15 +8,18 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.CommunityPost
+import com.example.nutrichief.view.PostDetailActivity
 
 class CommunityPostAdapter (private var postList: MutableList<CommunityPost>,
-//                            private val listener: AdapterView.OnItemClickListener
+                         private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<CommunityPostAdapter.PostItemViewHolder>(), Filterable {
-    private var communityPostList = ArrayList<CommunityPost>(postList)
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {
-        fun onFoodClick(item: CommunityPost)
+        fun onFoodClick(post: CommunityPost)
+        fun onLikeClick(post: CommunityPost)
+        fun onDislikeClick(post: CommunityPost)
+        fun onCommentClick(post: CommunityPost)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityPostAdapter.PostItemViewHolder {
@@ -34,6 +38,18 @@ class CommunityPostAdapter (private var postList: MutableList<CommunityPost>,
         holder.itemView.setOnClickListener{
 //            listener.onFoodClick(food)
         }
+
+        holder.likeBtn.setOnClickListener{
+
+        }
+
+        holder.dislikeBtn.setOnClickListener{
+
+        }
+
+        holder.commentBtn.setOnClickListener{
+            listener.onCommentClick(post)
+        }
     }
 
     override fun getItemCount(): Int = postList.size
@@ -43,6 +59,9 @@ class CommunityPostAdapter (private var postList: MutableList<CommunityPost>,
         val postTitle: TextView = itemView.findViewById(R.id.post_title)
         val postDesc: TextView = itemView.findViewById(R.id.post_desc)
         val postLike: TextView = itemView.findViewById(R.id.post_like_number)
+        val likeBtn: ImageView = itemView.findViewById(R.id.post_like)
+        val dislikeBtn: ImageView = itemView.findViewById(R.id.post_dislike)
+        val commentBtn: ImageView = itemView.findViewById(R.id.post_comment)
     }
 
     override fun getFilter(): Filter {
