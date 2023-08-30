@@ -316,10 +316,6 @@ VALUES
 ("Pumpkin Soup", "A fall favorite featuring pumpkin, onion, garlic, nutmeg, cinnamon, vegetable broth, and a touch of cream.", 40, 25, 3),
 ("Creamy Spinach and Parmesan Soup", "A velvety spinach soup with sautéed onion, garlic, Parmesan cheese, vegetable broth, and a luxurious creaminess.", 35, 20, 3),
 ("Creamy Broccoli Cheddar Soup", "A comforting soup combining broccoli florets, cheddar cheese, onion, garlic, vegetable broth, and a creamy finish.", 40, 25, 3),
-("Crab Soup (Gejang)", "A Korean specialty soup featuring crab, soy sauce, chili paste, garlic, ginger, rice wine, and a sprinkling of sesame seeds.", 45, 30, 3),
-("Canh Bap Cai", "A Vietnamese cabbage soup made with cabbage, ground meat, and mushrooms for a simple and satisfying dish.", 30, 20, 3),
-("Canh Chua", "A tangy Vietnamese sour soup with fish or shrimp, pineapple, tomato, okra, and tamarind for a burst of flavor.", 35, 25, 3),
-("Sup Mang Cua", "A crab and asparagus soup featuring crab meat, fresh asparagus, and delicate quail eggs for an elegant touch.", 40, 30, 3),
 -- Main courses
 ("Ginseng Chicken Soup", "A nourishing chicken soup with tender chicken, sticky rice, ginseng, garlic, jujubes, and a hint of ginger, served with ginseng tea.", 45, 30, 4),
 ("Creamy Mushroom Risotto", "Creamy risotto made with Arborio rice, mushrooms, and Parmesan cheese.", 25, 20, 4),
