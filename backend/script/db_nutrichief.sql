@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS `recipe` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `meal` (
-    meal_id INT(11) NOT NULL AUTO_INCREMENT,
     user_id INT(11) NOT NULL,
-    meal_food VARCHAR(255) NOT NULL,
+    food_id INT(11) NOT NULL,
     meal_date DATE NOT NULL,
-    meal_type VARCHAR(255) NOT NULL,
+    meal_checked INT (1) NOT NULL, -- 0 - false; 1 - true 
 
-    PRIMARY KEY (meal_id, user_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
+    PRIMARY KEY (user_id, food_id, meal_date),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (food_id) REFERENCES food(food_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `otp` (
