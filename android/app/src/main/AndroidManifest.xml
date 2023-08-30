@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PostDetailActivity"
+            android:name=".view.PostDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -67,13 +67,6 @@
         </activity>
         <activity
             android:name=".view.UserProfileActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.OtpVerifyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

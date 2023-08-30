@@ -27,10 +27,12 @@ class PostDetailActivity : AppCompatActivity() {
 
         postCommentRecyclerView = findViewById(R.id.comments_recycler_view)
 
+        val postId = intent.getIntExtra("post_id", 1)
+
         val dummy = mutableListOf<PostComment>(
-            PostComment(1, 1, 1, "Comment 1"),
-            PostComment(1, 2, 1, "Comment 2"),
-            PostComment(1, 3, 1, "Comment 3")
+            PostComment(postId, 1, 1, "Comment 1"),
+            PostComment(postId, 2, 1, "Comment 2"),
+            PostComment(postId, 3, 1, "Comment 3")
         )
 
         adapter = PostCommentAdapter(dummy)

@@ -108,7 +108,9 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
     }
 
     override fun onCommentClick(post: CommunityPost) {
-
+        val intent = Intent (activity, PostDetailActivity::class.java)
+        intent.putExtra("post_id", 1)
+        startActivity(intent)
     }
 
 
