@@ -229,7 +229,7 @@ class SearchFragment : Fragment(), RecyclerFoodAdapter.OnItemClickListener {
     }
 
     override fun onFoodClick(item: Food) {
-        val searchIntent = Intent(activity, RecipeDetail::class.java)
+        val searchIntent = Intent(activity, RecipeDetailActivity::class.java)
         searchIntent.putExtra("food_id", item.food_id)
         startActivity(searchIntent)
     }

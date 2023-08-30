@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.RecipeDetail">
+    tools:context=".view.RecipeDetailActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,7 +63,8 @@
                 android:text="Ramen"
                 android:textColor="@color/black"
                 android:textSize="26sp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

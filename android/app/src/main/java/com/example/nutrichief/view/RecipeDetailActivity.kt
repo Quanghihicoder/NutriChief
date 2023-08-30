@@ -1,9 +1,11 @@
 package com.example.nutrichief.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +25,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.io.IOException
 
-class RecipeDetail : AppCompatActivity() {
+class RecipeDetailActivity : AppCompatActivity() {
     private lateinit var ingredientRecyclerView: RecyclerView
     private lateinit var adapter: IngredientAdapter
 
@@ -61,7 +63,7 @@ class RecipeDetail : AppCompatActivity() {
             recipeIngredients?.let {
                 runOnUiThread {
                     adapter = IngredientAdapter(it as MutableList<RecipeIngredient>)
-                    ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetail)
+                    ingredientRecyclerView.layoutManager = LinearLayoutManager(this@RecipeDetailActivity)
                     ingredientRecyclerView.adapter = adapter
 
                     kcalTV.text = recipeCalories.toString() + " kcal"
@@ -94,6 +96,14 @@ class RecipeDetail : AppCompatActivity() {
                 Log.e("RecipeDetail", "Failed to retrieve food")
             }
         }
+
+        val startCookingButton = findViewById<Button>(R.id.startCookingButton)
+        startCookingButton.setOnClickListener {
+            val intent = Intent(this, InstructionsActivity::class.java)
+            intent.putExtra("food_id", foodId)
+            startActivity(intent)
+        }
+
     }
 
     private fun getRecipeData(foodId: Int, callback: (List<RecipeIngredient>?) -> Unit) {
@@ -161,8 +171,6 @@ class RecipeDetail : AppCompatActivity() {
     private fun getFoodData(foodId: Int, callback: (List<Food>?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
-                val requestBody = JSONObject()
-
                 val request = Request.Builder()
                     .url("http://10.0.2.2:8001/apis/food/$foodId")
                     .get()
@@ -205,5 +213,5 @@ class RecipeDetail : AppCompatActivity() {
         }
     }
 
-    fun goBack(view: View) { onBackPressed() }
+    fun goBack(view: View) { onBackPressedDispatcher.onBackPressed() }
 }
