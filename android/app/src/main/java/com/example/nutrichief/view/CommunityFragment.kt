@@ -1,6 +1,7 @@
 package com.example.nutrichief.view
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nutrichief.MainActivity
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.CommunityPostAdapter
-import com.example.nutrichief.adapter.RecyclerFoodAdapter
 import com.example.nutrichief.datamodels.CommunityPost
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -68,7 +68,6 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
         communityRecyclerView.adapter = communityAdapter
 
 
-
         addPostBtn.setOnClickListener {
             val bottomDialog = PostAddingFragment()
             bottomDialog.show(requireActivity().supportFragmentManager, null)
@@ -99,13 +98,6 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
             }
     }
 
-    override fun onLikeClick(post: CommunityPost) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onDislikeClick(post: CommunityPost) {
-        TODO("Not yet implemented")
-    }
 
     override fun onCommentClick(post: CommunityPost) {
         val intent = Intent (activity, PostDetailActivity::class.java)

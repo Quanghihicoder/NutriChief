@@ -62,7 +62,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/post_title"
+                android:id="@+id/post_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Post title"
@@ -71,7 +71,7 @@
                 android:transitionName="itemNameTransition" />
 
             <TextView
-                android:id="@+id/post_desc"
+                android:id="@+id/post_detail_desc"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:ellipsize="end"
@@ -93,14 +93,14 @@
                 android:paddingVertical="5dp">
 
                 <ImageView
-                    android:id="@+id/post_like"
+                    android:id="@+id/post_detail_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_like_custom" />
 
                 <TextView
-                    android:id="@+id/post_like_number"
+                    android:id="@+id/post_detail_like_number"
                     android:layout_width="wrap_content"
                     android:layout_height="31dp"
                     android:layout_weight="1"
@@ -109,7 +109,7 @@
                     android:textColor="@color/purple_theme_color" />
 
                 <ImageView
-                    android:id="@+id/post_dislike"
+                    android:id="@+id/post_detail_dislike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -117,7 +117,7 @@
                     app:srcCompat="@drawable/ic_like_custom" />
 
                 <TextView
-                    android:id="@+id/post_dislike_number"
+                    android:id="@+id/post_detail_dislike_number"
                     android:layout_width="wrap_content"
                     android:layout_height="31dp"
                     android:layout_weight="1"
