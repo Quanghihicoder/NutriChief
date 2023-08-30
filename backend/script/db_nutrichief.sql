@@ -823,4 +823,3 @@ VALUES
 -- ("Peach Iced Tea", ""): Peach, Black Tea, Sugar, Ice
 -- ("Lemon Limeade", ""): Lemon, Lime, Sugar, Water, Ice
 -- ("Coca-Cola","")
-
