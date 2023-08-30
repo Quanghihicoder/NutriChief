@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_fat FLOAT(8,1) NOT NULL, -- grams
     ingre_protein FLOAT(8,1) NOT NULL, -- grams
     ingre_carb FLOAT(8,1) NOT NULL, -- grams
-    ingre_img VARCHAR(255) NOT NULL,
+    ingre_img VARCHAR(1000) NOT NULL,
 
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `media` (
 CREATE TABLE IF NOT EXISTS `recipe` (
     food_id INT(11) NOT NULL,
     ingre_id INT(11) NOT NULL,
-    media_id INT(11),
+    media_url VARCHAR(1000) NOT NULL,
     recipe_qty FLOAT(11,1), -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
@@ -328,7 +328,7 @@ VALUES
 ("Bacon Wrapped Asparagus", "Asparagus wrapped in bacon, seasoned and roasted.", 20, 15, 4);
 
 
-INSERT INTO `recipe` (food_id, ingre_id, media_id, recipe_qty, recipe_desc, recipe_title)
+INSERT INTO `recipe` (food_id, ingre_id, media_url, recipe_qty, recipe_desc, recipe_title)
 VALUES
 (1,3, NULL, 200, "Cut the ripe avocado in half, remove the pit, and scoop out the flesh into a bowl. Use a fork to mash the avocado until it reaches your desired consistency.", "1 ripe avocado"),
 (1,113, NULL, 200, "Toast the bread.", "2 slices of bread"),

@@ -184,3 +184,130 @@ class InstructionsActivity : AppCompatActivity() {
     }
 }
 
+// LOOP STEPS CIRCLES
+//override fun onCreate(savedInstanceState: Bundle?) {
+//    super.onCreate(savedInstanceState)
+//    setContentView(R.layout.activity_layout)
+//
+//    val buttonContainer: LinearLayout = findViewById(R.id.buttonContainer)
+//
+//    // Replace this with your actual logic to retrieve the number from the database
+//    val numberOfButtonsFromDatabase = retrieveNumberOfButtonsFromDatabase()
+//
+//    for (i in 0 until numberOfButtonsFromDatabase) {
+//        val button = Button(this)
+//        button.text = "Button ${i + 1}"
+//        button.setOnClickListener {
+//            // Handle button click here
+//        }
+//        buttonContainer.addView(button)
+//    }
+//}
+
+
+// FULLSCREEN
+// create layout
+//<?xml version="1.0" encoding="utf-8"?>
+//<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//xmlns:app="http://schemas.android.com/apk/res-auto"
+//xmlns:tools="http://schemas.android.com/tools"
+//android:layout_width="match_parent"
+//android:layout_height="match_parent"
+//tools:context=".FullscreenActivity">
+//
+//<VideoView
+//android:id="@+id/fullscreenVideoView"
+//android:layout_width="match_parent"
+//android:layout_height="match_parent" />
+//
+//<!-- You can add any other UI elements here, such as close button or title bar -->
+//
+//</RelativeLayout>
+
+// NEW ACTIVITY
+//import android.net.Uri
+//import android.os.Bundle
+//import android.widget.MediaController
+//import android.widget.VideoView
+//import androidx.appcompat.app.AppCompatActivity
+//
+//class FullscreenActivity : AppCompatActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_fullscreen)
+//
+//        val videoView = findViewById<VideoView>(R.id.fullscreenVideoView)
+//        val videoUrl = intent.getStringExtra("videoUrl")
+//
+//        val mediaController = MediaController(this)
+//        mediaController.setAnchorView(videoView)
+//        videoView.setMediaController(mediaController)
+//        videoView.setVideoURI(Uri.parse(videoUrl))
+//        videoView.start()
+//    }
+//}
+
+// modify current
+//val videoView = findViewById<VideoView>(R.id.videoView)
+//val videoUrl = "https://www.example.com/path/to/your/video.mp4"
+//
+//videoView.setOnClickListener {
+//    val intent = Intent(this, FullscreenActivity::class.java)
+//    intent.putExtra("videoUrl", videoUrl)
+//    startActivity(intent)
+//}
+
+// CLOSE BUTTON
+// modify full screen.xml
+//<?xml version="1.0" encoding="utf-8"?>
+//<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+//xmlns:app="http://schemas.android.com/apk/res-auto"
+//xmlns:tools="http://schemas.android.com/tools"
+//android:layout_width="match_parent"
+//android:layout_height="match_parent"
+//tools:context=".FullscreenActivity">
+//
+//<VideoView
+//android:id="@+id/fullscreenVideoView"
+//android:layout_width="match_parent"
+//android:layout_height="match_parent" />
+//
+//<ImageButton
+//android:id="@+id/closeButton"
+//android:layout_width="wrap_content"
+//android:layout_height="wrap_content"
+//android:layout_alignParentEnd="true"
+//android:layout_margin="16dp"
+//android:background="?android:attr/selectableItemBackgroundBorderless"
+//android:src="@drawable/ic_close" />
+//
+//</RelativeLayout>
+
+// modify activity
+//import android.net.Uri
+//import android.os.Bundle
+//import android.widget.ImageButton
+//import android.widget.MediaController
+//import android.widget.VideoView
+//import androidx.appcompat.app.AppCompatActivity
+//
+//class FullscreenActivity : AppCompatActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_fullscreen)
+//
+//        val videoView = findViewById<VideoView>(R.id.fullscreenVideoView)
+//        val closeButton = findViewById<ImageButton>(R.id.closeButton)
+//        val videoUrl = intent.getStringExtra("videoUrl")
+//
+//        closeButton.setOnClickListener {
+//            finish() // Close the activity when the close button is clicked
+//        }
+//
+//        val mediaController = MediaController(this)
+//        mediaController.setAnchorView(videoView)
+//        videoView.setMediaController(mediaController)
+//        videoView.setVideoURI(Uri.parse(videoUrl))
+//        videoView.start()
+//    }
+//}
