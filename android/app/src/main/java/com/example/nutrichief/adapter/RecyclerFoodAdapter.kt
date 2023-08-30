@@ -1,6 +1,5 @@
 package com.example.nutrichief.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,6 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Food
-import com.example.nutrichief.view.RecipeDetail
-import com.example.nutrichief.view.SearchFragment
 import java.util.*
 import kotlin.collections.ArrayList
 

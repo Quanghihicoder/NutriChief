@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.Instructions"
+            android:name=".view.InstructionsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -38,7 +38,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.RecipeDetail"
+            android:name=".view.RecipeDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
