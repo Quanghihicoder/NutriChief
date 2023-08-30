@@ -66,6 +66,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".view.OtpVerifyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true">
             <intent-filter>

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.example.nutrichief.MainActivity
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.User
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -153,7 +154,10 @@ class RegisterActivity : AppCompatActivity() {
                                 // Registration successful
                                 Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT)
                                     .show()
-                                val loginIntent = Intent(this@RegisterActivity, UserProfileActivity::class.java)
+                                val loginIntent = Intent(this@RegisterActivity, MainActivity::class.java)
+                                val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                                val editor = sharedPrefs.edit()
+                                editor.putString("user_name", fullName)
                                 startActivity(loginIntent)
                                 finish()
                             } else {

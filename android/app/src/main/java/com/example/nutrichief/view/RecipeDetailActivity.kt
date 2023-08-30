@@ -171,8 +171,6 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun getFoodData(foodId: Int, callback: (List<Food>?) -> Unit) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
-                val requestBody = JSONObject()
-
                 val request = Request.Builder()
                     .url("http://10.0.2.2:8001/apis/food/$foodId")
                     .get()

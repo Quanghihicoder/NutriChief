@@ -137,7 +137,7 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
-    fun bmiRate (bmi : Float) : String {
+    private fun bmiRate (bmi : Float) : String {
         if (bmi < 18.5 ) return  " Underweight"
         else if (bmi in 18.5..25.0) return " Healthy"
         else if (bmi in 25.0..30.0) return " Overweight"
