@@ -49,7 +49,7 @@
             android:id="@+id/post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="Post title"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -61,7 +61,7 @@
             android:layout_height="100dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="Post detail"
             android:textSize="14sp"
             android:transitionName="itemDescTransition" />

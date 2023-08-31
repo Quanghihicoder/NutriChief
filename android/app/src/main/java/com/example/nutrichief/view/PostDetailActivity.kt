@@ -30,9 +30,9 @@ class PostDetailActivity : AppCompatActivity() {
         val postId = intent.getIntExtra("post_id", 1)
 
         val dummy = mutableListOf<PostComment>(
-            PostComment(postId, 1, 1, "Comment 1"),
-            PostComment(postId, 2, 1, "Comment 2"),
-            PostComment(postId, 3, 1, "Comment 3")
+            PostComment(postId, 1, "Trang Le", "I agree"),
+            PostComment(postId, 2, "Chi Kim", "Add friend"),
+            PostComment(postId, 3, "Tri Luu", "Hello")
         )
 
         adapter = PostCommentAdapter(dummy)

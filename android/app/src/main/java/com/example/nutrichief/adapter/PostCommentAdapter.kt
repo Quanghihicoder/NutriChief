@@ -28,7 +28,7 @@ class PostCommentAdapter (private var commentList: MutableList<PostComment>)
 
     override fun onBindViewHolder(holder: CommentItemViewHolder, position: Int) {
         val comment = commentList[position]
-        holder.userName.text = ""
+        holder.userName.text = comment.user_name
         holder.postDetail.text = comment.comment_detail
     }
 }
