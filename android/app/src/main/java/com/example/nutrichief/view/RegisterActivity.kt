@@ -218,7 +218,7 @@ class RegisterActivity : AppCompatActivity() {
                 requestBodyCreateMealPref.put("user_id", customer.user_id)
                 requestBodyCreateMealPref.put("pref_calo", customer.user_tdee)
                 requestBodyCreateMealPref.put("pref_time", 60)
-                requestBodyCreateMealPref.put("pref_goal", 0)
+                requestBodyCreateMealPref.put("pref_goal", 1)
                 requestBodyCreateMealPref.put("pref_date_range", 1)
 
                 val requestCreateMealPref =
