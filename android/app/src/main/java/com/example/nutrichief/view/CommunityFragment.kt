@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.CommunityPostAdapter
+import com.example.nutrichief.adapter.CommunityRoomAdapter
 import com.example.nutrichief.adapter.ExpertAdapter
 import com.example.nutrichief.datamodels.CommunityPost
+import com.example.nutrichief.datamodels.CommunityRoom
 import com.example.nutrichief.datamodels.Expert
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -37,8 +39,10 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
     private var param2: String? = null
 
     private lateinit var communityRecyclerView: RecyclerView
+
     private lateinit var communityAdapter: CommunityPostAdapter
     private lateinit var expertAdapter: ExpertAdapter
+    private lateinit var communityRoomAdapter: CommunityRoomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +66,8 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
         val blogBtn = view.findViewById<Button>(R.id.button_blogs)
         val expertBtn = view.findViewById<Button>(R.id.button_expert_consultation)
 
+        var featureDesc: TextView = view.findViewById(R.id.community_feature_slogan)
+
         //set button colors
         roomsBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
         blogBtn.setBackgroundColor(Color.parseColor("#6173DF"))
@@ -69,9 +75,6 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
 
         communityRecyclerView = view.findViewById(R.id.community_recycler_view)
         communityRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        // Initialize adapters
-//        communityAdapter = CommunityPostAdapter(mutableListOf(), this)
 
         val posts = mutableListOf(
             CommunityPost(1, "Banh Mi", "good", "Chi Pham", 10, 0),
@@ -86,23 +89,42 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
             Expert(2, "Jack Wise", "Mental consulting expert"),
         )
 
+        val rooms = mutableListOf(
+            CommunityRoom(1, "Ramen Lovers", "For ramen enthusiasts around the world", "https://www.modernfarmhouseeats.com/wp-content/uploads/2021/03/chili-lime-shrimp-ramen-2-500x500.jpg", 613, 12),
+            CommunityRoom(2, "Food Art", "Eating is simple, Art is style", "https://nerdinstilettoscom.files.wordpress.com/2016/06/fullsizerender6.jpg", 532, 5),
+            CommunityRoom(3, "Vegans", "Veggies are besties", "https://images.everydayhealth.com/images/what-is-a-vegan-diet-benefits-food-list-beginners-guide-alt-1440x810.jpg", 324, 8),
+        )
+
         addPostBtn.setOnClickListener {
             val bottomDialog = PostAddingFragment()
             bottomDialog.show(requireActivity().supportFragmentManager, null)
         }
 
-        blogBtn.setOnClickListener{
+        blogBtn.setOnClickListener {
             blogBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            roomsBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
             expertBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
             communityAdapter = CommunityPostAdapter(posts, this)
             communityRecyclerView.adapter = communityAdapter
+            featureDesc.text = "Connect with others"
         }
 
-        expertBtn.setOnClickListener{
+        roomsBtn.setOnClickListener {
+            roomsBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            blogBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+            expertBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+            communityRoomAdapter = CommunityRoomAdapter(rooms)
+            communityRecyclerView.adapter = communityRoomAdapter
+            featureDesc.text = "Discover new communities"
+        }
+
+        expertBtn.setOnClickListener {
             expertBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            roomsBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
             blogBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
             expertAdapter = ExpertAdapter(experts)
             communityRecyclerView.adapter = expertAdapter
+            featureDesc.text = "Available Experts"
         }
 
         return view
@@ -129,7 +151,6 @@ class CommunityFragment : Fragment(), CommunityPostAdapter.OnItemClickListener {
                 }
             }
     }
-
 
     override fun onCommentClick(post: CommunityPost) {
         val intent = Intent (activity, PostDetailActivity::class.java)

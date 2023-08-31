@@ -24,18 +24,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//         val test = findViewById<TextView>(R.id.test)
-//         val test2 = findViewById<TextView>(R.id.test2)
-//         test.setOnClickListener {
-//             val fragmentContainer: FragmentContainerView = findViewById(R.id.fragment_container)
-//             fragmentContainer.visibility = View.VISIBLE
-//         }
-
-//         test2.setOnClickListener {
-//             val loginIntent = Intent(this, UserProfileActivity::class.java)
-//             startActivity(loginIntent)
-//             finish()
-//         }
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         bottomNavigationView.setOnItemSelectedListener(this)
 
