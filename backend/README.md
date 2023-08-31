@@ -10,8 +10,6 @@ npm install
 
 npm start
 
-# APIs Usage
-
 
 
 
