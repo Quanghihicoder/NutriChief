@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
-import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
 import com.squareup.picasso.Picasso
 import java.util.*
@@ -35,7 +34,7 @@ class IngredientAdapter (
     // Create view holder for recycler view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.ingredient_item, parent, false) as View
+        val view = layoutInflater.inflate(R.layout.recycler_item_ingredient, parent, false) as View
         return IngredientViewHolder(view)
     }
 
