@@ -4,4 +4,4 @@ A healthy eating food app – NutriChief was developed with the ultimate purpose
 
 # Tech setup 
 ### Open the Android folder in Android Studio 
-### Open the Backend folder in VSCode and run the commands as /backend/Readme.md
+### Open the Backend folder in VSCode and run the commands as /backend/README.md
