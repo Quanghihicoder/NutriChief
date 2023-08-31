@@ -62,7 +62,7 @@ class InstructionsActivity : AppCompatActivity() {
 
         val food_id = intent.getIntExtra("food_id", 1)
 
-        if (videoPath == null) {
+        if (videoPath == "") {
             videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
         }
 
