@@ -89,6 +89,17 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
             }
         }
 
+        getAllDishes { food ->
+            if (food != null) {
+                allDishes = food
+                foodAdapter.filterList(allDishes as MutableList<MenuItem>)
+                foodAdapter = FoodOrderAdapter(allDishes as MutableList<MenuItem>, this)
+                orderRecyclerView.adapter = foodAdapter
+            } else {
+                Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+            }
+        }
+
         cartBtn.setOnClickListener {
             showBottomDialog()
         }
