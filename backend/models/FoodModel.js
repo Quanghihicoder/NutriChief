@@ -112,3 +112,53 @@ export const getDetails = (data, result) => {
         result({ status: 0, message: "Can not get food's detail", data: [] });
     }
 };
+
+export const getAllRecipeDetail = (data, result) => {
+    if (data.food_id) {
+        db.query(
+            `
+            SELECT 
+                ingredient.*,
+                recipe.recipe_title,
+                recipe.recipe_desc,
+                recipe.recipe_qty,
+                recipe.media_url,
+                (recipe.recipe_qty / 100 * ingredient.ingre_price) AS recipe_price,
+                (recipe.recipe_qty / 100 * ingredient.ingre_calo) AS recipe_calories,
+                (recipe.recipe_qty / 100 * ingredient.ingre_carb) AS recipe_carb,
+                (recipe.recipe_qty / 100 * ingredient.ingre_fat) AS recipe_fat,
+                (recipe.recipe_qty / 100 * ingredient.ingre_protein) AS recipe_protein  
+            FROM recipe 
+            INNER JOIN ingredient 
+            ON recipe.ingre_id = ingredient.ingre_id 
+            WHERE recipe.food_id = ? AND recipe.recipe_qty > 0`,
+            [data.food_id],
+            (err, results) => {
+                if (err) {
+                    console.log(err);
+                    result({
+                        status: 0,
+                        message: "Can not get food's detail",
+                        data: [],
+                    });
+                } else {
+                    if (results[0]) {
+                        result({
+                            status: 1,
+                            message: "Successfully get food's detail",
+                            data: results,
+                        });
+                    } else {
+                        result({
+                            status: 0,
+                            message: "Can not get food's detail",
+                            data: [],
+                        });
+                    }
+                }
+            }
+        );
+    } else {
+        result({ status: 0, message: "Can not get food's detail", data: [] });
+    }
+};
