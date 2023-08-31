@@ -54,10 +54,18 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
 
+CREATE TABLE IF NOT EXISTS `media` (
+    media_id INT(11) NOT NULL,
+    media_name VARCHAR(255) NOT NULL,
+    media_url VARCHAR(255) NOT NULL,
+
+    PRIMARY KEY (media_id)
+) ENGINE=INNODB;
+
 CREATE TABLE IF NOT EXISTS `recipe` (
     food_id INT(11) NOT NULL,
     ingre_id INT(11) NOT NULL,
-    media_id VARCHAR(1000) NOT NULL,
+    media_url VARCHAR(1000) NOT NULL,
     recipe_qty FLOAT(11,1), -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
@@ -320,7 +328,7 @@ VALUES
 ("Bacon Wrapped Asparagus", "Asparagus wrapped in bacon, seasoned and roasted.", 20, 15, 4, "https://lifeloveandgoodfood.com/wp-content/uploads/2016/04/bacon-wrapped-asparagus_04_1200x1200-500x375.jpg");
 
 
-INSERT INTO `recipe` (food_id, ingre_id, media_id, recipe_qty, recipe_desc, recipe_title)
+INSERT INTO `recipe` (food_id, ingre_id, media_url, recipe_qty, recipe_desc, recipe_title)
 VALUES
 (1,3, NULL, 100, "Cut the ripe avocado in half, remove the pit, and scoop out the flesh into a bowl. Use a fork to mash the avocado until it reaches your desired consistency.", "1 ripe avocado"),
 (1,113, NULL, 50, "Toast the bread.", "2 slices of bread"),
