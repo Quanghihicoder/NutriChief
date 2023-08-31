@@ -10,7 +10,6 @@ import android.widget.*
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
-//import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -63,7 +62,7 @@ class InstructionsActivity : AppCompatActivity() {
 
         val food_id = intent.getIntExtra("food_id", 1)
 
-        if (videoPath == null) {
+        if (videoPath == "") {
             videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
         }
 
@@ -79,6 +78,9 @@ class InstructionsActivity : AppCompatActivity() {
                     totalPages = cookingSteps.size
 
                     videoPath = cookingSteps[currentPage - 1].media_url
+                    if (videoPath == "") {
+                        videoPath = "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm"
+                    }
                     mediaController.setAnchorView(videoView)
                     videoView.setMediaController(mediaController)
                     videoView.setVideoURI(Uri.parse(videoPath))

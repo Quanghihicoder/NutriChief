@@ -53,7 +53,7 @@ export const updateMealPrefInfo = (data, result) => {
             queryData.push(data.pref_time)
         }
 
-        if (data.pref_goal) {
+        if (data.pref_goal >= 0) {
             query += " pref_goal = ?,"
             queryData.push(data.pref_goal)
         }
