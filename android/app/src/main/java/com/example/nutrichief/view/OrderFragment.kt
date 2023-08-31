@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.R
 import com.example.nutrichief.adapter.FoodOrderAdapter
 import com.example.nutrichief.datamodels.CartItem
+import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.MenuItem
 import com.example.nutrichief.services.CartRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -75,6 +77,17 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
         orderRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         foodAdapter = FoodOrderAdapter(mutableListOf(), this)
+
+        getAllIngredients { food ->
+            if (food != null) {
+                allDishes = food
+                foodAdapter.filterList(allDishes as MutableList<MenuItem>)
+                foodAdapter = FoodOrderAdapter(allDishes as MutableList<MenuItem>, this)
+                orderRecyclerView.adapter = foodAdapter
+            } else {
+                Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+            }
+        }
 
         getAllDishes { food ->
             if (food != null) {
@@ -242,7 +255,56 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
         }
     }
 
-//    override fun onFoodClick(item: Food) {
-//        TODO("Not yet implemented")
-//    }
+    private fun getAllIngredients(callback: (List<MenuItem>?) -> Unit) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val requestBody = JSONObject()
+
+                val request = Request.Builder()
+                    .url("http://10.0.2.2:8001/apis/ingre")
+                    .post(
+                        RequestBody.create(
+                            "application/json".toMediaTypeOrNull(),
+                            requestBody.toString()
+                        )
+                    )
+                    .build()
+
+                val response = withContext(Dispatchers.IO) { client.newCall(request).execute() }
+
+                if (!response.isSuccessful) {
+                    throw IOException("Failed to retrieve ingredients")
+                }
+
+                val responseBody = response.body?.string()
+                val resultJson = JSONObject(responseBody ?: "")
+                val status = resultJson.optInt("status", 0)
+
+                if (status == 1) {
+                    val data = resultJson.optJSONArray("data")
+
+                    val ingredients = mutableListOf<MenuItem>()
+                    for (i in 0 until data.length()) {
+                        val jsonIngredient: JSONObject = data.getJSONObject(i)
+                        val ingredient = MenuItem(
+                            jsonIngredient.getInt("ingre_id"),
+                            jsonIngredient.getString("ingre_name"),
+                            jsonIngredient.getInt("ingre_calo").toString()+ "kcal, " + jsonIngredient.getDouble("ingre_fat").toString() + "g fat, " + jsonIngredient.getDouble("ingre_protein").toString() + "g protein, " + jsonIngredient.getDouble("ingre_carb").toString() + "g carb",
+                            jsonIngredient.getInt("ingre_calo"),
+                            jsonIngredient.getInt("ingre_calo"),
+                            jsonIngredient.getString("ingre_img"),
+                            jsonIngredient.getDouble("ingre_price").toFloat(),
+                        )
+                        ingredients.add(ingredient)
+                    }
+                    callback(ingredients)
+                } else {
+                    callback(null)
+                }
+            } catch (e: Exception) {
+                // Handle the error here
+                Log.e("RecipeDetail", "Failed to retrieve ingredients: ${e.message}")
+            }
+        }
+    }
 }

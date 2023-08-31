@@ -27,7 +27,7 @@
             android:transitionName="totalOrderedItemsPriceTransition" />
 
         <TextView
-            android:id="@+id/post_title"
+            android:id="@+id/post_detail_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semi_bold"

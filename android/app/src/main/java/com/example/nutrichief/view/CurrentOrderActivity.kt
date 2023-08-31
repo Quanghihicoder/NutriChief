@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,11 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         loadCurrentOrdersFromDatabase()
+
+        val backIcon = findViewById<ImageView>(R.id.backIcon)
+        backIcon.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     // Retrieve data from database
@@ -110,5 +117,5 @@ class CurrentOrderActivity : AppCompatActivity(), RecyclerCurrentOrderAdapter.On
             .create().show()
     }
 
-    fun goBack(view: View) {onBackPressed()}
+    fun goBack(view: View) {onBackPressedDispatcher.onBackPressed()}
 }

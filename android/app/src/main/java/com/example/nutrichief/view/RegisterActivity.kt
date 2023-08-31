@@ -15,10 +15,13 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONObject
 import java.io.IOException
 
 class RegisterActivity : AppCompatActivity() {
@@ -43,7 +46,12 @@ class RegisterActivity : AppCompatActivity() {
 
         genderList = findViewById(R.id.gender)
         genderList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedGender = parent?.getItemAtPosition(position) as? String
             }
 
@@ -63,7 +71,12 @@ class RegisterActivity : AppCompatActivity() {
 
         activeLevelList = findViewById(R.id.activeLevel)
         activeLevelList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedActiveLevel = parent?.getItemAtPosition(position) as? String
             }
 
@@ -115,7 +128,8 @@ class RegisterActivity : AppCompatActivity() {
 
             if (fullName.isNotEmpty() && yearOfBirthText.isNotEmpty() &&
                 weightText.isNotEmpty() &&
-                heightText.isNotEmpty() ) {
+                heightText.isNotEmpty()
+            ) {
 
                 val yearOfBirth = yearOfBirthText.toInt()
 
@@ -152,10 +166,16 @@ class RegisterActivity : AppCompatActivity() {
                         runOnUiThread {
                             if (response.isSuccessful) {
                                 // Registration successful
-                                Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    "Registration successful",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
-                                val loginIntent = Intent(this@RegisterActivity, MainActivity::class.java)
-                                val sharedPrefs = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                                val loginIntent =
+                                    Intent(this@RegisterActivity, MainActivity::class.java)
+                                val sharedPrefs =
+                                    getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                                 val editor = sharedPrefs.edit()
                                 editor.putString("user_name", fullName)
                                 startActivity(loginIntent)
@@ -163,9 +183,17 @@ class RegisterActivity : AppCompatActivity() {
                             } else {
                                 // Registration failed
                                 if (errorMessage != null) {
-                                    Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        this@RegisterActivity,
+                                        errorMessage,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 } else {
-                                    Toast.makeText(this@RegisterActivity, "Failed to register user", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        this@RegisterActivity,
+                                        "Failed to register user",
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                 }
                             }
@@ -173,39 +201,61 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                    Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT)
+                    .show()
             }
-        }
-
-    private fun registerUser(customer: User, callback: (Response, String?) -> Unit) {
-        try {
-            val jsonMediaType = "application/json; charset=utf-8".toMediaType()
-            val requestBody = jacksonObjectMapper().writeValueAsString(customer)
-                .toRequestBody(jsonMediaType)
-
-            val request = Request.Builder()
-                .url("http://10.0.2.2:8001/apis/user/update")
-                .post(requestBody)
-                .build()
-
-            client.newCall(request).enqueue(object : Callback {
-                override fun onResponse(call: Call, response: Response) {
-                    val responseBody = response.body?.string()
-                    callback(response, responseBody)
-                }
-
-                override fun onFailure(call: Call, e: IOException) {
-                    // Handle network failure
-                    callback(Response.Builder().code(-1).build(), e.message)
-                }
-            })
-        } catch (e: Exception) {
-            // Handle other exceptions
-            callback(Response.Builder().code(-1).build(), e.message)
         }
     }
 
+    private fun registerUser(customer: User, callback: (Response, String?) -> Unit) {
+        GlobalScope.launch {
+            try {
+                val jsonMediaType = "application/json; charset=utf-8".toMediaType()
+                val requestBody = jacksonObjectMapper().writeValueAsString(customer)
+                    .toRequestBody(jsonMediaType)
+
+                val requestBodyCreateMealPref = JSONObject()
+                requestBodyCreateMealPref.put("user_id", customer.user_id)
+                requestBodyCreateMealPref.put("pref_calo", customer.user_tdee)
+                requestBodyCreateMealPref.put("pref_time", 60)
+                requestBodyCreateMealPref.put("pref_goal", 1)
+                requestBodyCreateMealPref.put("pref_date_range", 1)
+
+                val requestCreateMealPref =
+                    Request.Builder().url("http://localhost:8001/apis/mealpref/create")
+                        .post(
+                            requestBodyCreateMealPref.toString()
+                                .toRequestBody("application/json".toMediaTypeOrNull())
+                        )
+                        .build()
+
+                withContext(Dispatchers.IO) {
+                    client.newCall(requestCreateMealPref).execute()
+                }
+
+                val request = Request.Builder()
+                    .url("http://10.0.2.2:8001/apis/user/update")
+                    .post(requestBody)
+                    .build()
+
+
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseBody = response.body?.string()
+                        callback(response, responseBody)
+                    }
+
+                    override fun onFailure(call: Call, e: IOException) {
+                        // Handle network failure
+                        callback(Response.Builder().code(-1).build(), e.message)
+                    }
+                })
+            } catch (e: Exception) {
+                // Handle other exceptions
+                callback(Response.Builder().code(-1).build(), e.message)
+            }
+        }
+
+    }
 //    fun goBack(view: View) { onBackPressed() }
 }

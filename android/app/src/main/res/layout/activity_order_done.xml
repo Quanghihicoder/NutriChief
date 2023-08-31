@@ -173,22 +173,6 @@
                                 android:background="@drawable/horizontal_line"/>
 
                             <TextView
-                                android:id="@+id/order_done_take_away_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="12:40 PM"
-                                android:textSize="16sp"
-                                android:textColor="@color/text_light_color"
-                                android:fontFamily="@font/montserrat_semi_bold"/>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="10dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@drawable/horizontal_line"/>
-
-                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"

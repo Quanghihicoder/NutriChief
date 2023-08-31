@@ -28,7 +28,7 @@ import { getPosts, createPost } from "../controllers/post.js";
 
 import { getComments, createComment } from "../controllers/comment.js";
 
-import { updateReact } from "../controllers/react.js";
+import { getReact, updateReact } from "../controllers/react.js";
 
 // init express router
 const router = express.Router();
@@ -106,6 +106,9 @@ router.post("/apis/comment/get", getComments)
 router.post("/apis/comment/create", createComment)
 
 ////////////////////////// REACT ////////////////////////////////
+// create react
+router.post("/apis/react/get", getReact)
+
 // create react
 router.post("/apis/react/create", updateReact)
 

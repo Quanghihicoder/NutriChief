@@ -18,7 +18,6 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
     : RecyclerView.Adapter<FoodOrderAdapter.FoodItemViewHolder>(), Filterable {
 
     private var filteredFoodList = ArrayList<MenuItem>(foodList)
-    private var quantity: Int? = null
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {
@@ -35,7 +34,13 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
         val food = foodList[position]
-        Picasso.get().load(food.food_img).into(holder.imageItemFood)
+        val imageUrl = food.food_img
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl).into(holder.imageItemFood)
+        } else {
+            holder.imageItemFood.setImageResource(R.drawable.default_item_image)
+        }
+
         holder.textItemFoodName.text = food.food_name
         holder.textItemFoodShortDesc.text = food.food_desc
         holder.itemPrice.text = "$" + food.food_price.toString()
