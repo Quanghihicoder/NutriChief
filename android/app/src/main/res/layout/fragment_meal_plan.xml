@@ -22,7 +22,7 @@
             android:contentDescription="user avatar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_account_circle" />
+            app:srcCompat="@drawable/user_male" />
 
         <!--    Notification button-->
         <ImageView
@@ -49,6 +49,7 @@
             android:text="@string/meal_plan"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,11 +87,11 @@
 
         <TextView
             android:id="@+id/text_view_date"
-            android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:textSize="16dp">
 
         </TextView>
 
@@ -116,8 +117,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:textSize="14dp"
-            android:text="Generate meal plan for today">
+            android:text="Generate meal plan for today"
+            android:textSize="14dp">
 
         </TextView>
 
@@ -125,16 +126,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:textSize="14dp"
-            android:text="Load blank meal plan">
+            android:text="Load blank meal plan"
+            android:textSize="14dp">
 
         </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:text="Copy from previous day">
+            android:text="Copy from previous day"
+            android:textSize="14dp">
 
         </TextView>
     </LinearLayout>
@@ -144,7 +145,7 @@
         android:id="@+id/layout_suggested_meal_plan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -196,8 +197,7 @@
                                 android:text="Carb"
                                 app:layout_constraintEnd_toEndOf="@id/prog_bar_carb"
                                 app:layout_constraintStart_toStartOf="@id/prog_bar_carb"
-                                app:layout_constraintTop_toTopOf="@id/prog_bar_carb">
-                            </TextView>
+                                app:layout_constraintTop_toTopOf="@id/prog_bar_carb"></TextView>
 
                             <TextView
                                 android:id="@+id/text_daily_recommended_carb"
@@ -206,19 +206,17 @@
                                 android:text="250g"
                                 app:layout_constraintEnd_toEndOf="@id/text_carb"
                                 app:layout_constraintStart_toStartOf="@id/text_carb"
-                                app:layout_constraintTop_toBottomOf="@id/text_carb">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/text_carb"></TextView>
 
                             <TextView
                                 android:id="@+id/text_progress_carb"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0%"
                                 android:layout_marginTop="-15dp"
+                                android:text="0%"
                                 app:layout_constraintEnd_toEndOf="@id/text_carb"
                                 app:layout_constraintStart_toStartOf="@id/text_carb"
-                                app:layout_constraintTop_toBottomOf="@id/prog_bar_carb">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/prog_bar_carb"></TextView>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,12 +262,11 @@
                                 android:id="@+id/text_progress_protein"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0%"
                                 android:layout_marginTop="-15dp"
+                                android:text="0%"
                                 app:layout_constraintEnd_toEndOf="@id/text_protein"
                                 app:layout_constraintStart_toStartOf="@id/text_protein"
-                                app:layout_constraintTop_toBottomOf="@id/prog_bar_protein">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/prog_bar_protein"></TextView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!-- Fat progress widget -->
@@ -314,12 +311,11 @@
                                 android:id="@+id/text_progress_fat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0%"
                                 android:layout_marginTop="-15dp"
+                                android:text="0%"
                                 app:layout_constraintEnd_toEndOf="@id/text_fat"
                                 app:layout_constraintStart_toStartOf="@id/text_fat"
-                                app:layout_constraintTop_toBottomOf="@id/prog_bar_fat">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/prog_bar_fat"></TextView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!-- Calories progress widget-->
@@ -335,8 +331,7 @@
                                 android:layout_height="100dp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                tools:progress="60"
-                                />
+                                tools:progress="60" />
 
 
                             <TextView
@@ -347,8 +342,7 @@
                                 android:text="Calories"
                                 app:layout_constraintEnd_toEndOf="@id/prog_bar_calories"
                                 app:layout_constraintStart_toStartOf="@id/prog_bar_calories"
-                                app:layout_constraintTop_toTopOf="@id/prog_bar_calories">
-                            </TextView>
+                                app:layout_constraintTop_toTopOf="@id/prog_bar_calories"></TextView>
 
                             <TextView
                                 android:id="@+id/text_daily_recommended_calo"
@@ -357,19 +351,17 @@
                                 android:text="2000kcal"
                                 app:layout_constraintEnd_toEndOf="@id/text_calories"
                                 app:layout_constraintStart_toStartOf="@id/text_calories"
-                                app:layout_constraintTop_toBottomOf="@id/text_calories">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/text_calories"></TextView>
 
                             <TextView
                                 android:id="@+id/text_progress_calories"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0%"
                                 android:layout_marginTop="-15dp"
+                                android:text="0%"
                                 app:layout_constraintEnd_toEndOf="@id/text_calories"
                                 app:layout_constraintStart_toStartOf="@id/text_calories"
-                                app:layout_constraintTop_toBottomOf="@id/prog_bar_calories">
-                            </TextView>
+                                app:layout_constraintTop_toBottomOf="@id/prog_bar_calories"></TextView>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>

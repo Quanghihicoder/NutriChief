@@ -87,6 +87,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".view.UserProfileSettingsActivity"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.OtpVerifyActivity"
             android:exported="false">
             <meta-data

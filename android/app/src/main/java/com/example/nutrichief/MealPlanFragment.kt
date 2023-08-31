@@ -1,6 +1,8 @@
 package com.example.nutrichief
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nutrichief.model.Food
 import com.example.nutrichief.model.Meal
+import com.example.nutrichief.view.InstructionsActivity
+import com.example.nutrichief.view.UserProfileActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -61,12 +65,14 @@ class MealPlanFragment : Fragment(), RecyclerMealAdapter.onMealCheckedChange {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_meal_plan, container, false)
+
         val textViewGeneratePlan = view.findViewById<TextView>(R.id.text_view_generate_plan)
         val layoutMealPlanOptions = view.findViewById<LinearLayout>(R.id.layout_meal_plan_options)
         val layoutSuggestedMealPlan =
@@ -75,6 +81,12 @@ class MealPlanFragment : Fragment(), RecyclerMealAdapter.onMealCheckedChange {
         val imageViewMealPlanActions =
             view.findViewById<ImageView>(R.id.image_view_meal_plan_actions)
         textViewDate.text = DateTimeFormatter.ofPattern("dd MMM yyyy").format(date)
+
+        val imageUserAva = view.findViewById<ImageView>(R.id.img_user_ava)
+        imageUserAva.setOnClickListener {
+            val intent = Intent(activity, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         val progressBarCalories = view.findViewById<ProgressBar>(R.id.prog_bar_calories)
         progressBarCalories.progress = 0
@@ -111,14 +123,22 @@ class MealPlanFragment : Fragment(), RecyclerMealAdapter.onMealCheckedChange {
         }
 
         textViewGeneratePlan.setOnClickListener {
-            mealPrefCalo = 2000.0f
+            val sharedPrefs = activity?.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val userId = sharedPrefs?.getInt("user_id", 0)
             getGeneratedMealPlan(
-                2,
+                userId!!,
                 DateTimeFormatter.ofPattern("yy-MM-dd").format(date)
             ) { generatedMeals ->
-                textDailyRecommendedCarb.text = "250g"
-                textDailyRecommendedProtein.text = "150g"
-                textDailyRecommendedFat.text = "80g"
+                var totalCalories = 0.0f
+                for ( i in 0 until mealList.size) {
+                    for (j in 0 until mealList[i].foodList.size) {
+                        totalCalories += mealList[i].foodList[j].foodCalories
+                    }
+                }
+                textDailyRecommendedCalo.text = totalCalories.toInt().toString()
+                textDailyRecommendedCarb.text = "${(totalCalories * 0.4f / 4).toInt()}g"
+                textDailyRecommendedProtein.text = "${(totalCalories * 0.3f / 4).toInt()}g"
+                textDailyRecommendedFat.text = "${(totalCalories * 0.3f / 9).toInt()}g"
 
                 layoutMealPlanOptions.visibility = View.GONE
                 layoutSuggestedMealPlan.visibility = View.VISIBLE

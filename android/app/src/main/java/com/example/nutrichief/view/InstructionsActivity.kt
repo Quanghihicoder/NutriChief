@@ -10,7 +10,7 @@ import android.widget.*
 import com.example.nutrichief.R
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
-import com.squareup.picasso.Picasso
+//import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
