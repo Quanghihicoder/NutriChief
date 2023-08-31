@@ -3,9 +3,9 @@ CREATE DATABASE IF NOT EXISTS db_nutrichief;
 USE db_nutrichief;
 
 CREATE TABLE IF NOT EXISTS `user` (
-    user_id INT(11) NOT 0 AUTO_INCREMENT, 
+    user_id INT(11) NOT NULL AUTO_INCREMENT, 
     user_name VARCHAR(255), 
-    user_email VARCHAR(255) NOT 0, 
+    user_email VARCHAR(255) NOT NULL, 
     user_year_of_birth INT(4), 
     user_gender INT(1), -- 0 female, 1 - male 
     user_weight FLOAT(4,1), -- kg
@@ -19,57 +19,57 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `mealpref` (
-    user_id INT(11) NOT 0,
-    pref_calo INT(5) NOT 0,  
-    pref_time INT(5) NOT 0, -- mins
-    pref_goal INT(1) NOT 0, -- loss - 0, maintain - 1, gain - 2
-    pref_date_range INT(2) NOT 0, -- daily - 1, weekly - 7, monthly - 30
+    user_id INT(11) NOT NULL,
+    pref_calo INT(5) NOT NULL,  
+    pref_time INT(5) NOT NULL, -- mins
+    pref_goal INT(1) NOT NULL, -- loss - 0, maintain - 1, gain - 2
+    pref_date_range INT(2) NOT NULL, -- daily - 1, weekly - 7, monthly - 30
 
     PRIMARY KEY (user_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `food` (
-    food_id INT(11) NOT 0 AUTO_INCREMENT,
-    food_name VARCHAR(255) NOT 0, 
-    food_desc VARCHAR(255) NOT 0,
-    food_ctime INT(5) NOT 0, -- mins
-    food_ptime INT(5) NOT 0, -- mins
-    food_type INT(1) NOT 0,
+    food_id INT(11) NOT NULL AUTO_INCREMENT,
+    food_name VARCHAR(255) NOT NULL, 
+    food_desc VARCHAR(255) NOT NULL,
+    food_ctime INT(5) NOT NULL, -- mins
+    food_ptime INT(5) NOT NULL, -- mins
+    food_type INT(1) NOT NULL,
     food_img VARCHAR(255),
 
     PRIMARY KEY (food_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `ingredient` (
-    ingre_id INT(11) NOT 0 AUTO_INCREMENT,
-    ingre_name VARCHAR(255) NOT 0,
-    ingre_price FLOAT(11,1) NOT 0,
-    ingre_calo INT(5) NOT 0,
-    ingre_fat FLOAT(8,1) NOT 0, -- grams
-    ingre_protein FLOAT(8,1) NOT 0, -- grams
-    ingre_carb FLOAT(8,1) NOT 0, -- grams
-    ingre_img VARCHAR(255) NOT 0,
+    ingre_id INT(11) NOT NULL AUTO_INCREMENT,
+    ingre_name VARCHAR(255) NOT NULL,
+    ingre_price FLOAT(11,1) NOT NULL,
+    ingre_calo INT(5) NOT NULL,
+    ingre_fat FLOAT(8,1) NOT NULL, -- grams
+    ingre_protein FLOAT(8,1) NOT NULL, -- grams
+    ingre_carb FLOAT(8,1) NOT NULL, -- grams
+    ingre_img VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `media` (
-    media_id INT(11) NOT 0 AUTO_INCREMENT,
-    media_name VARCHAR(255) NOT 0,
-    media_url VARCHAR(255) NOT 0,
+    media_id INT(11) NOT NULL AUTO_INCREMENT,
+    media_name VARCHAR(255) NOT NULL,
+    media_url VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (media_id)
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `recipe` (
-    food_id INT(11) NOT 0,
-    ingre_id INT(11) NOT 0,
+    food_id INT(11) NOT NULL,
+    ingre_id INT(11) NOT NULL,
     media_id INT(11),
     recipe_qty FLOAT(11,1), -- grams
-    recipe_desc VARCHAR(255) NOT 0,
-    recipe_title VARCHAR(255) NOT 0,
-    media_url VARCHAR(255) NOT 0,
+    recipe_desc VARCHAR(255) NOT NULL,
+    recipe_title VARCHAR(255) NOT NULL,
+    media_url VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (food_id, ingre_id),
     FOREIGN KEY (food_id) REFERENCES food(food_id),
@@ -78,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `recipe` (
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `meal` (
-    user_id INT(11) NOT 0,
-    food_id INT(11) NOT 0,
-    meal_date DATE NOT 0,
-    meal_checked INT (1) NOT 0, -- 0 - false; 1 - true 
+    user_id INT(11) NOT NULL,
+    food_id INT(11) NOT NULL,
+    meal_date DATE NOT NULL,
+    meal_checked INT (1) NOT NULL, -- 0 - false; 1 - true 
 
     PRIMARY KEY (user_id, food_id, meal_date),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `meal` (
 ) ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `otp` (
-    user_email VARCHAR(255) NOT 0,
-    otp_key INT(6) NOT 0,
+    user_email VARCHAR(255) NOT NULL,
+    otp_key INT(6) NOT NULL,
 
     PRIMARY KEY (user_email),
     UNIQUE (user_email)
