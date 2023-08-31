@@ -69,7 +69,6 @@ CREATE TABLE IF NOT EXISTS `recipe` (
     recipe_qty FLOAT(11,1), -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
-    media_url VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (food_id, ingre_id),
     FOREIGN KEY (food_id) REFERENCES food(food_id),
