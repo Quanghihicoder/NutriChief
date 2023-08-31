@@ -96,6 +96,36 @@ CREATE TABLE IF NOT EXISTS `otp` (
     UNIQUE (user_email)
 ) ENGINE=INNODB;
 
+CREATE TABLE IF NOT EXISTS `post` (
+    post_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    post_title VARCHAR(255) NOT NULL,
+    post_detail TEXT NOT NULL,
+
+    PRIMARY KEY (post_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS `comment` (
+    comment_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    post_id INT(11) NOT NULL,
+    comment_detail TEXT NOT NULL,
+    
+    PRIMARY KEY (comment_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS `react` (
+    user_id INT(11) NOT NULL,
+    post_id INT(11) NOT NULL,
+    react_type INT (1) NOT NULL, 
+    
+    PRIMARY KEY (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+) ENGINE=INNODB;
 
 INSERT INTO `ingredient` (ingre_name, ingre_price, ingre_calo, ingre_fat, ingre_protein, ingre_carb, ingre_img)
 VALUES
