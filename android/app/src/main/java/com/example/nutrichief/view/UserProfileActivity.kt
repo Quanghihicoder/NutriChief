@@ -44,9 +44,15 @@ class UserProfileActivity : AppCompatActivity() {
         val bmi = findViewById<TextView>(R.id.profile_bmi)
         val tdee = findViewById<TextView>(R.id.profile_tdee)
         val update = findViewById<ImageView>(R.id.update_profile)
+        val currentOrderBtn = findViewById<ImageView>(R.id.current_order)
 
         update.setOnClickListener {
             startActivity( Intent(this, UserProfileSettingsActivity::class.java) )
+            finish()
+        }
+
+        currentOrderBtn.setOnClickListener {
+            startActivity( Intent(this, CurrentOrderActivity::class.java) )
             finish()
         }
 

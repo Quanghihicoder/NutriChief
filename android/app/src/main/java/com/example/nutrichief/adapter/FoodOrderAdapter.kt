@@ -18,7 +18,6 @@ class FoodOrderAdapter(private var foodList: MutableList<MenuItem>,
     : RecyclerView.Adapter<FoodOrderAdapter.FoodItemViewHolder>(), Filterable {
 
     private var filteredFoodList = ArrayList<MenuItem>(foodList)
-    private var quantity: Int? = null
 
     // Interface for defining click listener callbacks
     interface OnItemClickListener {

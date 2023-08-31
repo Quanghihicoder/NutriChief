@@ -36,7 +36,6 @@ class OrderDoneActivity : AppCompatActivity() {
     private var totalTaxPrice = 0.0F
     private var subTotalPrice = 0.0F
     private var paymentMethod = ""
-    private var takeAwayTime = ""
 
     private var orderID = ""
     private var orderDate = ""
@@ -58,12 +57,10 @@ class OrderDoneActivity : AppCompatActivity() {
         subTotalPrice = intent.getFloatExtra("subTotalPrice", 0.0F)
 
         paymentMethod = intent?.getStringExtra("paymentMethod").toString()
-        takeAwayTime = intent?.getStringExtra("takeAwayTime").toString()
 
 
         findViewById<TextView>(R.id.order_done_total_amount_tv).text = "%.2f".format(subTotalPrice)
         findViewById<TextView>(R.id.order_done_payment_method_tv).text = paymentMethod
-        findViewById<TextView>(R.id.order_done_take_away_time).text = takeAwayTime
 
         Handler().postDelayed({
             window.statusBarColor = resources.getColor(R.color.light_green)
@@ -121,7 +118,7 @@ class OrderDoneActivity : AppCompatActivity() {
     private fun saveCurrentOrderToDatabase() {
         val item = CurrentOrderItem(
             orderID,
-            takeAwayTime,
+            "0",
             if(paymentMethod.startsWith("Pending")) "Pending" else "Done",
             getOrderItemNames(),
             getOrderItemQty(),
@@ -165,7 +162,6 @@ class OrderDoneActivity : AppCompatActivity() {
         val message = "Order Status: ${orderStatusTV.text}\n" +
                 "${orderIDTV.text}\n" +
                 "$paymentMethod\n" +
-                "Order Take-Away Time: $takeAwayTime\n" +
                 "Total Amount: $%.2f".format(subTotalPrice)
 
         intent.putExtra(Intent.EXTRA_TEXT, message)

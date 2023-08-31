@@ -257,6 +257,5 @@ class RegisterActivity : AppCompatActivity() {
         }
 
     }
-
 //    fun goBack(view: View) { onBackPressed() }
 }
