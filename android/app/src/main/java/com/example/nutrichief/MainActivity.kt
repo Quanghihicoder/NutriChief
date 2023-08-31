@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.nutrichief.model.Meal
 import com.example.nutrichief.view.CommunityFragment
+import com.example.nutrichief.view.OrderFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.example.nutrichief.view.SearchFragment
@@ -17,23 +18,12 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     private lateinit var mealPlanFragment: MealPlanFragment
     private val searchFragment = SearchFragment()
     private val communityFragment = CommunityFragment()
+    private val orderFragment = OrderFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//         val test = findViewById<TextView>(R.id.test)
-//         val test2 = findViewById<TextView>(R.id.test2)
-//         test.setOnClickListener {
-//             val fragmentContainer: FragmentContainerView = findViewById(R.id.fragment_container)
-//             fragmentContainer.visibility = View.VISIBLE
-//         }
-
-//         test2.setOnClickListener {
-//             val loginIntent = Intent(this, UserProfileActivity::class.java)
-//             startActivity(loginIntent)
-//             finish()
-//         }
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         bottomNavigationView.setOnItemSelectedListener(this)
 
@@ -52,6 +42,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             }
             R.id.nav_item_community -> {
                 replaceFragment(this.communityFragment)
+            }
+            R.id.nav_item_collection -> {
+                replaceFragment(this.orderFragment)
             }
         }
         return true
