@@ -65,8 +65,7 @@ CREATE TABLE IF NOT EXISTS `recipe` (
 
     PRIMARY KEY (food_id, ingre_id),
     FOREIGN KEY (food_id) REFERENCES food(food_id),
-    FOREIGN KEY (ingre_id) REFERENCES ingredient(ingre_id),
-    FOREIGN KEY (media_id) REFERENCES media(media_id)
+    FOREIGN KEY (ingre_id) REFERENCES ingredient(ingre_id)
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS `meal` (
