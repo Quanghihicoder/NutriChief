@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
     ingre_fat FLOAT(8,1) NOT NULL, -- grams
     ingre_protein FLOAT(8,1) NOT NULL, -- grams
     ingre_carb FLOAT(8,1) NOT NULL, -- grams
-    ingre_img VARCHAR(1000) NOT NULL,
+    ingre_img VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (ingre_id)
 ) ENGINE=INNODB;
@@ -65,11 +65,11 @@ CREATE TABLE IF NOT EXISTS `media` (
 CREATE TABLE IF NOT EXISTS `recipe` (
     food_id INT(11) NOT NULL,
     ingre_id INT(11) NOT NULL,
-    media_url VARCHAR(1000) NOT NULL,
+    media_id INT(11),
     recipe_qty FLOAT(11,1), -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
-
+    media_url VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (food_id, ingre_id),
     FOREIGN KEY (food_id) REFERENCES food(food_id),
@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `otp` (
     PRIMARY KEY (user_email),
     UNIQUE (user_email)
 ) ENGINE=INNODB;
+
 
 INSERT INTO `ingredient` (ingre_name, ingre_price, ingre_calo, ingre_fat, ingre_protein, ingre_carb, ingre_img)
 VALUES
@@ -268,8 +269,7 @@ VALUES
 -- ctime: cook time, ptime: prepare time
 -- meal: 1=breakfast, 2=lunch, 3=snack, 4=dinner,drinks
 INSERT INTO `food` (food_name, food_desc, food_ctime, food_ptime, food_type, food_img)
-INSERT INTO `food` (food_name, food_desc, food_ctime, food_ptime, food_type, food_media)
-yVALUES
+VALUES
 ("Avocado Toast", "Mashed avocado on toasted bread.", 5, 10, 1, "https://vancouverwithlove.com/wp-content/uploads/2023/05/high-protein-avocado-toast-featured-500x500.jpg"),
 ("Omelette with Vegetables", "Fluffy omelette filled with assorted vegetables.", 10, 5, 1, "https://yumeating.com/wp-content/uploads/2020/08/Easy-pizza-omelette-with-vegetables-recipe.jpg"),
 ("French Toast", "Bread soaked in egg batter and pan-fried.", 10, 5, 1, "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/french-toast_1-5bbce73.jpg"),
