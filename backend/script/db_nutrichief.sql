@@ -330,7 +330,7 @@ VALUES
 (1,25, NULL, 1.5, "Add black pepper.", "1/4 teaspoon black pepper"),
 (1,9, NULL, 15, "Add lemon juice.", "1 tablespoon lemon juice"),
 
-(2,72, NULL, 100, "Prepare eggs.", "2 eggs"),
+(2,72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 100, "Prepare eggs.", "2 eggs"),
 (2,29, "https://www.shutterstock.com/shutterstock/videos/1055810363/preview/stock-footage-close-up-selective-focus-shot-of-hand-of-male-cook-adding-salt-to-boiling-water-in-metal-pot-while.webm", 3, "Add salt.", "1/2 teaspoon salt"),
 (2,25, NULL, 1.5, "Add black pepper.", "1/4 teaspoon black pepper"),
 (2,65, NULL, 30, "Add milk.", "1/4 cup milk"),
@@ -343,7 +343,7 @@ VALUES
 
 (3,113, NULL, 100, "Prepare bread.", "3 thick slices bread"),
 (3,65, NULL, 50, "Add milk.", "1/2 cup milk"),
-(3,72, NULL, 100, "Prepare eggs.", "2 large eggs"),
+(3,72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 100, "Prepare eggs.", "2 large eggs"),
 (3,114, NULL, 6, "Add vanilla extract.", "1 teaspoon vanilla extract"),
 (3,31, NULL, 3, "Add cinnamon powder.", "1/2 teaspoon cinnamon powder"),
 (3,29, "https://www.shutterstock.com/shutterstock/videos/1055810363/preview/stock-footage-close-up-selective-focus-shot-of-hand-of-male-cook-adding-salt-to-boiling-water-in-metal-pot-while.webm", 1.5, "Add salt.", "1/4 teaspoon salt"),
@@ -374,7 +374,7 @@ VALUES
 (6,29, "https://www.shutterstock.com/shutterstock/videos/1055810363/preview/stock-footage-close-up-selective-focus-shot-of-hand-of-male-cook-adding-salt-to-boiling-water-in-metal-pot-while.webm", 3, "Add salt.", "1/2 teaspoon salt"),
 (6,25, "https://www.shutterstock.com/shutterstock/videos/1069616947/preview/stock-footage-close-up-view-of-pepper-grinding-peppers-directly-into-black-cast-iron-pan-concept-of-restaurant.webm", 1.5, "Add black pepper.", "1/4 teaspoon black pepper"),
 
-(7,55, NULL, 100, "Prepare chicken.", "cooked chicken, shredded"),
+(7,55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 100, "Prepare chicken.", "cooked chicken, shredded"),
 (7,94, NULL, 100, "Prepare cabbage.", "cabbage, shredded"),
 (7,78, NULL, 50, "Prepare carrot.", "carrot, shredded"),
 (7,10, NULL, 15, "Add lime juice.", "1 tablespoon lime juice"),
@@ -383,7 +383,7 @@ VALUES
 (7,26, NULL, 1.5, "Add chili powder.", "1/4 teaspoon chili powder"),
 
 -- BREAKFAST
-(8, 72, NULL, 120, "Crack the eggs into a bowl and beat them until well mixed.", "2 large eggs"),
+(8, 72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 120, "Crack the eggs into a bowl and beat them until well mixed.", "2 large eggs"),
 (8, 118, NULL, 50, "Slice the smoked salmon into thin strips.", "50g smoked salmon"),
 (8, 116, NULL, 5, "Chop the dill finely.", "1 tablespoon chopped dill"),
 (8, 117, NULL, 5, "Squeeze some fresh lemon juice.", "1 teaspoon lemon juice"),
@@ -393,14 +393,14 @@ VALUES
 (9, 79, "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm", 150, "Dice the onion.", "1 medium onion"),
 (9, 92, NULL, 50, "Dice the bell pepper.", "1 medium bell pepper"),
 (9, 107, NULL, 50, "Remove the casing from the sausage and crumble it.", "50g sausage"),
-(9, 72, NULL, 100, "Crack the eggs into a bowl and beat them.", "2 large eggs"),
+(9, 72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 100, "Crack the eggs into a bowl and beat them.", "2 large eggs"),
 (9, 164, NULL, NULL, "Heat a skillet over medium heat. Add a bit of oil.\n\nAdd the diced potatoes and cook until they're golden and crispy.", "Cooking Instructions"),
 
 (10, 80, "https://www.shutterstock.com/shutterstock/videos/1106911463/preview/stock-footage-chop-tomato-close-up-diced-tomatoes-on-a-cutting-board-for-italian-sauce-chef-cut-tomatoes-with.webm", 300, "Dice the tomatoes.", "300g tomatoes"),
 (10, 92, NULL, 150, "Dice the bell pepper.", "1 medium bell pepper"),
 (10, 79, "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm", 100, "Dice the onion.", "1 medium onion"),
 (10, 81, NULL, 10, "Mince the garlic.", "2 cloves garlic"),
-(10, 72, NULL, 100, "Crack the eggs into a bowl.", "2 large eggs"),
+(10, 72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 100, "Crack the eggs into a bowl.", "2 large eggs"),
 (10, 32, NULL, 5, "Add cumin powder.", "1 teaspoon cumin powder"),
 (10, 164, NULL, NULL, "Heat a skillet and sauté the onion and bell pepper until softened. Add the garlic and cook briefly.\n\nAdd the diced tomatoes and cumin powder. Simmer until the sauce thickens.\n\nMake wells in the sauce and crack the eggs into them. Cover and cook until the eggs are set.\n\nServe hot.", "Cooking Instructions"),
 
@@ -420,7 +420,7 @@ VALUES
 (13, 93, NULL, 60, "Cook the bacon until crispy.", "2 slices bacon"),
 (13, 104, NULL, 30, "Tear the lettuce leaves.", "2 lettuce leaves"),
 (13, 80, "https://www.shutterstock.com/shutterstock/videos/1054805054/preview/stock-footage-woman-s-hands-using-kitchen-knife-cutting-fresh-tomato-on-wooden-cutting-board-healthy-eating.webm", 100, "Slice the tomatoes.", "1 medium tomato"),
-(13, 72, NULL, 2, "Fry or scramble the egg.", "1 large egg"),
+(13, 72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 2, "Fry or scramble the egg.", "1 large egg"),
 (13, 113, NULL, 50, "Prepare bread slices.", "2 slices bread"),
 (13, 44, NULL, 10, "Spread mayonnaise on one side of each bread slice.", "10g Mayonaise"),
 (13, 164, NULL, NULL, "Assemble the sandwich by layering bacon, lettuce, tomato, and egg between the mayo-spread slices of bread.", "Assembling Instructions"),
@@ -436,7 +436,7 @@ VALUES
 
 (15, 6, NULL, 200, "Prepare grapefruit and segment it.", "2 grapefruits"),
 (15, 61, NULL, 150, "Cook shrimp.", "150g shrimp, cooked"),
-(15, 55, NULL, 150, "Cook chicken.", "150g chicken, cooked and shredded"),
+(15, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 150, "Cook chicken.", "150g chicken, cooked and shredded"),
 (15, 85, NULL, 30, "Chop peanuts.", "30g chopped peanuts"),
 (15, 122, NULL, 10, "Tear mint leaves.", "10 mint leaves"),
 (15, 99, NULL, 5, "Tear basil leaves.", "5 basil leaves"),
@@ -604,7 +604,7 @@ VALUES
 (35, 164, NULL, NULL, "Sauté diced onion and minced garlic. Add diced tomatoes and torn basil leaves. Simmer until tomatoes are soft. Blend mixture until smooth. Return to heat, add cream, and stir until heated through.", "Cooking Instructions"),
 
 -- Chicken Noodle Soup
-(36, 55, NULL, 200, "Cook chicken", "200g chicken, cooked and shredded"),
+(36, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 200, "Cook chicken", "200g chicken, cooked and shredded"),
 (36, 78, NULL, 100, "Dice carrot", "1 medium carrot, diced"),
 (36, 102, NULL, 100, "Dice celery", "1 stalk celery, diced"),
 (36, 79, "https://www.shutterstock.com/shutterstock/videos/1009023404/preview/stock-footage-rapidly-chopping-onion-close-up-slow-mothion-red-onions-close-up-female-hands-cut-onions-in.webm", 100, "Dice onion", "1 small onion, diced"),
@@ -642,7 +642,7 @@ VALUES
 (39, 164, NULL, NULL, "In a pot, combine diced tomatoes, diced carrot, diced celery, diced onion, cooked cannellini beans, pasta, and vegetable broth. Simmer until vegetables are tender.", "Cooking Instructions"),
 
 -- Coconut Curry Chicken Soup
-(40, 55, NULL, 200, "Cook chicken", "200g chicken, cooked and shredded"),
+(40, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 200, "Cook chicken", "200g chicken, cooked and shredded"),
 (40, 95, NULL, 400, "Add coconut milk", "400ml coconut milk"),
 (40, 144, NULL, 5, "Sprinkle curry powder", "1 teaspoon curry powder"),
 (40, 28, NULL, 5, "Add ginger powder", "1/2 teaspoon ginger powder"),
@@ -688,7 +688,7 @@ VALUES
 
 -- MAIN COURSES
 -- Ginseng Chicken Soup
-(45, 55, NULL, 500, "Cook chicken", "500g chicken, cooked"),
+(45, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 500, "Cook chicken", "500g chicken, cooked"),
 (45, 146, NULL, 100, "Cook sticky rice", "100g sticky rice, cooked"),
 (45, 147, NULL, 75, "Add ginseng", "3 ginseng roots"),
 (45, 81, NULL, 10, "Mince garlic", "2 cloves garlic, minced"),
@@ -713,7 +713,7 @@ VALUES
 (47, 74, NULL, 200, "Serve with steamed rice.", "200g steamed rice"),
 
 -- Glass Noodle with Chicken - Mien Ga
-(48, 55, NULL, 100, "Prepare chicken.", "cooked chicken, shredded"),
+(48, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 100, "Prepare chicken.", "cooked chicken, shredded"),
 (48, 155, NULL, 50, "Prepare wood ear mushroom.", "wood ear mushroom, soaked and sliced"),
 (48, 149, NULL, 10, "Prepare ginger.", "1 small piece of ginger, minced"),
 (48, 156, NULL, 50, "Prepare glass noodle.", "glass noodle, soaked and drained"),
@@ -731,7 +731,7 @@ VALUES
 (50, 158, NULL, 5, "Prepare roasted seaweed.", "5 sheets of roasted seaweed"),
 (50, 78, NULL, 50, "Prepare carrot.", "1 carrot, julienned"),
 (50, 90, NULL, 50, "Prepare cucumber.", "1 cucumber, julienned"),
-(50, 72, NULL, 2, "Prepare egg.", "2 eggs, scrambled"),
+(50, 72, "https://www.shutterstock.com/shutterstock/videos/1031672702/preview/stock-footage-female-hands-holding-a-cracked-egg-breaking-an-egg-black-background-slow-motion.webm", 2, "Prepare egg.", "2 eggs, scrambled"),
 (50, 30, NULL, 5, "Prepare sesame seeds.", "1 tablespoon sesame seeds"),
 (50, 164, NULL, NULL, "Place a sheet of roasted seaweed on a bamboo mat or plastic wrap. Evenly spread a thin layer of cooked rice on the seaweed, leaving a border at the top.", "Cooking Instructions"),
 
@@ -748,7 +748,7 @@ VALUES
 (51, 164, NULL, NULL, "Prepare jajangmyeon noodles according to package instructions. Drain and set aside.", "Cooking Instructions"),
 
 -- Korean Fried Chicken
-(52, 55, NULL, 100, "Prepare chicken.", "chicken wings or drumettes, washed and patted dry"),
+(52, 55, "https://www.shutterstock.com/shutterstock/videos/1062774610/preview/stock-footage-close-up-of-cook-chef-hands-woman-cuts-raw-meat-chicken-breast-on-a-wooden-board.webm", 100, "Prepare chicken.", "chicken wings or drumettes, washed and patted dry"),
 (52, 161, NULL, 50, "Prepare flour.", "1/2 cup all-purpose flour"),
 (52, 162, NULL, 50, "Prepare cornstarch.", "1/2 cup cornstarch"),
 (52, 40, NULL, 30, "Prepare soy sauce.", "2 tablespoons soy sauce"),
