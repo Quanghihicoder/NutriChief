@@ -144,7 +144,7 @@ export const createUserMeal = (data, result) => {
 export const updateDateMeal = (data, result) => {
     // YYYY-MM-DD
 
-    if (data.user_id && data.meal_date && data.meal_checked) {
+    if (data.user_id && data.meal_date && data.meal_checked >= 0) {
         let query = "UPDATE meal SET meal_checked = ? WHERE user_id = ? "
         let queryArray = [data.meal_checked, data.user_id]
 
