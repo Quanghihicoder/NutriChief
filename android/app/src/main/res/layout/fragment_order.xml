@@ -42,6 +42,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/filter_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="5dp">
+            <Button
+                android:id="@+id/dishButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/dishes" />
+
+            <Button
+                android:id="@+id/ingredientButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/ingredients" />
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_recycler_view"
             android:layout_width="match_parent"

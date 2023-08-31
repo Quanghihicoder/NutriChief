@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.example.nutrichief.adapter.IngredientAdapter
 import com.example.nutrichief.datamodels.Food
 import com.example.nutrichief.datamodels.Ingredient
 import com.example.nutrichief.datamodels.RecipeIngredient
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,6 +40,7 @@ class RecipeDetailActivity : AppCompatActivity() {
     private var food_desc: String = ""
     private var food_ctime: Int = 0
     private var food_ptime: Int = 0
+    private var food_img: String = ""
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -83,10 +86,17 @@ class RecipeDetailActivity : AppCompatActivity() {
                     val pTimeTV = findViewById<TextView>(R.id.pTimeTV)
                     val cTimeTV = findViewById<TextView>(R.id.cTimeTV)
                     val foodNameTV = findViewById<TextView>(R.id.foodName)
+                    val foodImg = findViewById<ImageView>(R.id.foodBgImage)
 
                     pTimeTV.text = food_ptime.toString() + "mins to prepare"
                     cTimeTV.text = food_ctime.toString() + "mins to cook"
                     foodNameTV.text = food_name
+                    val imageUrl = food_img
+                    if (!imageUrl.isNullOrEmpty()) {
+                        Picasso.get().load(imageUrl).into(foodImg)
+                    } else {
+                        foodImg.setImageResource(R.drawable.ramen)
+                    }
                 }
             } ?: run {
                 // Handle the case when recipeIngredients is null (error occurred)
@@ -197,7 +207,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                         food_desc = foodJson.getString("food_desc")
                         food_ctime = foodJson.getInt("food_ctime")
                         food_ptime = foodJson.getInt("food_ptime")
-                        val food_img = foodJson.getString("food_img")
+                        food_img = foodJson.getString("food_img")
 
                         val food = Food(foodId, food_name, food_desc, food_ctime, food_ptime, food_img)
                         foods.add(food)
