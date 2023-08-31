@@ -49,6 +49,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
     private lateinit var allDishes: List<MenuItem>
     private lateinit var cartRepository: CartRepository
     private var num: Int = 0
+    private var savedSearchQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +90,18 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
         cartBtn.setOnClickListener {
             showBottomDialog()
         }
+
+        searchBox.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                savedSearchQuery = newText ?: ""
+                foodAdapter.filter.filter(newText)
+                return false
+            }
+        })
 
         return view
     }

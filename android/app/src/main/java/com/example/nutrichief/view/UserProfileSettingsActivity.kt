@@ -15,10 +15,13 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONObject
 import java.io.IOException
 
 class UserProfileSettingsActivity : AppCompatActivity() {
@@ -43,7 +46,12 @@ class UserProfileSettingsActivity : AppCompatActivity() {
 
         genderList = findViewById(R.id.gender)
         genderList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedGender = parent?.getItemAtPosition(position) as? String
             }
 
@@ -63,7 +71,12 @@ class UserProfileSettingsActivity : AppCompatActivity() {
 
         activeLevelList = findViewById(R.id.activeLevel)
         activeLevelList.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 selectedActiveLevel = parent?.getItemAtPosition(position) as? String
             }
 
@@ -113,7 +126,8 @@ class UserProfileSettingsActivity : AppCompatActivity() {
 
             if (fullName.isNotEmpty() && yearOfBirthText.isNotEmpty() &&
                 weightText.isNotEmpty() &&
-                heightText.isNotEmpty() ) {
+                heightText.isNotEmpty()
+            ) {
                 val yearOfBirth = yearOfBirthText.toInt()
 
 
@@ -145,22 +159,38 @@ class UserProfileSettingsActivity : AppCompatActivity() {
                 )
 
                 GlobalScope.launch(Dispatchers.IO) {
+
                     updateUser(user) { response, errorMessage ->
                         Log.e("confirm", "clicked")
                         runOnUiThread {
                             if (response.isSuccessful) {
                                 // Registration successful
-                                Toast.makeText(this@UserProfileSettingsActivity, "Update Profile Successful", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    this@UserProfileSettingsActivity,
+                                    "Update Profile Successful",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
-                                val loginIntent = Intent(this@UserProfileSettingsActivity, UserProfileActivity::class.java)
+                                val loginIntent = Intent(
+                                    this@UserProfileSettingsActivity,
+                                    UserProfileActivity::class.java
+                                )
                                 startActivity(loginIntent)
                                 finish()
                             } else {
                                 // Registration failed
                                 if (errorMessage != null) {
-                                    Toast.makeText(this@UserProfileSettingsActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        this@UserProfileSettingsActivity,
+                                        errorMessage,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 } else {
-                                    Toast.makeText(this@UserProfileSettingsActivity, "Failed to register user", Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                        this@UserProfileSettingsActivity,
+                                        "Failed to register user",
+                                        Toast.LENGTH_SHORT
+                                    )
                                         .show()
                                 }
                             }
@@ -175,15 +205,32 @@ class UserProfileSettingsActivity : AppCompatActivity() {
     }
 
     private fun updateUser(customer: User, callback: (Response, String?) -> Unit) {
+
         try {
             val jsonMediaType = "application/json; charset=utf-8".toMediaType()
             val requestBody = jacksonObjectMapper().writeValueAsString(customer)
                 .toRequestBody(jsonMediaType)
 
+
             val request = Request.Builder()
                 .url("http://10.0.2.2:8001/apis/user/update")
                 .post(requestBody)
                 .build()
+
+            val requestBodyUpdateMealPref = JSONObject()
+            requestBodyUpdateMealPref.put("user_id", customer.user_id)
+            requestBodyUpdateMealPref.put("pref_calo", customer.user_tdee)
+            requestBodyUpdateMealPref.put("pref_time", 60)
+            requestBodyUpdateMealPref.put("pref_goal", 0)
+            requestBodyUpdateMealPref.put("pref_date_range", 1)
+
+//            val requestUpdateMealPref =
+//                Request.Builder().url("http://10.0.2.2:8001/apis/mealpref/update").post(
+//                    requestBodyUpdateMealPref.toString()
+//                        .toRequestBody("application/json".toMediaTypeOrNull())
+//                ).build()
+//
+//            client.newCall(requestUpdateMealPref).execute()
 
             client.newCall(request).enqueue(object : Callback {
                 override fun onResponse(call: Call, response: Response) {
@@ -198,9 +245,12 @@ class UserProfileSettingsActivity : AppCompatActivity() {
             })
         } catch (e: Exception) {
             // Handle other exceptions
-            callback(Response.Builder().code(-1).build(), e.message)
+//                callback(Response.Builder().code(-1).build(), e.message)
         }
+
     }
 
-    fun goBack(view: View) { onBackPressed() }
+    fun goBack(view: View) {
+        onBackPressed()
+    }
 }

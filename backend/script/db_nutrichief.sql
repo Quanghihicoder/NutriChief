@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `recipe` (
     recipe_qty FLOAT(11,1), -- grams
     recipe_desc VARCHAR(255) NOT NULL,
     recipe_title VARCHAR(255) NOT NULL,
-
+    media_url VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (food_id, ingre_id),
     FOREIGN KEY (food_id) REFERENCES food(food_id),
@@ -93,6 +93,37 @@ CREATE TABLE IF NOT EXISTS `otp` (
 
     PRIMARY KEY (user_email),
     UNIQUE (user_email)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS `post` (
+    post_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    post_title VARCHAR(255) NOT NULL,
+    post_detail TEXT NOT NULL,
+
+    PRIMARY KEY (post_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS `comment` (
+    comment_id INT(11) NOT NULL AUTO_INCREMENT,
+    user_id INT(11) NOT NULL,
+    post_id INT(11) NOT NULL,
+    comment_detail TEXT NOT NULL,
+    
+    PRIMARY KEY (comment_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+) ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS `react` (
+    user_id INT(11) NOT NULL,
+    post_id INT(11) NOT NULL,
+    react_type INT (1) NOT NULL, 
+    
+    PRIMARY KEY (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
 ) ENGINE=INNODB;
 
 INSERT INTO `ingredient` (ingre_name, ingre_price, ingre_calo, ingre_fat, ingre_protein, ingre_carb, ingre_img)
@@ -483,18 +514,18 @@ VALUES
 (19, 164, NULL, NULL, "Preheat grill. Toss asparagus with lemon juice. Grill until tender. Drizzle with melted butter and sprinkle black pepper.", "Cooking Instructions"),
 
 -- Sesame Ginger Green Beans
-(20, 125, NULL, 300, "Trim green beans.", "300g green beans"),
-(20, 30, NULL, 5, "Add sesame seeds.", "1 teaspoon sesame seeds"),
-(20, 28, NULL, 5, "Add ginger powder.", "1/2 teaspoon ginger powder"),
-(20, 40, NULL, 10, "Add soy sauce.", "2 teaspoons soy sauce"),
-(20, 164, NULL, NULL, "Blanch green beans. Toss with sesame seeds, ginger powder, and soy sauce.", "Cooking Instructions"),
+(20, 125, "", 300, "Trim green beans.", "300g green beans"),
+(20, 30, "", 5, "Add sesame seeds.", "1 teaspoon sesame seeds"),
+(20, 28, "", 5, "Add ginger powder.", "1/2 teaspoon ginger powder"),
+(20, 40, "", 10, "Add soy sauce.", "2 teaspoons soy sauce"),
+(20, 164, "", 0, "Blanch green beans. Toss with sesame seeds, ginger powder, and soy sauce.", "Cooking Instructions"),
 
 -- Garlic Butter Green Beans
-(21, 125, NULL, 300, "Trim green beans.", "300g green beans"),
-(21, 81, NULL, 5, "Mince garlic.", "2 cloves garlic, minced"),
-(21, 68, NULL, 20, "Melt butter.", "2 tablespoons butter"),
-(21, 126, NULL, 3, "Add lemon zest.", "1 teaspoon lemon zest"),
-(21, 164, NULL, NULL, "Blanch green beans. In a pan, sauté minced garlic in melted butter. Add blanched green beans and lemon zest. Toss to coat.", "Cooking Instructions"),
+(21, 125, "", 300, "Trim green beans.", "300g green beans"),
+(21, 81, "", 5, "Mince garlic.", "2 cloves garlic, minced"),
+(21, 68, "", 20, "Melt butter.", "2 tablespoons butter"),
+(21, 126, "", 3, "Add lemon zest.", "1 teaspoon lemon zest"),
+(21, 164, "", 0, "Blanch green beans. In a pan, sauté minced garlic in melted butter. Add blanched green beans and lemon zest. Toss to coat.", "Cooking Instructions"),
 
 -- Roasted Brussels Sprouts with Balsamic Glaze
 (22, 127, NULL, 300, "Trim Brussels sprouts.", "300g Brussels sprouts"),
@@ -504,11 +535,11 @@ VALUES
 (22, 164, NULL, NULL, "Preheat oven. Toss trimmed Brussels sprouts with olive oil and salt. Roast in the oven until caramelized. Drizzle with balsamic glaze.", "Cooking Instructions"),
 
 -- Caprese Skewers
-(23, 128, NULL, 20, "Thread cherry tomatoes.", "20 cherry tomatoes"),
-(23, 67, NULL, 100, "Thread mozzarella cheese cubes.", "100g mozzarella cheese, cubed"),
-(23, 99, NULL, 20, "Thread basil leaves.", "20 fresh basil leaves"),
-(23, 123, NULL, 30, "Drizzle balsamic glaze.", "2 tablespoons balsamic glaze"),
-(23, 164, NULL, NULL, "Thread cherry tomatoes, mozzarella cheese cubes, and fresh basil leaves onto skewers. Drizzle with balsamic glaze.", "Assembling Instructions"),
+(23, 128, "", 20, "Thread cherry tomatoes.", "20 cherry tomatoes"),
+(23, 67, "", 100, "Thread mozzarella cheese cubes.", "100g mozzarella cheese, cubed"),
+(23, 99, "", 20, "Thread basil leaves.", "20 fresh basil leaves"),
+(23, 123, "", 30, "Drizzle balsamic glaze.", "2 tablespoons balsamic glaze"),
+(23, 164, "", 0, "Thread cherry tomatoes, mozzarella cheese cubes, and fresh basil leaves onto skewers. Drizzle with balsamic glaze.", "Assembling Instructions"),
 
 -- Sweet and Spicy Roasted Cauliflower
 (24, 89, NULL, 500, "Cut cauliflower into florets.", "500g cauliflower florets"),
@@ -518,26 +549,26 @@ VALUES
 (24, 164, NULL, NULL, "Preheat oven. Toss cauliflower florets with chili powder, sugar, and olive oil. Roast in the oven until tender and caramelized.", "Cooking Instructions"),
 
 -- Spinach and Feta Stuffed Mushrooms
-(25, 91, NULL, 12, "Remove stems from mushrooms.", "12 large mushrooms"),
-(25, 86, NULL, 100, "Chop spinach.", "100g spinach, chopped"),
-(25, 138, NULL, 100, "Crumble feta cheese.", "100g feta cheese, crumbled"),
-(25, 81, NULL, 10, "Mince garlic.", "2 cloves garlic, minced"),
-(25, 48, NULL, 30, "Coat with olive oil.", "2 tablespoons olive oil"),
-(25, 164, NULL, NULL, "Preheat oven. Remove stems from mushrooms and chop them. Sauté chopped stems, minced garlic, and chopped spinach in olive oil. Fill mushroom caps with the mixture and top with crumbled feta. Bake in the oven until mushrooms are tender.", "Cooking Instructions"),
+(25, 91, "", 12, "Remove stems from mushrooms.", "12 large mushrooms"),
+(25, 86, "", 100, "Chop spinach.", "100g spinach, chopped"),
+(25, 138, "", 100, "Crumble feta cheese.", "100g feta cheese, crumbled"),
+(25, 81, "", 10, "Mince garlic.", "2 cloves garlic, minced"),
+(25, 48, "", 30, "Coat with olive oil.", "2 tablespoons olive oil"),
+(25, 164, "", 0, "Preheat oven. Remove stems from mushrooms and chop them. Sauté chopped stems, minced garlic, and chopped spinach in olive oil. Fill mushroom caps with the mixture and top with crumbled feta. Bake in the oven until mushrooms are tender.", "Cooking Instructions"),
 
 -- Cheesy Broccoli Casserole
-(26, 88, NULL, 500, "Cut broccoli into florets.", "500g broccoli florets"),
-(26, 103, NULL, 150, "Shred Cheddar cheese.", "1 1/2 cups shredded Cheddar cheese"),
-(26, 27, NULL, 5, "Sprinkle garlic powder.", "1 teaspoon garlic powder"),
-(26, 131, NULL, 50, "Sprinkle bread crumbs.", "1/2 cup bread crumbs"),
-(26, 164, NULL, NULL, "Steam broccoli florets until tender. In a baking dish, layer steamed broccoli, shredded Cheddar cheese, and garlic powder. Top with bread crumbs. Bake until cheese is melted and bubbly.", "Cooking Instructions"),
+(26, 88, "", 500, "Cut broccoli into florets.", "500g broccoli florets"),
+(26, 103, "", 150, "Shred Cheddar cheese.", "1 1/2 cups shredded Cheddar cheese"),
+(26, 27, "", 5, "Sprinkle garlic powder.", "1 teaspoon garlic powder"),
+(26, 131, "", 50, "Sprinkle bread crumbs.", "1/2 cup bread crumbs"),
+(26, 164, "", 0, "Steam broccoli florets until tender. In a baking dish, layer steamed broccoli, shredded Cheddar cheese, and garlic powder. Top with bread crumbs. Bake until cheese is melted and bubbly.", "Cooking Instructions"),
 
 -- Baked Parmesan Zucchini Fries
-(27, 98, NULL, 300, "Cut zucchini into fries.", "300g zucchini, cut into fries"),
-(27, 124, NULL, 50, "Sprinkle grated Parmesan cheese.", "1/2 cup grated Parmesan cheese"),
-(27, 131, NULL, 50, "Sprinkle bread crumbs.", "1/2 cup bread crumbs"),
-(27, 27, NULL, 5, "Sprinkle garlic powder.", "1 teaspoon garlic powder"),
-(27, 164, NULL, NULL, "Preheat oven. Toss zucchini fries with grated Parmesan cheese, bread crumbs, and garlic powder. Arrange on a baking sheet and bake until golden and crispy.", "Cooking Instructions"),
+(27, 98, "", 300, "Cut zucchini into fries.", "300g zucchini, cut into fries"),
+(27, 124, "", 50, "Sprinkle grated Parmesan cheese.", "1/2 cup grated Parmesan cheese"),
+(27, 131, "", 50, "Sprinkle bread crumbs.", "1/2 cup bread crumbs"),
+(27, 27, "", 5, "Sprinkle garlic powder.", "1 teaspoon garlic powder"),
+(27, 164, "", 0, "Preheat oven. Toss zucchini fries with grated Parmesan cheese, bread crumbs, and garlic powder. Arrange on a baking sheet and bake until golden and crispy.", "Cooking Instructions"),
 
 -- Creamed Spinach
 (28, 86, NULL, 200, "Chop spinach.", "200g spinach, chopped"),
@@ -586,11 +617,11 @@ VALUES
 (32, 164, NULL, NULL, "Cook beef and thinly slice it. Sauté diced onion and minced garlic. Add sliced beef, ginger powder, and soy sauce. Serve in lettuce leaves.", "Assembling Instructions"),
 
 -- Smoked Salmon Cucumber Bites
-(33, 90, NULL, 20, "Slice cucumber.", "20 cucumber slices"),
-(33, 118, NULL, 30, "Slice smoked salmon.", "30g smoked salmon, sliced"),
-(33, 69, NULL, 50, "Spread cream cheese.", "50g cream cheese"),
-(33, 116, NULL, 2, "Sprinkle chopped dill.", "1 teaspoon chopped dill"),
-(33, 164, NULL, NULL, "Top cucumber slices with smoked salmon. Spread cream cheese on top and sprinkle with chopped dill.", "Assembling Instructions"),
+(33, 90, "", 20, "Slice cucumber.", "20 cucumber slices"),
+(33, 118, "", 30, "Slice smoked salmon.", "30g smoked salmon, sliced"),
+(33, 69, "", 50, "Spread cream cheese.", "50g cream cheese"),
+(33, 116, "", 2, "Sprinkle chopped dill.", "1 teaspoon chopped dill"),
+(33, 164, "", 0, "Top cucumber slices with smoked salmon. Spread cream cheese on top and sprinkle with chopped dill.", "Assembling Instructions"),
 
 -- Tomato Basil Bruschetta
 (34, 80, "https://www.shutterstock.com/shutterstock/videos/1106911463/preview/stock-footage-chop-tomato-close-up-diced-tomatoes-on-a-cutting-board-for-italian-sauce-chef-cut-tomatoes-with.webm", 200, "Dice tomatoes.", "2 medium tomatoes, diced"),
@@ -704,11 +735,11 @@ VALUES
 (45, 164, NULL, NULL, "Brew ginseng tea and serve it with the soup", "Cooking Instructions"),
 
 -- "Creamy Mushroom Risotto"
-(46, 154, NULL, 200, "Cook the Arborio rice.", "200g Arborio Rice"),
-(46, 91, NULL, 150, "Sauté the mushrooms.", "150g mushrooms"),
-(46, 111, NULL, 100, "Pour in the white wine.", "100ml white wine"),
-(46, 124, NULL, 50, "Stir in the Parmesan cheese.", "50g Parmesan Cheese"),
-(46, 140, NULL, 500, "Add vegetable broth.", "500ml Vegetable Broth"),
+(46, 154, "", 200, "Cook the Arborio rice.", "200g Arborio Rice"),
+(46, 91, "", 150, "Sauté the mushrooms.", "150g mushrooms"),
+(46, 111, "", 100, "Pour in the white wine.", "100ml white wine"),
+(46, 124, "", 50, "Stir in the Parmesan cheese.", "50g Parmesan Cheese"),
+(46, 140, "", 500, "Add vegetable broth.", "500ml Vegetable Broth"),
 
 -- "Black Pepper Beef Stir-Fry"
 (47, 56, NULL, 200, "Slice the beef.", "200g beef"),
@@ -727,10 +758,10 @@ VALUES
 (48, 164, NULL, NULL, "Cook glass noodle according to package instructions. Drain and set aside.", "Cooking Instructions"),
 
 -- Stir-Fried Water Spinach - Rau muong xao toi
-(49, 157, NULL, 100, "Prepare water spinach.", "water spinach, washed and cut into pieces"),
-(49, 81, NULL, 10, "Prepare garlic.", "2-3 cloves of garlic, minced"),
-(49, 49, NULL, 15, "Prepare peanut oil.", "1 tablespoon peanut oil"),
-(49, 164, NULL, NULL, "Heat a pan with peanut oil. Add minced garlic and sauté until fragrant.", "Cooking Instructions"),
+(49, 157, "", 100, "Prepare water spinach.", "water spinach, washed and cut into pieces"),
+(49, 81, "", 10, "Prepare garlic.", "2-3 cloves of garlic, minced"),
+(49, 49, "", 15, "Prepare peanut oil.", "1 tablespoon peanut oil"),
+(49, 164, "", 0, "Heat a pan with peanut oil. Add minced garlic and sauté until fragrant.", "Cooking Instructions"),
 
 -- Avocado Kimbap
 (50, 3, NULL, 1, "Prepare avocado.", "1 ripe avocado, sliced"),

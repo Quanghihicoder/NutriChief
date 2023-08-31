@@ -11,12 +11,24 @@ import {
     updateMealPref,
 } from "../controllers/mealpref.js";
 
-import { getFoods, getFoodDetail, getFoodById } from "../controllers/food.js";
+import {
+    getFoods,
+    getFoodDetail,
+    getFoodById,
+    getRecipeDetail,
+} from "../controllers/food.js";
 
 import { getIngres, getAllFoodsByIngre } from "../controllers/ingre.js";
 
 import { getMeal, createMeal, updateMeal } from "../controllers/meal.js";
+
 import { webViewFood } from "../controllers/webview.js";
+
+import { getPosts, createPost } from "../controllers/post.js";
+
+import { getComments, createComment } from "../controllers/comment.js";
+
+import { getReact, updateReact } from "../controllers/react.js";
 
 // init express router
 const router = express.Router();
@@ -55,6 +67,9 @@ router.get("/apis/food/:food_id", getFoodById);
 // get foods with basic info
 router.post("/apis/food/detail", getFoodDetail);
 
+// get foods with recipe detail
+router.post("/apis/food/recipe/detail", getRecipeDetail);
+
 ////////////////////////// INGRE ////////////////////////////////
 // get ingres
 router.post("/apis/ingre", getIngres);
@@ -74,7 +89,28 @@ router.post("/apis/meal/update", updateMeal);
 
 ////////////////////////// WEB VIEW ////////////////////////////////
 // return html
-router.get("/food/:food_id", webViewFood)
+router.get("/food/:food_id", webViewFood);
+
+////////////////////////// POST ////////////////////////////////
+// get posts
+router.post("/apis/post/get", getPosts)
+
+// create posts
+router.post("/apis/post/create", createPost)
+
+////////////////////////// COMMENT ////////////////////////////////
+// get comments
+router.post("/apis/comment/get", getComments)
+
+// create comment
+router.post("/apis/comment/create", createComment)
+
+////////////////////////// REACT ////////////////////////////////
+// create react
+router.post("/apis/react/get", getReact)
+
+// create react
+router.post("/apis/react/create", updateReact)
 
 // export default router
 export default router;
