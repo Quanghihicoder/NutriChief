@@ -8,8 +8,8 @@
     tools:context=".view.RecipeDetailActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:id="@+id/foodBgImage"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,5 +1,6 @@
 package com.example.nutrichief.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,6 +71,12 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
         val view = inflater.inflate(R.layout.fragment_order, container, false)
         val searchBox = view.findViewById<SearchView>(R.id.search_menu_items)
         val cartBtn = view.findViewById<FloatingActionButton>(R.id.addPostBtn)
+        val dishBtn = view.findViewById<Button>(R.id.dishButton)
+        val ingredientBtn = view.findViewById<Button>(R.id.ingredientButton)
+
+        //set button colors
+        ingredientBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+        dishBtn.setBackgroundColor(Color.parseColor("#6173DF"))
 
         // Initialize the cart repository
         cartRepository = CartRepository(requireContext())
@@ -78,7 +86,7 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
 
         foodAdapter = FoodOrderAdapter(mutableListOf(), this)
 
-        getAllIngredients { food ->
+        getAllDishes { food ->
             if (food != null) {
                 allDishes = food
                 foodAdapter.filterList(allDishes as MutableList<MenuItem>)
@@ -89,14 +97,35 @@ class OrderFragment : Fragment(), FoodOrderAdapter.OnItemClickListener  {
             }
         }
 
-        getAllDishes { food ->
-            if (food != null) {
-                allDishes = food
-                foodAdapter.filterList(allDishes as MutableList<MenuItem>)
-                foodAdapter = FoodOrderAdapter(allDishes as MutableList<MenuItem>, this)
-                orderRecyclerView.adapter = foodAdapter
-            } else {
-                Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+        ingredientBtn.setOnClickListener {
+            ingredientBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            dishBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+
+            getAllIngredients { food ->
+                if (food != null) {
+                    allDishes = food
+                    foodAdapter.filterList(allDishes as MutableList<MenuItem>)
+                    foodAdapter = FoodOrderAdapter(allDishes as MutableList<MenuItem>, this)
+                    orderRecyclerView.adapter = foodAdapter
+                } else {
+                    Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+                }
+            }
+        }
+
+        dishBtn.setOnClickListener {
+            dishBtn.setBackgroundColor(Color.parseColor("#6173DF"))
+            ingredientBtn.setBackgroundColor(Color.parseColor("#A0A0A1"))
+
+            getAllDishes { food ->
+                if (food != null) {
+                    allDishes = food
+                    foodAdapter.filterList(allDishes as MutableList<MenuItem>)
+                    foodAdapter = FoodOrderAdapter(allDishes as MutableList<MenuItem>, this)
+                    orderRecyclerView.adapter = foodAdapter
+                } else {
+                    Log.e("Ingredients Search", "Failed to retrieve recipe ingredients")
+                }
             }
         }
 
